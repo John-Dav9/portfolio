@@ -1,0 +1,85 @@
+{
+  "skills": [
+    {
+      "id": "1",
+      "src": "./img/product-chain-1.png",
+      "title": "Front-End",
+      "description": "Lorem ipsum dadada nanana"
+    },
+    {
+      "id": "2",
+      "src": "./img/product-chain-1.png",
+      "title": "Back-End",
+      "description": "Lorem ipsum dadada nanana"
+    },
+    {
+      "id": "3",
+      "src": "./img/product-chain-1.png",
+      "title": "DB & SQL",
+      "description": "Lorem ipsum dadada nanana"
+    },
+    {
+      "id": "4",
+      "src": "./img/product-chain-1.png",
+      "title": "AI",
+      "description": "Lorem ipsum dadada nanana"
+    }
+  ],
+  "portfolio": [
+    {
+      "id": "1",
+      "src": "./img/placeholder-image-2.png",
+      "title": "My Portfolio",
+      "description": "HTML, CSS, React JS Portfolio",
+      "link": "view in github"
+    },
+    {
+      "id": "2",
+      "src": "./img/placeholder-image-2.png",
+      "title": "App Dashboard",
+      "description": "HTML, CSS, React JS Portfolio",
+      "link": "view in github"
+    },
+    {
+      "id": "3",
+      "src": "./img/placeholder-image-2.png",
+      "title": "Easy Rentn",
+      "description": "Lorem ipsum dadada nanana",
+      "link": "view in github"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "1",
+      "count": "5",
+      "src": "./img/avatar-image.png",
+      "description": "Lorem ipsum dadada nanana commentaires des vrais",
+      "author_name": "Pascal Kamtchuang",
+      "author_designation": "Hands on heart"
+    },
+    {
+      "id": "2",
+      "count": "5",
+      "src": "./img/avatar-image-1.png",
+      "description": "Lorem ipsum dadada nanana commentaires des vrais",
+      "author_name": "Christelle Ngadena",
+      "author_designation": "C'Entreprise"
+    },
+    {
+      "id": "3",
+      "count": "5",
+      "src": "./img/avatar-image-2.png",
+      "description": "Lorem ipsum dadada nanana commentaires des vrais",
+      "author_name": "Yohanna Taptue",
+      "author_designation": "Data Analist"
+    },
+    {
+      "id": "4",
+      "count": "5",
+      "src": "./img/avatar-image-2.png",
+      "description": "Lorem ipsum dadada nanana commentaires des vrais",
+      "author_name": "Fernand Taptue",
+      "author_designation": "My Lovely Father"
+    }
+  ]
+}
