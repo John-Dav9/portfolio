@@ -4,25 +4,49 @@
       "id": "1",
       "src": "./img/product-chain-1.png",
       "title": "Front-End",
-      "description": "Lorem ipsum dadada nanana"
+      "description": "Optimisation d'experiences utilisateurs. Création d'interfaces utilisateur réactives et attrayantes avec HTML, CSS (y compris Flexbox et Grid), JavaScript moderne (ES6), et frameworks comme React et Vue.js."
     },
     {
       "id": "2",
       "src": "./img/product-chain-1.png",
       "title": "Back-End",
-      "description": "Lorem ipsum dadada nanana"
+      "description": "Construction de la logique serveur et des APIs en utilisant Ruby on Rails, React Js, gestion des bases de données relationnelles avec SQL et ORM comme Active Record."
     },
     {
       "id": "3",
       "src": "./img/product-chain-1.png",
       "title": "DB & SQL",
-      "description": "Lorem ipsum dadada nanana"
+      "description": "Conception, gestion et manipulation de bases de données relationnelles via SQL pour effectuer des requêtes simples et complexes."
     },
     {
       "id": "4",
       "src": "./img/product-chain-1.png",
-      "title": "AI",
-      "description": "Lorem ipsum dadada nanana"
+      "title": "AI Integration",
+      "description": "Ajout de fonctionnalités avancées d'IA, comme des chatbots ou la génération d'images et de texte, via des API (ex. : OpenAI, LangChain) et techniques avancées (ex. : RAG - Retrieval-Augmented Generation)."
+    },
+    {
+      "id": "4",
+      "src": "./img/product-chain-1.png",
+      "title": "Application deployment",
+      "description": "Déploiement d'applications web sur des plateformes comme Heroku, gestion des domaines et mise en production."
+    },
+    {
+      "id": "4",
+      "src": "./img/product-chain-1.png",
+      "title": "Agile Workflow",
+      "description": "Utilisation d'outils de gestion de projets comme Trello pour organiser les tâches, suivre la progression, collaborer en équipe et appliquer des méthodologies agiles telles que Scrum ou Kanban."
+    },
+    {
+      "id": "4",
+      "src": "./img/product-chain-1.png",
+      "title": "Web Design & Prototyping",
+      "description": "Utilisation d'outils comme Figma pour concevoir des interfaces utilisateur et valider l'expérience utilisateur (UX)."
+    },
+    {
+      "id": "4",
+      "src": "./img/product-chain-1.png",
+      "title": "Command Line & Git",
+      "description": "Utilisation efficace de la ligne de commande pour gérer des projets et Git pour le contrôle de version et la collaboration."
     }
   ],
   "portfolio": [
@@ -30,22 +54,25 @@
       "id": "1",
       "src": "./img/placeholder-image-2.png",
       "title": "My Portfolio",
-      "description": "HTML, CSS, React JS Portfolio",
-      "link": "view in github"
+      "description": "React JS Portfolio",
+      "link": "view in github",
+      "url" : "https://github.com/John-Dav9/portfolio.git"
     },
     {
       "id": "2",
       "src": "./img/placeholder-image-2.png",
-      "title": "App Dashboard",
-      "description": "HTML, CSS, React JS Portfolio",
-      "link": "view in github"
+      "title": "Luxe Drive",
+      "description": "Luxe Drive est une application web inspirée d'Airbnb, développée avec Ruby on Rails et Bootstrap, l'application est une plateforme conviviale où les utilisateurs peuvent découvrir, réserver et louer des véhicules haut de gamme.",
+      "link": "view in github",
+      "url" : "https://github.com/John-Dav9/LuxeDrive.git"
     },
     {
       "id": "3",
       "src": "./img/placeholder-image-2.png",
-      "title": "Easy Rentn",
-      "description": "Lorem ipsum dadada nanana",
-      "link": "view in github"
+      "title": "My Garden Manager",
+      "description": "My Garden Manager est un projet sur lequel j'ai assuré le deployement sur Heroku, l'achat d'un nom de domaine sur Namechamp.",
+      "link": "view Online",
+      "url" : "https://railsgarden-manager-cb46d9a52c93.herokuapp.com/"
     }
   ],
   "testimonials": [
@@ -63,7 +90,7 @@
       "src": "./img/avatar-image-1.png",
       "description": "Lorem ipsum dadada nanana commentaires des vrais",
       "author_name": "Christelle Ngadena",
-      "author_designation": "C'Entreprise"
+      "author_designation": "C'Empire"
     },
     {
       "id": "3",

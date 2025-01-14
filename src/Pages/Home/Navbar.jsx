@@ -35,7 +35,7 @@ function Navbar () {
   return (
     <nav className = {`navbar ${navActive ? "active" : ""} `}>
       <div>
-        <img src="./img/logo.svg" alt="Logoipsum"/>
+        <img src="./img/logo.svg" alt="John David"/>
       </div>
       <a className={`nav__hamburger ${navActive ? "active" : ""}`}
       onClick={toggleNav}>
@@ -58,7 +58,7 @@ function Navbar () {
              duration={500}
              to="heroSection"
              className="navbar--content"
-             >Home</Link>
+             >Accueil</Link>
           </li>
           <li>
             <Link 
@@ -70,7 +70,7 @@ function Navbar () {
              duration={500}
              to="MySkills"
              className="navbar--content"
-             >Skills</Link>
+             >Compétences</Link>
           </li>
           <li>
             <Link 
@@ -82,7 +82,7 @@ function Navbar () {
              duration={500}
              to="AboutMe"
              className="navbar--content"
-             >About Me</Link>
+             >A Propos</Link>
           </li>
           <li>
             <Link 
@@ -106,7 +106,7 @@ function Navbar () {
              duration={500}
              to="testimonial"
              className="navbar--content"
-             >Testimonials</Link>
+             >Avis</Link>
           </li>
         </ul>
       </div>
@@ -119,7 +119,7 @@ function Navbar () {
         duration={500}
         to="Contact"
         className="btn btn-outline-primary"
-        >Contact Me
+        >Me Contacter
       </Link>
     </nav>
   );
