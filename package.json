@@ -32,7 +32,7 @@
     "resolve-url-loader": "^5.0.0",
     "rimraf": "^6.0.1",
     "serialize-javascript": "^6.0.1",
-    "serve": "^14.2.0",
+    "serve": "^14.2.4",
     "svgo": "^2.8.0",
     "terser": "^5.7.0",
     "tough-cookie": "^4.0.0",
@@ -44,7 +44,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "heroku-postbuild": "npm run build",
+    "serve": "serve -s build"
   },
   "browserslist": {
     "production": [
