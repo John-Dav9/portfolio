@@ -7,16 +7,27 @@ import Home from './Pages/Home/Homescreen';
 import PrivacyPolicy from './Pages/Legal/PrivacyPolicy';
 import TermsOfService from './Pages/Legal/TermsOfService';
 import CookiesSettings from './Pages/Legal/CookiesSettings';
+import AdminLogin from './Pages/Admin/Login';
+import AdminDashboard from './Pages/Admin/Dashboard';
+import AdminTestimonials from './Pages/Admin/Testimonials';
+import AdminContacts from './Pages/Admin/Contacts';
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/terms-of-service" element={<TermsOfService />} />
-        <Route path="/cookies-settings" element={<CookiesSettings />} />
+        {/* Routes publiques */}
+        <Route path="/" element={<><Navbar /><Home /></>} />
+        <Route path="/privacy-policy" element={<><Navbar /><PrivacyPolicy /></>} />
+        <Route path="/terms-of-service" element={<><Navbar /><TermsOfService /></>} />
+        <Route path="/cookies-settings" element={<><Navbar /><CookiesSettings /></>} />
+        
+        {/* Routes admin */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/testimonials" element={<AdminTestimonials />} />
+        <Route path="/admin/contacts" element={<AdminContacts />} />
+        
         <Route path="*" element={<div>404 Not Found</div>} />
       </Routes>
     </div>

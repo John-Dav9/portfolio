@@ -1,0 +1,58 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Fonction pour vérifier si l'utilisateur est admin
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'admin@cmciea-france.com';
+    }
+    
+    // Collection des témoignages (avis)
+    match /testimonials/{testimonialId} {
+      // Tout le monde peut lire les avis approuvés
+      allow read: if resource.data.status == 'approved' || !('status' in resource.data) || isAdmin();
+      
+      // Tout le monde peut créer un avis (il sera en attente)
+      allow create: if request.resource.data.keys().hasAll(['author_name', 'description', 'count', 'status'])
+                    && request.resource.data.author_name is string
+                    && request.resource.data.author_name.size() >= 2
+                    && request.resource.data.author_name.size() <= 100
+                    && request.resource.data.description is string
+                    && request.resource.data.description.size() >= 10
+                    && request.resource.data.description.size() <= 1000
+                    && request.resource.data.count is string
+                    && request.resource.data.count.matches('[1-5]')
+                    && request.resource.data.status == 'pending';
+      
+      // Seul l'admin peut modifier (approuver) et supprimer les avis
+      allow update, delete: if isAdmin();
+    }
+    
+    // Collection des messages de contact
+    match /contacts/{contactId} {
+      // Seul l'admin peut lire les messages
+      allow read: if isAdmin();
+      
+      // Tout le monde peut créer un message de contact
+      allow create: if request.resource.data.keys().hasAll(['firstName', 'lastName', 'email', 'message'])
+                    && request.resource.data.firstName is string
+                    && request.resource.data.firstName.size() >= 2
+                    && request.resource.data.lastName is string
+                    && request.resource.data.lastName.size() >= 2
+                    && request.resource.data.email is string
+                    && request.resource.data.email.matches('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')
+                    && request.resource.data.message is string
+                    && request.resource.data.message.size() >= 10
+                    && request.resource.data.message.size() <= 5000;
+      
+      // Seul l'admin peut supprimer les messages
+      allow update, delete: if isAdmin();
+    }
+    
+    // Bloquer tout accès aux autres collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

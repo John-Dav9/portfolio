@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { db } from "../../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 const COUNTRY_CODES = [
   { code: "+93", countryCode: "AFG", flag: "🇦🇫" },
@@ -192,9 +194,25 @@ export default function ContactMe() {
     const formData = new FormData(form);
     
     // Ajouter le numéro de téléphone complet
-    formData.set("phone-number", `${phoneCountryCode}${phoneNumber}`);
+    const fullPhoneNumber = `${phoneCountryCode}${phoneNumber}`;
+    formData.set("phone-number", fullPhoneNumber);
+
+    // Préparer les données pour Firestore
+    const contactData = {
+      firstName: formData.get("first-name"),
+      lastName: formData.get("last-name"),
+      email: formData.get("email"),
+      phoneNumber: fullPhoneNumber,
+      subject: formData.get("choose-subject"),
+      message: formData.get("message"),
+      createdAt: new Date().toISOString()
+    };
 
     try {
+      // Sauvegarder dans Firestore
+      await addDoc(collection(db, "contacts"), contactData);
+      
+      // Optionnel: Envoyer aussi à getform.io si tu veux garder les emails
       const response = await fetch("https://getform.io/f/bxoovyoa", {
         method: "POST",
         body: formData,
@@ -207,7 +225,11 @@ export default function ContactMe() {
         setPhoneNumber("");
         setTimeout(() => setSubmitStatus(null), 5000);
       } else {
-        setSubmitStatus("error");
+        // Même si getform échoue, les données sont dans Firebase
+        setSubmitStatus("success");
+        form.reset();
+        setPhoneCountryCode("+33");
+        setPhoneNumber("");
         setTimeout(() => setSubmitStatus(null), 5000);
       }
     } catch (error) {

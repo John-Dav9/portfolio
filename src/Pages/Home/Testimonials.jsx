@@ -1,12 +1,15 @@
 import data from "../../data/index.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { db } from "../../firebase";
+import { collection, addDoc, getDocs, orderBy, query } from "firebase/firestore";
 
 export default function Testimonial() {
   const { t } = useTranslation();
   const [testimonials, setTestimonials] = useState(data?.testimonials || []);
   const [showModal, setShowModal] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     author_name: "",
     author_designation: "",
@@ -14,21 +17,68 @@ export default function Testimonial() {
     count: "5"
   });
 
-  const handleSubmit = (e) => {
+  // Charger les avis depuis Firestore au démarrage
+  useEffect(() => {
+    loadTestimonials();
+  }, []);
+
+  const loadTestimonials = async () => {
+    try {
+      const q = query(collection(db, "testimonials"), orderBy("createdAt", "desc"));
+      const querySnapshot = await getDocs(q);
+      const firestoreTestimonials = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      
+      // Ne charger que les témoignages approuvés pour le public
+      const approvedTestimonials = firestoreTestimonials.filter(t => t.status === "approved" || !t.status);
+      
+      // Combiner les avis approuvés avec ceux de Firestore et les avis statiques
+      setTestimonials([...approvedTestimonials, ...data?.testimonials || []]);
+    } catch (error) {
+      console.error("Erreur lors du chargement des avis:", error);
+      // En cas d'erreur, garder les avis statiques
+      setTestimonials(data?.testimonials || []);
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newTestimonial = {
-      id: String(testimonials.length + 1),
-      src: "./img/avatar-image.png",
-      ...formData
-    };
-    setTestimonials([...testimonials, newTestimonial]);
-    setShowModal(false);
-    setFormData({
-      author_name: "",
-      author_designation: "",
-      description: "",
-      count: "5"
-    });
+    setLoading(true);
+    
+    try {
+      const newTestimonial = {
+        author_name: formData.author_name,
+        author_designation: formData.author_designation,
+        description: formData.description,
+        count: formData.count,
+        src: "./img/avatar-image.png",
+        status: "pending", // Avis en attente d'approbation
+        createdAt: new Date().toISOString()
+      };
+      
+      // Sauvegarder dans Firestore
+      await addDoc(collection(db, "testimonials"), newTestimonial);
+      
+      // Recharger les avis
+      await loadTestimonials();
+      
+      setShowModal(false);
+      setFormData({
+        author_name: "",
+        author_designation: "",
+        description: "",
+        count: "5"
+      });
+      
+      alert("✅ Merci pour votre avis ! Il sera publié après validation.");
+    } catch (error) {
+      console.error("Erreur lors de l'ajout de l'avis:", error);
+      alert("❌ Erreur: Impossible d'enregistrer l'avis. Vérifiez votre configuration Firebase.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -169,11 +219,11 @@ export default function Testimonial() {
                 />
               </div>
               <div className="form--actions">
-                <button type="button" onClick={() => setShowModal(false)} className="btn-secondary">
+                <button type="button" onClick={() => setShowModal(false)} className="btn-secondary" disabled={loading}>
                   Annuler
                 </button>
-                <button type="submit" className="btn-primary">
-                  Publier l'avis
+                <button type="submit" className="btn-primary" disabled={loading}>
+                  {loading ? "Publication..." : "Publier l'avis"}
                 </button>
               </div>
             </form>
