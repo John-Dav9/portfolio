@@ -1,0 +1,142 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "portfolio": "My Projects",
+    "contact": "Contact",
+    "testimonials": "Testimonials"
+  },
+  "hero": {
+    "title": "John David TCHOMGUI",
+    "subtitle": "Full Stack Web Developer",
+    "subtitleAccent": "Full Stack Web Developer",
+    "description": "Full Stack Web Developer and Data Analyst passionate about transforming data into performant web solutions. Specialized in data analysis with Python, SQL and Power BI, and developing robust applications with React, Ruby on Rails, and Node.js. I combine technical expertise in frontend/backend development and analytical capabilities to create intuitive user interfaces and data-driven insights.",
+    "description_continued": "Trained at <lewagon>Le Wagon</lewagon> and <technofutur>Technofutur TIC</technofutur>, I am looking for new challenges combining web development and data analysis.",
+    "cta_button": "View my CV"
+  },
+  "about": {
+    "title": "About",
+    "description1": "Full Stack Web Developer and Data Analyst with dual technical expertise. Trained in web development at <lewagon>Le Wagon</lewagon> (Ruby on Rails, React, PostgreSQL) and data analysis at <technofutur>Technofutur TIC</technofutur> (Python, SQL, Power BI), I master the entire web application development cycle and complex data analysis.",
+    "description2": "Passionate about digital transformation, I combine frontend/backend development and analytical skills to create performant web solutions enriched by data intelligence. Autonomous and collaborative, I excel both in teamwork and in conducting projects independently. My unconventional journey demonstrates great adaptability and continuous learning, essential for evolving in today's technology ecosystem."
+  },
+  "skills": {
+    "title": "My Skills",
+    "learnMore": "Learn More",
+    "frontend": {
+      "title": "Front-End Development",
+      "description": "Creating responsive and intuitive user interfaces with HTML, CSS, JavaScript (ES6+), React, Angular, Vue.js and TypeScript. Mastery of Flexbox, Grid and Bootstrap for responsive designs."
+    },
+    "backend": {
+      "title": "Back-End Development",
+      "description": "Development of robust and secure APIs with Ruby on Rails, Node.js, NestJS, Express and ASP.NET. JWT authentication management and REST API integration."
+    },
+    "database": {
+      "title": "Databases & SQL",
+      "description": "Expertise in PostgreSQL and SQL Server for database design, modeling and optimization. Mastery of SSMS (SQL Server Management Studio) for advanced management."
+    },
+    "dataAnalysis": {
+      "title": "Data Analysis & BI",
+      "description": "Data analysis with Python (pandas, NumPy, matplotlib, seaborn), SQL and Power BI. Creating interactive dashboards, data cleaning, modeling and business intelligence visualization to transform data into strategic insights."
+    },
+    "deployment": {
+      "title": "Deployment & DevOps",
+      "description": "Application deployment on Heroku, domain management (Namecheap), server configuration and production deployment of full stack web applications independently."
+    },
+    "agile": {
+      "title": "Agile Project Management",
+      "description": "Application of agile methodologies (Scrum, Kanban) with tools like Trello for task management, team collaboration and project progress tracking."
+    },
+    "uxui": {
+      "title": "UX/UI Design",
+      "description": "User-centered design and prototyping with Figma and Canva. Creating interactive mockups to validate user experience before development."
+    },
+    "git": {
+      "title": "Git & Dev Tools",
+      "description": "Mastery of Git/GitHub for versioning, Visual Studio Code, Postman for API testing, and collaborative workflow with branch management and pull requests."
+    }
+  },
+  "portfolio": {
+    "title": "My Projects",
+    "projects": [
+      {
+        "title": "My Portfolio",
+        "description": "A portfolio designed in React to showcase my projects, skills and journey, with a modern, responsive interface focused on user experience.",
+        "link": "View on GitHub"
+      },
+      {
+        "title": "LuxeDrive",
+        "description": "Full stack luxury car rental platform inspired by Airbnb. Secure authentication system, administration space, dynamic dashboard with sales visualization. Developed independently with Ruby on Rails, Bootstrap and Git versioning.",
+        "link": "View on GitHub"
+      },
+      {
+        "title": "CMCIEA-France",
+        "description": "Modern and responsive institutional website for the International Christian Missionary Community & Associated Churches France. Deployment on Heroku and domain name management via Namecheap.",
+        "link": "View online"
+      },
+      {
+        "title": "BMW Analysis - Data Warehouse",
+        "description": "Data Analysis Project: Design of a structured Data Warehouse to analyze BMW sales. Exploratory analysis with Python (pandas, matplotlib) to identify profitable models and trends by region. Interactive Power BI dashboards with customer-focused strategic recommendations.",
+        "link": "Data Project"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact Me",
+    "description": "Send me a message and I'll respond as soon as possible.",
+    "form": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "message": "Message",
+      "submit": "Send Message",
+      "required": "Required",
+      "success": "Message sent successfully!",
+      "error": "Error sending message. Please try again.",
+      "selectTopic": "Select a topic",
+      "freelance": "Freelance",
+      "collaboration": "Collaboration",
+      "other": "Other",
+      "agreeTerms": "I accept the terms",
+      "submitting": "Submitting..."
+    }
+  },
+  "testimonials": {
+    "title": "What People Say",
+    "leaveReview": "Leave a Review",
+    "reviews": [
+      {
+        "description": "Very professional, thank you so much for the website. May the Lord's hand be even more upon your projects. Be abundantly blessed.",
+        "author_name": "Pascal Kamtchuang",
+        "author_designation": "Hands on heart"
+      },
+      {
+        "description": "Thank you very much for your dynamism, I wish you to go further in your career.",
+        "author_name": "Christelle Ngadena",
+        "author_designation": "C'Empire"
+      },
+      {
+        "description": "I have seen this gentleman at work myself, very respectful and eloquent. Well done!",
+        "author_name": "Yohanna Taptue",
+        "author_designation": "Data Analyst"
+      },
+      {
+        "description": "Thank you for your availability. Much courage to you. You are someone to recommend, hopefully your work will take you very far.",
+        "author_name": "Fernand Taptue",
+        "author_designation": "My lovely father"
+      }
+    ]
+  },
+  "legal": {
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "cookieSettings": "Cookies Settings",
+    "privacyDescription": "This section explains how data is collected and used. Full content will be added soon.",
+    "termsDescription": "This section details the terms of use. Full content will be added soon.",
+    "cookiesDescription": "This section describes cookie management. Full content will be added soon."
+  },
+  "footer": {
+    "copyright": "© 2026 John David Tchomgui. All rights reserved."
+  }
+}

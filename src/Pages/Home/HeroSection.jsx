@@ -1,27 +1,56 @@
-export default function HeroSection(){
+import { Trans, useTranslation } from 'react-i18next';
+
+export default function HeroSection() {
+  const { t } = useTranslation();
+
   return (
     <section id="heroSection" className="hero--section">
       <div className="hero--section--content--box">
         <div className="hero--section--content">
-          <h1 className="section--title"> 
-            <span>John David</span>
+          <h1 className="section--title">
+            <span>{t('hero.title')}</span>
           </h1>
           <h2 className="hero--section--title">
-            <span className="hero--section-title--color"> Developpeur</span>{" "}
+            <span className="hero--section--title--color">{t('hero.subtitle')}</span>{" "}
             <br />
-            Full Stack
+            & Data Analyst
           </h2>
-          <p className="hero--section--description">Développeur Full Stack passionné par les technologies numériques et fort d'un parcours riche en expériences diversifiées, je cherche à relever de nouveaux défis dans le domaine du développement web. Ayant suivi un bootcamp intensif en développement web, j'ai acquis des compétences techniques essentielles telles que HTML, CSS, JavaScript, Ruby on Rails, React, et PostgreSQL.
-            <br/> Je suis enthousiaste à l'idée de contribuer activement au succès des initiatives ambitieuses et innovantes.
+          <p className="hero--section--description">
+            {t('hero.description')}
+            <br />
+            <Trans
+              i18nKey="hero.description_continued"
+              components={{
+                lewagon: (
+                  <a
+                    href="https://www.lewagon.com/fr/web-development-course"
+                    target="_blank"
+                    rel="noreferrer"
+                  />
+                ),
+                technofutur: (
+                  <a
+                    href="https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis"
+                    target="_blank"
+                    rel="noreferrer"
+                  />
+                )
+              }}
+            />
           </p>
-        </div>  
-        <a href="https://www.canva.com/design/DAGRbJFBCcQ/ENKhhjbSAB3NvhZBzzCISA/view" target="blank">
-          <button className="btn btn-primary"> Voir mon CV</button>
+        </div>
+        <a
+          className="btn btn-primary"
+          href="https://www.canva.com/design/DAGRbJFBCcQ/ENKhhjbSAB3NvhZBzzCISA/view"
+          target="_blank"
+          rel="noreferrer"
+        >
+          {t('hero.cta_button')}
         </a>
-     </div>
-     <div className="hero--section--img">
-      <img src="./img/copie 3.JPG" alt=" Hero section" />
-     </div>
+      </div>
+      <div className="hero--section--img">
+        <img src="./img/copie 3.JPG" alt="Hero section" />
+      </div>
     </section>
   );
 }

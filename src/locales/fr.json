@@ -1,0 +1,141 @@
+{
+  "navbar": {
+    "home": "Accueil",
+    "about": "À propos",
+    "skills": "Compétences",
+    "portfolio": "Mes Projets",
+    "contact": "Contact",
+    "testimonials": "Avis"
+  },
+  "hero": {
+    "title": "John David TCHOMGUI",
+    "subtitle": "Développeur Web Fullstack",
+    "subtitleAccent": "Développeur Web Fullstack",
+    "description": "Développeur Web Fullstack et Data Analyst passionné par la transformation des données en solutions web performantes. Spécialisé en analyse de données avec Python, SQL et Power BI, et développement d'applications robustes avec React, Ruby on Rails, et Node.js. Je combine expertise technique en développement frontend/backend et capacités analytiques pour créer des interfaces utilisateur intuitives et des insights basés sur les données.",
+    "description_continued": "Formé chez <lewagon>Le Wagon</lewagon> et <technofutur>Technofutur TIC</technofutur>, je cherche à relever de nouveaux défis alliant développement web et analyse de données."
+  },
+  "about": {
+    "title": "À propos",
+    "description1": "Développeur Web Fullstack et Data Analyst avec une double expertise technique. Formé au développement web chez <lewagon>Le Wagon</lewagon> (Ruby on Rails, React, PostgreSQL) et à l'analyse de données chez <technofutur>Technofutur TIC</technofutur> (Python, SQL, Power BI), je maîtrise l'ensemble du cycle de développement d'applications web et l'analyse de données complexes.",
+    "description2": "Passionné par la transformation numérique, je combine développement frontend/backend et compétences analytiques pour créer des solutions web performantes enrichies par l'intelligence des données. Autonome et collaboratif, j'excelle aussi bien dans le travail d'équipe que dans la réalisation de projets en autonomie. Mon parcours atypique témoigne d'une grande capacité d'adaptation et d'un apprentissage continu, essentiels pour évoluer dans l'écosystème technologique actuel."
+  },
+  "skills": {
+    "title": "Mes Compétences",
+    "learnMore": "En savoir plus",
+    "frontend": {
+      "title": "Développement Front-End",
+      "description": "Création d'interfaces utilisateur réactives et intuitives avec HTML, CSS, JavaScript (ES6+), React, Angular, Vue.js et TypeScript. Maîtrise de Flexbox, Grid et Bootstrap pour des designs responsive."
+    },
+    "backend": {
+      "title": "Développement Back-End",
+      "description": "Développement d'APIs robustes et sécurisées avec Ruby on Rails, Node.js, NestJS, Express et ASP.NET. Gestion de l'authentification JWT et intégration d'APIs REST."
+    },
+    "database": {
+      "title": "Bases de Données & SQL",
+      "description": "Expertise en PostgreSQL et SQL Server pour la conception, modélisation et optimisation de bases de données. Maîtrise de SSMS (SQL Server Management Studio) pour la gestion avancée."
+    },
+    "dataAnalysis": {
+      "title": "Analyse de Données & BI",
+      "description": "Analyse de données avec Python (pandas, NumPy, matplotlib, seaborn), SQL et Power BI. Création de dashboards interactifs, data cleaning, modélisation et visualisation décisionnelle pour transformer les données en insights stratégiques."
+    },
+    "deployment": {
+      "title": "Déploiement & DevOps",
+      "description": "Déploiement d'applications sur Heroku, gestion de domaines (Namecheap), configuration serveur et mise en production d'applications web fullstack en autonomie."
+    },
+    "agile": {
+      "title": "Gestion de Projet Agile",
+      "description": "Application de méthodologies agiles (Scrum, Kanban) avec des outils comme Trello pour la gestion de tâches, collaboration en équipe et suivi de progression des projets."
+    },
+    "uxui": {
+      "title": "Design UX/UI",
+      "description": "Conception orientée utilisateur et prototypage avec Figma et Canva. Création de maquettes interactives pour valider l'expérience utilisateur avant le développement."
+    },
+    "git": {
+      "title": "Git & Outils Dev",
+      "description": "Maîtrise de Git/GitHub pour le versioning, Visual Studio Code, Postman pour les tests d'API, et workflow collaboratif en équipe avec gestion des branches et pull requests."
+    }
+  },
+  "portfolio": {
+    "title": "Mes projets",
+    "projects": [
+      {
+        "title": "Mon Portfolio",
+        "description": "Un portfolio conçu en React pour présenter mes projets, mes compétences et mon parcours, avec une interface moderne, responsive et orientée expérience utilisateur.",
+        "link": "Voir sur GitHub"
+      },
+      {
+        "title": "LuxeDrive",
+        "description": "Plateforme fullstack de location de voitures de luxe inspirée d'Airbnb. Système d'authentification sécurisé, espace d'administration, tableau de bord dynamique avec visualisation des ventes. Développé en autonomie avec Ruby on Rails, Bootstrap et versioning Git.",
+        "link": "Voir sur GitHub"
+      },
+      {
+        "title": "CMCIEA-France",
+        "description": "Site institutionnel moderne et responsive pour la Communauté Missionnaire Chrétienne Internationale & Églises Associées France. Déploiement sur Heroku et gestion du nom de domaine via Namecheap.",
+        "link": "Voir en ligne"
+      },
+      {
+        "title": "Analyse BMW - Data Warehouse",
+        "description": "Projet Data Analysis : Conception d'un Data Warehouse structuré pour analyser les ventes BMW. Analyse exploratoire avec Python (pandas, matplotlib) pour identifier les modèles rentables et tendances par région. Dashboards Power BI interactifs avec recommandations stratégiques orientées client.",
+        "link": "Projet Data"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Me Contacter",
+    "description": "Envoyez-moi un message et je vous répondrai dès que possible.",
+    "form": {
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Adresse Email",
+      "phone": "Numéro de Téléphone",
+      "message": "Message",
+      "submit": "Envoyer le Message",
+      "required": "Requis",
+      "success": "Message envoyé avec succès !",
+      "error": "Erreur lors de l'envoi du message. Veuillez réessayer.",
+      "selectTopic": "Sélectionner un sujet",
+      "freelance": "Freelance",
+      "collaboration": "Collaboration",
+      "other": "Autres",
+      "agreeTerms": "J'accepte les termes",
+      "submitting": "En cours..."
+    }
+  },
+  "testimonials": {
+    "title": "Ce que Disent les Gens",
+    "leaveReview": "Laisser un avis",
+    "reviews": [
+      {
+        "description": "Très professionnel, merci beaucoup pour le site. Que la main du Seigneur soit davantage sur tes projets. Soyez abondamment bénis.",
+        "author_name": "Pascal Kamtchuang",
+        "author_designation": "Hands on heart"
+      },
+      {
+        "description": "Merci beaucoup pour votre dynamisme, je vous souhaite d'aller plus loin dans votre carrière.",
+        "author_name": "Christelle Ngadena",
+        "author_designation": "C'Empire"
+      },
+      {
+        "description": "J'ai moi-même vu ce monsieur à l'oeuvre, très respectueux et éloquent. Bravo !",
+        "author_name": "Yohanna Taptue",
+        "author_designation": "Data Analyst"
+      },
+      {
+        "description": "Merci pour votre disponibilité. Beaucoup de courage à vous. Vous êtes quelqu'un de recommandable, vivement que votre travail vous conduise très loin.",
+        "author_name": "Fernand Taptue",
+        "author_designation": "My lovely father"
+      }
+    ]
+  },
+  "legal": {
+    "privacyPolicy": "Politique de Confidentialité",
+    "termsOfService": "Conditions d'Utilisation",
+    "cookieSettings": "Gestion des Cookies",
+    "privacyDescription": "Cette section explique comment les données sont collectées et utilisées. Le contenu complet sera ajouté prochainement.",
+    "termsDescription": "Cette section détaille les conditions d'utilisation. Le contenu complet sera ajouté prochainement.",
+    "cookiesDescription": "Cette section décrit la gestion des cookies. Le contenu complet sera ajouté prochainement."
+  },
+  "footer": {
+    "copyright": "© 2026 John David Tchomgui. Tous droits réservés."
+  }
+}
