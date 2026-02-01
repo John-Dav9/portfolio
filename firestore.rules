@@ -44,7 +44,10 @@ service cloud.firestore {
                     && request.resource.data.email.matches('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')
                     && request.resource.data.message is string
                     && request.resource.data.message.size() >= 10
-                    && request.resource.data.message.size() <= 5000;
+                    && request.resource.data.message.size() <= 5000
+                    && (request.resource.data.phoneNumber == null || request.resource.data.phoneNumber is string)
+                    && (request.resource.data.subject == null || request.resource.data.subject is string)
+                    && (request.resource.data.createdAt == null || request.resource.data.createdAt is string);
       
       // Seul l'admin peut supprimer les messages
       allow update, delete: if isAdmin();

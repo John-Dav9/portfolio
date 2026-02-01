@@ -2,7 +2,7 @@
   "navbar": {
     "home": "Accueil",
     "about": "À propos",
-    "skills": "Compétences",
+    "skills": "Mes Compétences",
     "portfolio": "Mes Projets",
     "contact": "Contact",
     "testimonials": "Avis"
@@ -12,7 +12,8 @@
     "subtitle": "Développeur Web Fullstack",
     "subtitleAccent": "Développeur Web Fullstack",
     "description": "Développeur Web Fullstack et Data Analyst passionné par la transformation des données en solutions web performantes. Spécialisé en analyse de données avec Python, SQL et Power BI, et développement d'applications robustes avec React, Ruby on Rails, et Node.js. Je combine expertise technique en développement frontend/backend et capacités analytiques pour créer des interfaces utilisateur intuitives et des insights basés sur les données.",
-    "description_continued": "Formé chez <lewagon>Le Wagon</lewagon> et <technofutur>Technofutur TIC</technofutur>, je cherche à relever de nouveaux défis alliant développement web et analyse de données."
+    "description_continued": "Formé chez <lewagon>Le Wagon</lewagon> et <technofutur>Technofutur TIC</technofutur>, je cherche à relever de nouveaux défis alliant développement web et analyse de données.",
+    "cta_button": "Voir mon CV"
   },
   "about": {
     "title": "À propos",
@@ -88,6 +89,7 @@
       "lastName": "Nom",
       "email": "Adresse Email",
       "phone": "Numéro de Téléphone",
+      "subject": "Sujet",
       "message": "Message",
       "submit": "Envoyer le Message",
       "required": "Requis",

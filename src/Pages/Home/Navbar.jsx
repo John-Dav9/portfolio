@@ -131,6 +131,20 @@ function Navbar() {
               {t('navbar.testimonials')}
             </Link>
           </li>
+          <li>
+            <Link
+              onClick={closeMenu}
+              activeClass="navbar--active--content"
+              spy={true}
+              smooth={true}
+              offset={-70}
+              duration={500}
+              to="Contact"
+              className="navbar--content"
+            >
+              {t('navbar.contact')}
+            </Link>
+          </li>
         </ul>
       </div>
       <div className="navbar--actions">
@@ -150,18 +164,6 @@ function Navbar() {
             EN
           </button>
         </div>
-        <Link
-          onClick={closeMenu}
-          activeClass="navbar--active--content"
-          spy={true}
-          smooth={true}
-          offset={-70}
-          duration={500}
-          to="Contact"
-          className="btn btn-outline-primary"
-        >
-          {t('navbar.contact')}
-        </Link>
       </div>
     </nav>
   );

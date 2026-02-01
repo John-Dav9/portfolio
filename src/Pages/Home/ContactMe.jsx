@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
+import emailjs from '@emailjs/browser';
 
 const COUNTRY_CODES = [
   { code: "+93", countryCode: "AFG", flag: "🇦🇫" },
@@ -208,30 +209,39 @@ export default function ContactMe() {
       createdAt: new Date().toISOString()
     };
 
+    // Préparer les paramètres du template EmailJS
+    const emailParams = {
+      from_name: `${contactData.firstName} ${contactData.lastName}`,
+      from_email: contactData.email,
+      phone_number: fullPhoneNumber,
+      subject: contactData.subject || 'Nouveau message de contact',
+      message: contactData.message,
+      to_name: "John David",
+      reply_to: contactData.email,
+      submission_date: new Date().toLocaleString('fr-FR', {
+        dateStyle: 'full',
+        timeStyle: 'short'
+      })
+    };
+
     try {
-      // Sauvegarder dans Firestore
+      // 1. Sauvegarder dans Firestore
       await addDoc(collection(db, "contacts"), contactData);
       
-      // Optionnel: Envoyer aussi à getform.io si tu veux garder les emails
-      const response = await fetch("https://getform.io/f/bxoovyoa", {
-        method: "POST",
-        body: formData,
-      });
+      // 2. Envoyer l'email via EmailJS
+      await emailjs.send(
+        'service_3e9z3k3',      // Service ID
+        'template_lwhrj6h',     // Template ID
+        emailParams,
+        'WjxPUQCdiNcmPGWZp'     // Public Key
+      );
 
-      if (response.ok) {
-        setSubmitStatus("success");
-        form.reset();
-        setPhoneCountryCode("+33");
-        setPhoneNumber("");
-        setTimeout(() => setSubmitStatus(null), 5000);
-      } else {
-        // Même si getform échoue, les données sont dans Firebase
-        setSubmitStatus("success");
-        form.reset();
-        setPhoneCountryCode("+33");
-        setPhoneNumber("");
-        setTimeout(() => setSubmitStatus(null), 5000);
-      }
+      setSubmitStatus("success");
+      form.reset();
+      setPhoneCountryCode("+33");
+      setPhoneNumber("");
+      setTimeout(() => setSubmitStatus(null), 5000);
+      
     } catch (error) {
       console.error("Erreur:", error);
       setSubmitStatus("error");
@@ -314,11 +324,11 @@ export default function ContactMe() {
             </div>
           </label>
         </div>
-        <label htmlFor="choose-topic" className="contact--label required">
-          <span className="text-md">{t('contact.form.message')} <span className="required-asterisk">*</span></span>
+        <label htmlFor="choose-subject" className="contact--label required">
+          <span className="text-md">{t('contact.form.subject')} <span className="required-asterisk">*</span></span>
           <select
-            id="choose-topic"
-            name="topic"
+            id="choose-subject"
+            name="choose-subject"
             className="contact--input text-md"
             required
           >

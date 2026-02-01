@@ -14,7 +14,7 @@
     "@babel/plugin-transform-optional-chaining": "^7.24.0",
     "@babel/plugin-transform-private-methods": "^7.24.0",
     "@babel/plugin-transform-react-jsx": "^7.25.9",
-    "@dataconnect/generated": "link:src/dataconnect-generated",
+    "@emailjs/browser": "^4.3.3",
     "@eslint/config-array": "^0.16.0",
     "@eslint/object-schema": "^2.0.1",
     "@rollup/plugin-terser": "^0.2.0",

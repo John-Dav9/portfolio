@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs, doc, updateDoc, deleteDoc, query, orderBy } from "firebase/firestore";
+import "../../Admin.css";
 
 export default function AdminTestimonials() {
   const [user, setUser] = useState(null);

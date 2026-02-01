@@ -3,6 +3,7 @@ import { signOut } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
+import "../../Admin.css";
 
 export default function AdminDashboard() {
   const [user, setUser] = useState(null);
