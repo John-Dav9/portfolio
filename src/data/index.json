@@ -65,8 +65,8 @@
       "title": "LuxeDrive",
       "description": "Plateforme fullstack de location de voitures de luxe inspirée d'Airbnb. Système d'authentification sécurisé, espace d'administration, tableau de bord dynamique avec visualisation des ventes. Développé en autonomie avec Ruby on Rails, Bootstrap et versioning Git.",
       "link": "View on GitHub",
-      "url": "https://github.com/John-Dav9/LuxeDrive.git",
-      "site": "https://luxedrive.com/"
+      "url": "https://luxedrive-rqdo.onrender.com",
+      "site": "https://luxedrive-rqdo.onrender.com"
     },
     {
       "id": "3",
