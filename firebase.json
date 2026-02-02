@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "john-david-portfolio",
     "public": "build",
     "ignore": [
       "firebase.json",
