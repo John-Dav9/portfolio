@@ -58,6 +58,10 @@
   },
   "portfolio": {
     "title": "My Projects",
+    "links": {
+      "github": "View on GitHub",
+      "site": "View site"
+    },
     "projects": [
       {
         "title": "My Portfolio",

@@ -55,9 +55,9 @@
       "src": "./img/placeholder-image-1.png",
       "title": "My Portfolio",
       "description": "Un portfolio conçu en React pour présenter mes projets, mes compétences et mon parcours, avec une interface moderne, responsive et orientée expérience utilisateur.",
-      "link": "View on GitHub",
+      "link": "Voir en ligne",
       "url": "https://github.com/John-Dav9/portfolio.git",
-      "site": "https://react-js-portfolio-89cac9339a3e.herokuapp.com/"
+      "site": "https://john-david-portfolio.web.app/"
     },
     {
       "id": "2",

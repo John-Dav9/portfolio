@@ -577,7 +577,10 @@ h3 {
   align-self: stretch;
   flex: 1;
 }
-.portfolio--section--card--content a {
+.portfolio--links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
   margin-top: auto;
 }
 .portfolio--section--title {

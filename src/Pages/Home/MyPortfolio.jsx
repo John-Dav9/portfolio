@@ -19,12 +19,6 @@ export default function MyPortfolio() {
     "Projet Data Analysis : Conception d'un Data Warehouse structuré pour analyser les ventes BMW. Analyse exploratoire avec Python (pandas, matplotlib) pour identifier les modèles rentables et tendances par région. Dashboards Power BI interactifs avec recommandations stratégiques orientées client.": t('portfolio.projects.3.description'),
   };
 
-  const projectLinkMap = {
-    "View on GitHub": t('portfolio.projects.0.link'),
-    "View online": t('portfolio.projects.2.link'),
-    "Projet Data": t('portfolio.projects.3.link'),
-  };
-
   return (
     <section className="portfolio--section" id="MyPortfolio">
       <div className="portfolio--container--box">
@@ -69,27 +63,54 @@ export default function MyPortfolio() {
                 <h3 className="portfolio--section--title">{projectTitleMap[item.title] || item.title}</h3>
                 <p className="text-md">{projectDescriptionMap[item.description] || item.description}</p>
               </div>
-              <a href={item.url} target="_blank" rel="noreferrer">
-                <p className="text-sm portfolio--link">
-                  {projectLinkMap[item.link] || item.link}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 20 19"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M4.66667 1.66675H18V15.0001M18 1.66675L2 17.6667L18 1.66675Z"
-                      stroke="currentColor"
-                      strokeWidth="2.66667"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </p>
-              </a>
+              <div className="portfolio--links">
+                {item.url ? (
+                  <a href={item.url} target="_blank" rel="noreferrer" aria-label="Voir sur GitHub">
+                    <p className="text-sm portfolio--link">
+                      {t('portfolio.links.github')}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 20 19"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M4.66667 1.66675H18V15.0001M18 1.66675L2 17.6667L18 1.66675Z"
+                          stroke="currentColor"
+                          strokeWidth="2.66667"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </p>
+                  </a>
+                ) : null}
+                {item.site ? (
+                  <a href={item.site} target="_blank" rel="noreferrer" aria-label="Voir le site">
+                    <p className="text-sm portfolio--link">
+                      {t('portfolio.links.site')}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 20 19"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M4.66667 1.66675H18V15.0001M18 1.66675L2 17.6667L18 1.66675Z"
+                          stroke="currentColor"
+                          strokeWidth="2.66667"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </p>
+                  </a>
+                ) : null}
+              </div>
             </div>
           </div>
         ))}
