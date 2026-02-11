@@ -457,6 +457,36 @@ h3 {
   width: 100%;
   line-height: 60px;
 }
+.skills--carousel--header {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.skills--carousel--controls {
+  display: flex;
+  gap: 10px;
+}
+.skills--carousel--btn {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--primary);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--primary);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.skills--carousel--btn:hover:not(:disabled) {
+  background: var(--primary);
+  color: #fff;
+}
+.skills--carousel--btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 .skills--section--container {
   display: grid;
   justify-content: center;
@@ -605,6 +635,15 @@ h3 {
   flex-direction: column;
   align-items: flex-start;
   gap: 21.3px;
+}
+.portfolio--domain--section {
+  width: 100%;
+}
+.portfolio--domain--title {
+  color: var(--heading-color);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 .portfolio--section--container {
   display: grid;
@@ -1754,6 +1793,11 @@ input[type="checkbox"] {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
+  .skills--carousel--header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
   .portfolio--section--container {
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
@@ -1914,6 +1958,11 @@ input[type="checkbox"] {
     gap: 20px;
     max-width: 100%;
     width: 100%;
+  }
+  .skills--carousel--btn {
+    width: 38px;
+    height: 38px;
+    font-size: 22px;
   }
 
   .skills--section--card {

@@ -6,9 +6,10 @@ import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 export default function MySkills() {
   const { t, i18n } = useTranslation();
-  const [showAllSkills, setShowAllSkills] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState(null);
   const [dynamicSkills, setDynamicSkills] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [cardsPerView, setCardsPerView] = useState(4);
 
   useEffect(() => {
     const loadSkills = async () => {
@@ -28,9 +29,30 @@ export default function MySkills() {
     loadSkills();
   }, []);
 
+  useEffect(() => {
+    const updateCardsPerView = () => {
+      if (window.innerWidth >= 1200) {
+        setCardsPerView(4);
+      } else if (window.innerWidth >= 576) {
+        setCardsPerView(2);
+      } else {
+        setCardsPerView(1);
+      }
+    };
+
+    updateCardsPerView();
+    window.addEventListener("resize", updateCardsPerView);
+    return () => window.removeEventListener("resize", updateCardsPerView);
+  }, []);
+
   const skills = dynamicSkills.length > 0 ? dynamicSkills : data?.skills || [];
-  const displayedSkills = showAllSkills ? skills : skills.slice(0, 8);
+  const maxIndex = Math.max(0, skills.length - cardsPerView);
+  const displayedSkills = skills.slice(currentIndex, currentIndex + cardsPerView);
   const lang = i18n.language || "fr";
+
+  useEffect(() => {
+    setCurrentIndex((prev) => Math.min(prev, maxIndex));
+  }, [maxIndex]);
 
   // Create a mapping of titles to translations
   const skillTitleMap = {
@@ -63,13 +85,43 @@ export default function MySkills() {
     setSelectedSkill(null);
   };
 
+  const handlePrev = () => {
+    setCurrentIndex((prev) => Math.max(prev - cardsPerView, 0));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => Math.min(prev + cardsPerView, maxIndex));
+  };
+
   return (
     <section className="skills--section" id="MySkills">
-      <div className="portfolio--container">
-        <p className="section--title"></p>
+      <div className="portfolio--container skills--carousel--header">
         <h2 className="skills--section--heading">{t('skills.title')}</h2>
+        <div className="skills--carousel--controls">
+          <button
+            type="button"
+            className="skills--carousel--btn"
+            onClick={handlePrev}
+            disabled={currentIndex === 0}
+            aria-label={t("skills.carousel.previous")}
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            className="skills--carousel--btn"
+            onClick={handleNext}
+            disabled={currentIndex >= maxIndex}
+            aria-label={t("skills.carousel.next")}
+          >
+            ›
+          </button>
+        </div>
       </div>
-      <div className="skills--section--container">
+      <div
+        className="skills--section--container"
+        style={{ gridTemplateColumns: `repeat(${cardsPerView}, minmax(0, 1fr))` }}
+      >
         {displayedSkills?.map((item) => (
           <div 
             key={item.id} 
@@ -97,16 +149,6 @@ export default function MySkills() {
           </div>
         ))}
       </div>
-      {skills.length > 8 && (
-        <div className="skills--see--all-wrapper">
-          <button 
-            onClick={() => setShowAllSkills(!showAllSkills)} 
-            className="btn-outline-primary" 
-            type="button">
-            {showAllSkills ? t('show Less') || "Voir moins" : `${t('show All') || "Voir tous mes expertises"} (${skills.length})`}
-          </button>
-        </div>
-      )}
 
       {/* Skill Modal */}
       {selectedSkill && (

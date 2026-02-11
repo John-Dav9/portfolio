@@ -44,6 +44,24 @@ export default function MyPortfolio() {
   const projects = dynamicProjects.length > 0 ? dynamicProjects : data?.portfolio || [];
   const lang = i18n.language || "fr";
 
+  const resolveDomain = (project) => {
+    if (project?.domain) {
+      return project.domain.toLowerCase() === "data" ? "data" : "dev";
+    }
+
+    const title = typeof project?.title === "string" ? project.title.toLowerCase() : "";
+    const description = typeof project?.description === "string" ? project.description.toLowerCase() : "";
+    const content = `${title} ${description}`;
+    return content.includes("data") || content.includes("analysis") ? "data" : "dev";
+  };
+
+  const domainGroups = {
+    dev: projects.filter((item) => resolveDomain(item) === "dev"),
+    data: projects.filter((item) => resolveDomain(item) === "data")
+  };
+
+  const domainOrder = ["dev", "data"];
+
   return (
     <section className="portfolio--section" id="MyPortfolio">
       <div className="portfolio--container--box">
@@ -77,77 +95,84 @@ export default function MyPortfolio() {
           </a>
         </div>
       </div>
-      <div className="portfolio--section--container">
-        {projects?.map((item) => (
-          <div key={item.id} className="portfolio--section--img">
-            <a href={item.site} target="_blank" rel="noreferrer">
-              <img
-                src={item.imageUrl || item.src}
-                alt={projectTitleMap[item.title] || item.title || item.title?.[lang]}
-                loading="lazy"
-              />
-            </a>
-            <div className="portfolio--section--card--content">
-              <div>
-                <h3 className="portfolio--section--title">
-                  {item.title?.[lang] || projectTitleMap[item.title] || item.title}
-                </h3>
-                <p className="text-md">
-                  {item.description?.[lang] || projectDescriptionMap[item.description] || item.description}
-                </p>
-              </div>
-              <div className="portfolio--links">
-                {item.url ? (
-                  <a href={item.url} target="_blank" rel="noreferrer" aria-label="Voir sur GitHub">
-                    <p className="text-sm portfolio--link">
-                      {t('portfolio.links.github')}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 20 19"
-                        fill="none"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M4.66667 1.66675H18V15.0001M18 1.66675L2 17.6667L18 1.66675Z"
-                          stroke="currentColor"
-                          strokeWidth="2.66667"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </p>
+      {domainOrder.map((domain) => (
+        domainGroups[domain]?.length > 0 ? (
+          <div key={domain} className="portfolio--domain--section">
+            <h3 className="portfolio--domain--title">{t(`portfolio.domains.${domain}`)}</h3>
+            <div className="portfolio--section--container">
+              {domainGroups[domain].map((item) => (
+                <div key={item.id} className="portfolio--section--img">
+                  <a href={item.site} target="_blank" rel="noreferrer">
+                    <img
+                      src={item.imageUrl || item.src}
+                      alt={projectTitleMap[item.title] || item.title || item.title?.[lang]}
+                      loading="lazy"
+                    />
                   </a>
-                ) : null}
-                {item.site ? (
-                  <a href={item.site} target="_blank" rel="noreferrer" aria-label="Voir le site">
-                    <p className="text-sm portfolio--link">
-                      {t('portfolio.links.site')}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 20 19"
-                        fill="none"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M4.66667 1.66675H18V15.0001M18 1.66675L2 17.6667L18 1.66675Z"
-                          stroke="currentColor"
-                          strokeWidth="2.66667"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </p>
-                  </a>
-                ) : null}
-              </div>
+                  <div className="portfolio--section--card--content">
+                    <div>
+                      <h3 className="portfolio--section--title">
+                        {item.title?.[lang] || projectTitleMap[item.title] || item.title}
+                      </h3>
+                      <p className="text-md">
+                        {item.description?.[lang] || projectDescriptionMap[item.description] || item.description}
+                      </p>
+                    </div>
+                    <div className="portfolio--links">
+                      {item.url ? (
+                        <a href={item.url} target="_blank" rel="noreferrer" aria-label="Voir sur GitHub">
+                          <p className="text-sm portfolio--link">
+                            {t('portfolio.links.github')}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 20 19"
+                              fill="none"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M4.66667 1.66675H18V15.0001M18 1.66675L2 17.6667L18 1.66675Z"
+                                stroke="currentColor"
+                                strokeWidth="2.66667"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </p>
+                        </a>
+                      ) : null}
+                      {item.site ? (
+                        <a href={item.site} target="_blank" rel="noreferrer" aria-label="Voir le site">
+                          <p className="text-sm portfolio--link">
+                            {t('portfolio.links.site')}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 20 19"
+                              fill="none"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M4.66667 1.66675H18V15.0001M18 1.66675L2 17.6667L18 1.66675Z"
+                                stroke="currentColor"
+                                strokeWidth="2.66667"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </p>
+                        </a>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
-      </div>
+        ) : null
+      ))}
     </section>
   );
 }

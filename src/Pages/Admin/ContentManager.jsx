@@ -103,6 +103,7 @@ export default function ContentManager({ showHeader = true }) {
     description: { ...emptyLocale },
     imageUrl: "",
     imageFile: null,
+    domain: "dev",
     url: "",
     site: ""
   });
@@ -225,6 +226,7 @@ export default function ContentManager({ showHeader = true }) {
           en: enLocale.portfolio?.projects?.[index]?.description || project.description
         },
         imageUrl: normalizeImagePath(project.src),
+        domain: project.domain === "data" ? "data" : "dev",
         url: project.url || "",
         site: project.site || "",
         createdAt: serverTimestamp(),
@@ -414,6 +416,7 @@ export default function ContentManager({ showHeader = true }) {
       description: { ...emptyLocale },
       imageUrl: "",
       imageFile: null,
+      domain: "dev",
       url: "",
       site: ""
     });
@@ -493,6 +496,7 @@ export default function ContentManager({ showHeader = true }) {
         title: projectForm.title,
         description: projectForm.description,
         imageUrl: imageUrl || "",
+        domain: projectForm.domain === "data" ? "data" : "dev",
         url: projectForm.url || "",
         site: projectForm.site || "",
         updatedAt: serverTimestamp()
@@ -525,6 +529,7 @@ export default function ContentManager({ showHeader = true }) {
       description: item.description || { ...emptyLocale },
       imageUrl: item.imageUrl || "",
       imageFile: null,
+      domain: item.domain === "data" ? "data" : "dev",
       url: item.url || "",
       site: item.site || ""
     });
@@ -540,6 +545,67 @@ export default function ContentManager({ showHeader = true }) {
     } catch (error) {
       console.error("Erreur suppression project:", error);
       alert("❌ Erreur lors de la suppression");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const resolveProjectDomain = (item) => {
+    if (item?.domain === "data") return "data";
+    if (item?.domain === "dev") return "dev";
+
+    const title =
+      typeof item?.title === "string"
+        ? item.title
+        : `${item?.title?.fr || ""} ${item?.title?.en || ""}`;
+    const description =
+      typeof item?.description === "string"
+        ? item.description
+        : `${item?.description?.fr || ""} ${item?.description?.en || ""}`;
+    const content = `${title} ${description}`.toLowerCase();
+
+    const isDataProject =
+      content.includes("data") ||
+      content.includes("analysis") ||
+      content.includes("analytics") ||
+      content.includes("warehouse") ||
+      content.includes("dashboard") ||
+      content.includes("power bi") ||
+      content.includes("python");
+
+    return isDataProject ? "data" : "dev";
+  };
+
+  const handleBackfillProjectDomains = async () => {
+    setSaving(true);
+    try {
+      const projectsWithoutDomain = projects.filter(
+        (item) => item.domain !== "dev" && item.domain !== "data"
+      );
+
+      if (!projectsWithoutDomain.length) {
+        alert("Aucune migration nécessaire. Tous les projets ont déjà un domaine.");
+        return;
+      }
+
+      await Promise.all(
+        projectsWithoutDomain.map((item) =>
+          updateDoc(doc(db, "projects", item.id), {
+            domain: resolveProjectDomain(item),
+            updatedAt: serverTimestamp()
+          })
+        )
+      );
+
+      await loadProjects();
+      alert(
+        `✅ Migration terminée: ${projectsWithoutDomain.length} projet${
+          projectsWithoutDomain.length > 1 ? "s" : ""
+        } mis à jour`
+      );
+    } catch (error) {
+      console.error("Erreur migration domaines projects:", error);
+      alert("❌ Erreur lors de la migration des domaines");
     } finally {
       setSaving(false);
     }
@@ -1027,6 +1093,16 @@ export default function ContentManager({ showHeader = true }) {
               <div className="admin-form-block">
                 <h3>Liens & Image</h3>
                 <label>
+                  Domaine
+                  <select
+                    value={projectForm.domain}
+                    onChange={(e) => setProjectForm((prev) => ({ ...prev, domain: e.target.value }))}
+                  >
+                    <option value="dev">Dev</option>
+                    <option value="data">Data</option>
+                  </select>
+                </label>
+                <label>
                   Lien GitHub
                   <input
                     type="url"
@@ -1059,6 +1135,14 @@ export default function ContentManager({ showHeader = true }) {
               <button type="submit" className="admin-primary-btn" disabled={saving}>
                 {saving ? "Sauvegarde..." : projectForm.id ? "Modifier le projet" : "Ajouter le projet"}
               </button>
+              <button
+                type="button"
+                className="admin-secondary-btn"
+                onClick={handleBackfillProjectDomains}
+                disabled={saving}
+              >
+                Migrer domaines manquants
+              </button>
               {projectForm.id && (
                 <button type="button" className="admin-secondary-btn" onClick={resetProjectForm}>
                   Annuler
@@ -1072,6 +1156,7 @@ export default function ContentManager({ showHeader = true }) {
               <div key={item.id} className="admin-list-item">
                 <div className="admin-list-info">
                   <strong>{item.title?.fr || item.title?.en || "Sans titre"}</strong>
+                  <span>Domaine: {item.domain === "data" ? "Data" : "Dev"}</span>
                   <span>{item.description?.fr || item.description?.en || ""}</span>
                 </div>
                 <div className="admin-list-actions">

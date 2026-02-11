@@ -52,6 +52,7 @@
   "portfolio": [
     {
       "id": "1",
+      "domain": "dev",
       "src": "./img/placeholder-image-1.png",
       "title": "My Portfolio",
       "description": "Un portfolio conçu en React pour présenter mes projets, mes compétences et mon parcours, avec une interface moderne, responsive et orientée expérience utilisateur.",
@@ -61,6 +62,7 @@
     },
     {
       "id": "2",
+      "domain": "dev",
       "src": "./img/luxedriveimack.png",
       "title": "LuxeDrive",
       "description": "Plateforme fullstack de location de voitures de luxe inspirée d'Airbnb. Système d'authentification sécurisé, espace d'administration, tableau de bord dynamique avec visualisation des ventes. Développé en autonomie avec Ruby on Rails, Bootstrap et versioning Git.",
@@ -70,6 +72,7 @@
     },
     {
       "id": "3",
+      "domain": "dev",
       "src": "./img/cmciea-france.png",
       "title": "CMCIEA-France",
       "description": "Site institutionnel moderne et responsive pour la Communauté Missionnaire Chrétienne Internationale & Églises Associées en France. Déploiement sur Firebase et gestion du nom de domaine via Squarespace. Technologies utilisées : Angular, Bootstrap.",
@@ -79,6 +82,7 @@
     },
     {
       "id": "4",
+      "domain": "data",
       "src": "./img/bmwsales.png",
       "title": "Analyse BMW - Data Warehouse",
       "description": "Projet Data Analysis : Conception d'un Data Warehouse structuré pour analyser les ventes BMW. Analyse exploratoire avec Python. Dashboards Power BI interactifs avec recommandations stratégiques orientées client. Projet présenté sous forme de site web développé en Next.js(backend) et Angular(frontend) avec systeme de login et sécurité avec JWTAuth.",

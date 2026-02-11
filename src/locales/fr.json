@@ -23,6 +23,10 @@
   "skills": {
     "title": "Mes Compétences",
     "learnMore": "En savoir plus",
+    "carousel": {
+      "previous": "Compétences précédentes",
+      "next": "Compétences suivantes"
+    },
     "frontend": {
       "title": "Développement Front-End",
       "description": "Création d'interfaces utilisateur réactives et intuitives avec HTML, CSS, JavaScript (ES6+), React, Angular, Vue.js et TypeScript. Maîtrise de Flexbox, Grid et Bootstrap pour des designs responsive."
@@ -58,6 +62,10 @@
   },
   "portfolio": {
     "title": "Mes projets",
+    "domains": {
+      "dev": "Dev",
+      "data": "Data"
+    },
     "links": {
       "github": "Voir sur GitHub",
       "site": "Voir le site"

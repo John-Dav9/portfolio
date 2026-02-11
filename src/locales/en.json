@@ -23,6 +23,10 @@
   "skills": {
     "title": "My Skills",
     "learnMore": "Learn More",
+    "carousel": {
+      "previous": "Previous skills",
+      "next": "Next skills"
+    },
     "frontend": {
       "title": "Front-End Development",
       "description": "Creating responsive and intuitive user interfaces with HTML, CSS, JavaScript (ES6+), React, Angular, Vue.js and TypeScript. Mastery of Flexbox, Grid and Bootstrap for responsive designs."
@@ -58,6 +62,10 @@
   },
   "portfolio": {
     "title": "My Projects",
+    "domains": {
+      "dev": "Dev",
+      "data": "Data"
+    },
     "links": {
       "github": "View on GitHub",
       "site": "View site"
