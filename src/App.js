@@ -11,6 +11,7 @@ import AdminLogin from './Pages/Admin/Login';
 import AdminDashboard from './Pages/Admin/Dashboard';
 import AdminTestimonials from './Pages/Admin/Testimonials';
 import AdminContacts from './Pages/Admin/Contacts';
+import AdminContent from './Pages/Admin/Content';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/testimonials" element={<AdminTestimonials />} />
         <Route path="/admin/contacts" element={<AdminContacts />} />
+        <Route path="/admin/content" element={<AdminContent />} />
         
         <Route path="*" element={<div>404 Not Found</div>} />
       </Routes>

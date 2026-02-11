@@ -1,10 +1,40 @@
 import { Link } from "react-scroll";
 import { Link as RouterLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { db } from "../../firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 function Footer() {
   const { t } = useTranslation();
+  const [socialLinks, setSocialLinks] = useState({
+    facebook: "https://www.facebook.com/",
+    instagram: "https://www.instagram.com/",
+    twitter: "https://www.twitter.com/",
+    linkedin: "https://www.linkedin.com/in/jd-tchomgui"
+  });
+
+  useEffect(() => {
+    const loadFooterLinks = async () => {
+      try {
+        const snapshot = await getDoc(doc(db, "siteContent", "footer"));
+        if (snapshot.exists()) {
+          const data = snapshot.data();
+          if (data?.socialLinks) {
+            setSocialLinks((prev) => ({
+              ...prev,
+              ...data.socialLinks
+            }));
+          }
+        }
+      } catch (error) {
+        console.error("Erreur chargement footer:", error);
+      }
+    };
+
+    loadFooterLinks();
+  }, []);
+
   return (
     <footer className="footer--container">
       <div className="footer--link--container">
@@ -84,7 +114,7 @@ function Footer() {
           <ul>
             <li>
               <a
-                href="https://www.facebook.com/"
+                href={socialLinks.facebook || "https://www.facebook.com/"}
                 className="navbar--content"
                 target="_blank"
                 rel="noreferrer"
@@ -107,7 +137,7 @@ function Footer() {
             </li>
             <li>
               <a
-                href="https://www.instagram.com/"
+                href={socialLinks.instagram || "https://www.instagram.com/"}
                 className="navbar--content"
                 target="_blank"
                 rel="noreferrer"
@@ -132,7 +162,7 @@ function Footer() {
             </li>
             <li>
               <a
-                href="https://www.twitter.com/"
+                href={socialLinks.twitter || "https://www.twitter.com/"}
                 className="navbar--content"
                 target="_blank"
                 rel="noreferrer"
@@ -155,7 +185,7 @@ function Footer() {
             </li>
             <li>
               <a
-                href="https://www.linkedin.com/in/jd-tchomgui"
+                href={socialLinks.linkedin || "https://www.linkedin.com/in/jd-tchomgui"}
                 className="navbar--content"
                 target="_blank"
                 rel="noreferrer"

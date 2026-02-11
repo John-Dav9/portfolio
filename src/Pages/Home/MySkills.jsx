@@ -1,13 +1,36 @@
 import data from "../../data/index.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { db } from "../../firebase";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 export default function MySkills() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [showAllSkills, setShowAllSkills] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState(null);
-  const skills = data?.skills || [];
+  const [dynamicSkills, setDynamicSkills] = useState([]);
+
+  useEffect(() => {
+    const loadSkills = async () => {
+      try {
+        const q = query(collection(db, "skills"), orderBy("createdAt", "desc"));
+        const snapshot = await getDocs(q);
+        const list = snapshot.docs.map((docItem) => ({
+          id: docItem.id,
+          ...docItem.data()
+        }));
+        setDynamicSkills(list);
+      } catch (error) {
+        console.error("Erreur chargement skills:", error);
+      }
+    };
+
+    loadSkills();
+  }, []);
+
+  const skills = dynamicSkills.length > 0 ? dynamicSkills : data?.skills || [];
   const displayedSkills = showAllSkills ? skills : skills.slice(0, 8);
+  const lang = i18n.language || "fr";
 
   // Create a mapping of titles to translations
   const skillTitleMap = {
@@ -57,10 +80,16 @@ export default function MySkills() {
             onKeyDown={(e) => e.key === 'Enter' && handleSkillClick(item)}
           >
             <div className="skills--section--img">
-              <img src={item.src} alt={skillTitleMap[item.title] || item.title} loading="lazy" />
+              <img
+                src={item.imageUrl || item.src}
+                alt={skillTitleMap[item.title] || item.title || item.title?.[lang] || ""}
+                loading="lazy"
+              />
             </div>
             <div className="skills--section--card--content">
-              <h3 className="skills--section--title">{skillTitleMap[item.title] || item.title}</h3>
+              <h3 className="skills--section--title">
+                {item.title?.[lang] || skillTitleMap[item.title] || item.title}
+              </h3>
               <span className="skills--card--learn-more">
                 {t('skills.learnMore') || 'En savoir plus'}
               </span>
@@ -87,15 +116,17 @@ export default function MySkills() {
               ×
             </button>
             <div className="skills--modal--header">
-              <img 
-                src={selectedSkill.src} 
-                alt={skillTitleMap[selectedSkill.title] || selectedSkill.title}
+              <img
+                src={selectedSkill.imageUrl || selectedSkill.src}
+                alt={skillTitleMap[selectedSkill.title] || selectedSkill.title || selectedSkill.title?.[lang]}
                 className="skills--modal--img"
               />
-              <h2>{skillTitleMap[selectedSkill.title] || selectedSkill.title}</h2>
+              <h2>{selectedSkill.title?.[lang] || skillTitleMap[selectedSkill.title] || selectedSkill.title}</h2>
             </div>
             <p className="skills--modal--description">
-              {skillDescriptionMap[selectedSkill.description] || selectedSkill.description}
+              {selectedSkill.description?.[lang] ||
+                skillDescriptionMap[selectedSkill.description] ||
+                selectedSkill.description}
             </p>
           </div>
         </div>

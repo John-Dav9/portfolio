@@ -1,8 +1,30 @@
 import data from "../../data/index.json";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { db } from "../../firebase";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 export default function MyPortfolio() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [dynamicProjects, setDynamicProjects] = useState([]);
+
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
+        const snapshot = await getDocs(q);
+        const list = snapshot.docs.map((docItem) => ({
+          id: docItem.id,
+          ...docItem.data()
+        }));
+        setDynamicProjects(list);
+      } catch (error) {
+        console.error("Erreur chargement projects:", error);
+      }
+    };
+
+    loadProjects();
+  }, []);
 
   // Create mapping of project titles to translations
   const projectTitleMap = {
@@ -18,6 +40,9 @@ export default function MyPortfolio() {
     "Site institutionnel moderne et responsive pour la Communauté Missionnaire Chrétienne Internationale & Églises Associées France. Déploiement sur Heroku et gestion du nom de domaine via Namecheap.": t('portfolio.projects.2.description'),
     "Projet Data Analysis : Conception d'un Data Warehouse structuré pour analyser les ventes BMW. Analyse exploratoire avec Python (pandas, matplotlib) pour identifier les modèles rentables et tendances par région. Dashboards Power BI interactifs avec recommandations stratégiques orientées client.": t('portfolio.projects.3.description'),
   };
+
+  const projects = dynamicProjects.length > 0 ? dynamicProjects : data?.portfolio || [];
+  const lang = i18n.language || "fr";
 
   return (
     <section className="portfolio--section" id="MyPortfolio">
@@ -53,15 +78,23 @@ export default function MyPortfolio() {
         </div>
       </div>
       <div className="portfolio--section--container">
-        {data?.portfolio?.map((item) => (
+        {projects?.map((item) => (
           <div key={item.id} className="portfolio--section--img">
             <a href={item.site} target="_blank" rel="noreferrer">
-              <img src={item.src} alt={projectTitleMap[item.title] || item.title} loading="lazy" />
+              <img
+                src={item.imageUrl || item.src}
+                alt={projectTitleMap[item.title] || item.title || item.title?.[lang]}
+                loading="lazy"
+              />
             </a>
             <div className="portfolio--section--card--content">
               <div>
-                <h3 className="portfolio--section--title">{projectTitleMap[item.title] || item.title}</h3>
-                <p className="text-md">{projectDescriptionMap[item.description] || item.description}</p>
+                <h3 className="portfolio--section--title">
+                  {item.title?.[lang] || projectTitleMap[item.title] || item.title}
+                </h3>
+                <p className="text-md">
+                  {item.description?.[lang] || projectDescriptionMap[item.description] || item.description}
+                </p>
               </div>
               <div className="portfolio--links">
                 {item.url ? (

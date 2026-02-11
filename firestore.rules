@@ -52,6 +52,24 @@ service cloud.firestore {
       // Seul l'admin peut supprimer les messages
       allow update, delete: if isAdmin();
     }
+
+    // Contenu du site (accueil, about, footer, etc.)
+    match /siteContent/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Compétences
+    match /skills/{skillId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Projets
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
     
     // Bloquer tout accès aux autres collections
     match /{document=**} {

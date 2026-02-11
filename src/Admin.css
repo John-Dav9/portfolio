@@ -150,6 +150,152 @@
   transform: translateX(-5px);
 }
 
+/* Admin Content Manager */
+.admin-section {
+  background: white;
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 32px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.admin-section h2 {
+  margin-bottom: 16px;
+  color: #1a1a2e;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.admin-form-grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.admin-form-block {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-form-block h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.admin-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+  padding: 12px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 14px;
+  background: white;
+}
+
+.admin-form textarea {
+  resize: vertical;
+}
+
+.admin-form-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-primary-btn,
+.admin-secondary-btn,
+.admin-danger-btn,
+.admin-back-btn {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.admin-primary-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.admin-secondary-btn {
+  background: #e2e8f0;
+  color: #1a1a2e;
+}
+
+.admin-danger-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.admin-image-preview {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.admin-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.admin-list-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 14px 18px;
+}
+
+.admin-list-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 70%;
+}
+
+.admin-list-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-embedded-content {
+  margin-top: 40px;
+}
+
+.admin-embedded-title {
+  margin: 0 0 16px;
+  color: #1a1a2e;
+}
+
 /* Admin Dashboard */
 .admin-dashboard {
   min-height: 100vh;

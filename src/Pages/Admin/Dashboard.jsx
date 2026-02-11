@@ -4,6 +4,7 @@ import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
 import "../../Admin.css";
+import ContentManager from "./ContentManager";
 
 export default function AdminDashboard() {
   const [user, setUser] = useState(null);
@@ -144,6 +145,11 @@ export default function AdminDashboard() {
             <h3>🔥 Firebase Console</h3>
             <p>Accéder à la console Firebase</p>
           </div>
+        </div>
+
+        <div className="admin-embedded-content">
+          <h2 className="admin-embedded-title">Éditeur du site</h2>
+          <ContentManager showHeader={false} />
         </div>
       </div>
     </div>
