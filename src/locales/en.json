@@ -12,12 +12,12 @@
     "subtitle": "Full Stack Web Developer",
     "subtitleAccent": "Full Stack Web Developer",
     "description": "Full Stack Web Developer and Data Analyst passionate about transforming data into performant web solutions. Specialized in data analysis with Python, SQL and Power BI, and developing robust applications with React, Ruby on Rails, and Node.js. I combine technical expertise in frontend/backend development and analytical capabilities to create intuitive user interfaces and data-driven insights.",
-    "description_continued": "Trained at <lewagon>Le Wagon</lewagon> and <technofutur>Technofutur TIC</technofutur>, I am looking for new challenges combining web development and data analysis.",
+    "description_continued": "Trained at <a href=\"https://www.lewagon.com/fr/web-development-course\">Le Wagon</a> and <a href=\"https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis\">Technofutur TIC</a>, I am looking for new challenges combining web development and data analysis.",
     "cta_button": "View my CV"
   },
   "about": {
     "title": "About",
-    "description1": "Full Stack Web Developer and Data Analyst with dual technical expertise. Trained in web development at <lewagon>Le Wagon</lewagon> (Ruby on Rails, React, PostgreSQL) and data analysis at <technofutur>Technofutur TIC</technofutur> (Python, SQL, Power BI), I master the entire web application development cycle and complex data analysis.",
+    "description1": "Full Stack Web Developer and Data Analyst with dual technical expertise. Trained in web development at <a href=\"https://www.lewagon.com/fr/web-development-course\">Le Wagon</a> (Ruby on Rails, React, PostgreSQL) and data analysis at <a href=\"https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis\">Technofutur TIC</a> (Python, SQL, Power BI), I master the entire web application development cycle and complex data analysis.",
     "description2": "Passionate about digital transformation, I combine frontend/backend development and analytical skills to create performant web solutions enriched by data intelligence. Autonomous and collaborative, I excel both in teamwork and in conducting projects independently. My unconventional journey demonstrates great adaptability and continuous learning, essential for evolving in today's technology ecosystem."
   },
   "skills": {

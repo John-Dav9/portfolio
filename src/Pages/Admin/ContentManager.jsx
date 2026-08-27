@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { auth, db, storage } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import {
@@ -19,8 +19,50 @@ import "../../Admin.css";
 import data from "../../data/index.json";
 import frLocale from "../../locales/fr.json";
 import enLocale from "../../locales/en.json";
+import { sanitizeRichText } from "../../utils/richText";
 
 const emptyLocale = { fr: "", en: "" };
+
+function HtmlTextarea({ value, onChange, rows = 4 }) {
+  const textareaRef = useRef(null);
+
+  const insertLink = () => {
+    const el = textareaRef.current;
+    if (!el) return;
+    const url = window.prompt("URL du lien (https://...)");
+    if (!url) return;
+
+    const start = el.selectionStart;
+    const end = el.selectionEnd;
+    const selected = value.slice(start, end) || "texte du lien";
+    const before = value.slice(0, start);
+    const after = value.slice(end);
+    const inserted = `<a href="${url}">${selected}</a>`;
+
+    onChange(`${before}${inserted}${after}`);
+
+    requestAnimationFrame(() => {
+      el.focus();
+      const cursor = before.length + inserted.length;
+      el.setSelectionRange(cursor, cursor);
+    });
+  };
+
+  return (
+    <div className="admin-richtext-field">
+      <div className="admin-richtext-toolbar">
+        <button type="button" onClick={insertLink}>+ Lien</button>
+      </div>
+      <textarea ref={textareaRef} rows={rows} value={value} onChange={(e) => onChange(e.target.value)} />
+      {value && (
+        <div
+          className="admin-richtext-preview"
+          dangerouslySetInnerHTML={{ __html: sanitizeRichText(value) }}
+        />
+      )}
+    </div>
+  );
+}
 
 const defaultHomeContent = {
   hero: {
@@ -699,15 +741,15 @@ export default function ContentManager({ showHeader = true }) {
                 </label>
                 <label>
                   Description (suite avec liens)
-                  <textarea
-                    rows="3"
+                  <HtmlTextarea
+                    rows={3}
                     value={homeContent.hero.description_continued.fr}
-                    onChange={(e) =>
+                    onChange={(next) =>
                       setHomeContent((prev) => ({
                         ...prev,
                         hero: {
                           ...prev.hero,
-                          description_continued: { ...prev.hero.description_continued, fr: e.target.value }
+                          description_continued: { ...prev.hero.description_continued, fr: next }
                         }
                       }))
                     }
@@ -787,15 +829,15 @@ export default function ContentManager({ showHeader = true }) {
                 </label>
                 <label>
                   Description (continued with links)
-                  <textarea
-                    rows="3"
+                  <HtmlTextarea
+                    rows={3}
                     value={homeContent.hero.description_continued.en}
-                    onChange={(e) =>
+                    onChange={(next) =>
                       setHomeContent((prev) => ({
                         ...prev,
                         hero: {
                           ...prev.hero,
-                          description_continued: { ...prev.hero.description_continued, en: e.target.value }
+                          description_continued: { ...prev.hero.description_continued, en: next }
                         }
                       }))
                     }
@@ -860,26 +902,26 @@ export default function ContentManager({ showHeader = true }) {
                 </label>
                 <label>
                   Description 1
-                  <textarea
-                    rows="4"
+                  <HtmlTextarea
+                    rows={4}
                     value={homeContent.about.description1.fr}
-                    onChange={(e) =>
+                    onChange={(next) =>
                       setHomeContent((prev) => ({
                         ...prev,
-                        about: { ...prev.about, description1: { ...prev.about.description1, fr: e.target.value } }
+                        about: { ...prev.about, description1: { ...prev.about.description1, fr: next } }
                       }))
                     }
                   />
                 </label>
                 <label>
                   Description 2
-                  <textarea
-                    rows="4"
+                  <HtmlTextarea
+                    rows={4}
                     value={homeContent.about.description2.fr}
-                    onChange={(e) =>
+                    onChange={(next) =>
                       setHomeContent((prev) => ({
                         ...prev,
-                        about: { ...prev.about, description2: { ...prev.about.description2, fr: e.target.value } }
+                        about: { ...prev.about, description2: { ...prev.about.description2, fr: next } }
                       }))
                     }
                   />
@@ -903,26 +945,26 @@ export default function ContentManager({ showHeader = true }) {
                 </label>
                 <label>
                   Description 1
-                  <textarea
-                    rows="4"
+                  <HtmlTextarea
+                    rows={4}
                     value={homeContent.about.description1.en}
-                    onChange={(e) =>
+                    onChange={(next) =>
                       setHomeContent((prev) => ({
                         ...prev,
-                        about: { ...prev.about, description1: { ...prev.about.description1, en: e.target.value } }
+                        about: { ...prev.about, description1: { ...prev.about.description1, en: next } }
                       }))
                     }
                   />
                 </label>
                 <label>
                   Description 2
-                  <textarea
-                    rows="4"
+                  <HtmlTextarea
+                    rows={4}
                     value={homeContent.about.description2.en}
-                    onChange={(e) =>
+                    onChange={(next) =>
                       setHomeContent((prev) => ({
                         ...prev,
-                        about: { ...prev.about, description2: { ...prev.about.description2, en: e.target.value } }
+                        about: { ...prev.about, description2: { ...prev.about.description2, en: next } }
                       }))
                     }
                   />

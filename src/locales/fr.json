@@ -12,12 +12,12 @@
     "subtitle": "Développeur Web Fullstack",
     "subtitleAccent": "Développeur Web Fullstack",
     "description": "Développeur Web Fullstack et Data Analyst passionné par la transformation des données en solutions web performantes. Spécialisé en analyse de données avec Python, SQL et Power BI, et développement d'applications robustes avec React, Ruby on Rails, et Node.js. Je combine expertise technique en développement frontend/backend et capacités analytiques pour créer des interfaces utilisateur intuitives et des insights basés sur les données.",
-    "description_continued": "Formé chez <lewagon>Le Wagon</lewagon> et <technofutur>Technofutur TIC</technofutur>, je cherche à relever de nouveaux défis alliant développement web et analyse de données.",
+    "description_continued": "Formé chez <a href=\"https://www.lewagon.com/fr/web-development-course\">Le Wagon</a> et <a href=\"https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis\">Technofutur TIC</a>, je cherche à relever de nouveaux défis alliant développement web et analyse de données.",
     "cta_button": "Voir mon CV"
   },
   "about": {
     "title": "À propos",
-    "description1": "Développeur Web Fullstack et Data Analyst avec une double expertise technique. Formé au développement web chez <lewagon>Le Wagon</lewagon> (Ruby on Rails, React, PostgreSQL) et à l'analyse de données chez <technofutur>Technofutur TIC</technofutur> (Python, SQL, Power BI), je maîtrise l'ensemble du cycle de développement d'applications web et l'analyse de données complexes.",
+    "description1": "Développeur Web Fullstack et Data Analyst avec une double expertise technique. Formé au développement web chez <a href=\"https://www.lewagon.com/fr/web-development-course\">Le Wagon</a> (Ruby on Rails, React, PostgreSQL) et à l'analyse de données chez <a href=\"https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis\">Technofutur TIC</a> (Python, SQL, Power BI), je maîtrise l'ensemble du cycle de développement d'applications web et l'analyse de données complexes.",
     "description2": "Passionné par la transformation numérique, je combine développement frontend/backend et compétences analytiques pour créer des solutions web performantes enrichies par l'intelligence des données. Autonome et collaboratif, j'excelle aussi bien dans le travail d'équipe que dans la réalisation de projets en autonomie. Mon parcours atypique témoigne d'une grande capacité d'adaptation et d'un apprentissage continu, essentiels pour évoluer dans l'écosystème technologique actuel."
   },
   "skills": {

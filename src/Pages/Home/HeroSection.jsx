@@ -1,7 +1,8 @@
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { useEffect, useRef, useState } from 'react';
 import { db } from '../../firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { RichText } from '../../utils/richText';
 
 export default function HeroSection() {
   const { t, i18n } = useTranslation();
@@ -64,26 +65,7 @@ export default function HeroSection() {
           <p className="hero--section--description">
             {heroDescription}
             <br />
-            <Trans
-              components={{
-                lewagon: (
-                  <a
-                    href="https://www.lewagon.com/fr/web-development-course"
-                    target="_blank"
-                    rel="noreferrer"
-                  />
-                ),
-                technofutur: (
-                  <a
-                    href="https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis"
-                    target="_blank"
-                    rel="noreferrer"
-                  />
-                )
-              }}
-            >
-              {heroDescriptionContinued}
-            </Trans>
+            <RichText text={heroDescriptionContinued} />
           </p>
         </div>
         {!hasCvLinks ? (

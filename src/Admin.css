@@ -217,6 +217,47 @@
   resize: vertical;
 }
 
+.admin-richtext-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-richtext-toolbar {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-richtext-toolbar button {
+  padding: 4px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2c3e50;
+  cursor: pointer;
+}
+
+.admin-richtext-toolbar button:hover {
+  background: #edf2f7;
+}
+
+.admin-richtext-preview {
+  padding: 10px 12px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #475569;
+  background: #f8fafc;
+}
+
+.admin-richtext-preview a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
 .admin-form-actions {
   display: flex;
   gap: 12px;

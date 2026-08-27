@@ -1,0 +1,13 @@
+services:
+  portfolio:
+    build: ./app
+    container_name: portfolio-jd
+    restart: unless-stopped
+    ports:
+      - "4001:80"
+    networks:
+      - mon-reseau
+
+networks:
+  mon-reseau:
+    external: true

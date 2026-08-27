@@ -1,7 +1,8 @@
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { db } from '../../firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { RichText } from '../../utils/richText';
 
 export default function AboutMe() {
   const { t, i18n } = useTranslation();
@@ -39,29 +40,10 @@ export default function AboutMe() {
           <p className="section--title"></p>
           <h1 className="skills--section--heading">{aboutTitle}</h1>
           <p className="hero--section--description">
-            <Trans
-              components={{
-                lewagon: (
-                  <a
-                    href="https://www.lewagon.com/fr/web-development-course"
-                    target="_blank"
-                    rel="noreferrer"
-                  />
-                ),
-                technofutur: (
-                  <a
-                    href="https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis"
-                    target="_blank"
-                    rel="noreferrer"
-                  />
-                )
-              }}
-            >
-              {aboutDescription1}
-            </Trans>
+            <RichText text={aboutDescription1} />
           </p>
           <p className="hero--section--description">
-            {aboutDescription2}
+            <RichText text={aboutDescription2} />
           </p>
         </div>
       </div>
