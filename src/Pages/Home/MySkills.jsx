@@ -95,59 +95,59 @@ export default function MySkills() {
 
   return (
     <section className="skills--section" id="MySkills">
-      <div className="portfolio--container skills--carousel--header">
+      <div className="portfolio--container">
         <h2 className="skills--section--heading">{t('skills.title')}</h2>
-        <div className="skills--carousel--controls">
-          <button
-            type="button"
-            className="skills--carousel--btn"
-            onClick={handlePrev}
-            disabled={currentIndex === 0}
-            aria-label={t("skills.carousel.previous")}
-          >
-            ‹
-          </button>
-          <button
-            type="button"
-            className="skills--carousel--btn"
-            onClick={handleNext}
-            disabled={currentIndex >= maxIndex}
-            aria-label={t("skills.carousel.next")}
-          >
-            ›
-          </button>
-        </div>
       </div>
-      <div
-        className="skills--section--container"
-        style={{ gridTemplateColumns: `repeat(${cardsPerView}, minmax(0, 1fr))` }}
-      >
-        {displayedSkills?.map((item) => (
-          <div 
-            key={item.id} 
-            className="skills--section--card"
-            onClick={() => handleSkillClick(item)}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === 'Enter' && handleSkillClick(item)}
-          >
-            <div className="skills--section--img">
-              <img
-                src={item.imageUrl || item.src}
-                alt={skillTitleMap[item.title] || item.title || item.title?.[lang] || ""}
-                loading="lazy"
-              />
+      <div className="skills--carousel--layout">
+        <button
+          type="button"
+          className="skills--carousel--btn"
+          onClick={handlePrev}
+          disabled={currentIndex === 0}
+          aria-label={t("skills.carousel.previous")}
+        >
+          ‹
+        </button>
+        <div
+          className="skills--section--container"
+          style={{ gridTemplateColumns: `repeat(${cardsPerView}, minmax(0, 1fr))` }}
+        >
+          {displayedSkills?.map((item) => (
+            <div 
+              key={item.id} 
+              className="skills--section--card"
+              onClick={() => handleSkillClick(item)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && handleSkillClick(item)}
+            >
+              <div className="skills--section--img">
+                <img
+                  src={item.imageUrl || item.src}
+                  alt={skillTitleMap[item.title] || item.title || item.title?.[lang] || ""}
+                  loading="lazy"
+                />
+              </div>
+              <div className="skills--section--card--content">
+                <h3 className="skills--section--title">
+                  {item.title?.[lang] || skillTitleMap[item.title] || item.title}
+                </h3>
+                <span className="skills--card--learn-more">
+                  {t('skills.learnMore') || 'En savoir plus'}
+                </span>
+              </div>
             </div>
-            <div className="skills--section--card--content">
-              <h3 className="skills--section--title">
-                {item.title?.[lang] || skillTitleMap[item.title] || item.title}
-              </h3>
-              <span className="skills--card--learn-more">
-                {t('skills.learnMore') || 'En savoir plus'}
-              </span>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <button
+          type="button"
+          className="skills--carousel--btn"
+          onClick={handleNext}
+          disabled={currentIndex >= maxIndex}
+          aria-label={t("skills.carousel.next")}
+        >
+          ›
+        </button>
       </div>
 
       {/* Skill Modal */}

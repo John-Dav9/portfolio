@@ -457,15 +457,12 @@ h3 {
   width: 100%;
   line-height: 60px;
 }
-.skills--carousel--header {
+.skills--carousel--layout {
   width: 100%;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  margin-bottom: 20px;
-}
-.skills--carousel--controls {
-  display: flex;
-  gap: 10px;
+  gap: 14px;
 }
 .skills--carousel--btn {
   width: 42px;
@@ -1793,10 +1790,8 @@ input[type="checkbox"] {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-  .skills--carousel--header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+  .skills--carousel--layout {
+    gap: 10px;
   }
   .portfolio--section--container {
     grid-template-columns: repeat(2, 1fr);
@@ -1963,6 +1958,10 @@ input[type="checkbox"] {
     width: 38px;
     height: 38px;
     font-size: 22px;
+  }
+  .skills--carousel--layout {
+    grid-template-columns: auto 1fr auto;
+    gap: 8px;
   }
 
   .skills--section--card {

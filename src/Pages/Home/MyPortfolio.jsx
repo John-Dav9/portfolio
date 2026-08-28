@@ -45,14 +45,29 @@ export default function MyPortfolio() {
   const lang = i18n.language || "fr";
 
   const resolveDomain = (project) => {
-    if (project?.domain) {
-      return project.domain.toLowerCase() === "data" ? "data" : "dev";
-    }
-
-    const title = typeof project?.title === "string" ? project.title.toLowerCase() : "";
-    const description = typeof project?.description === "string" ? project.description.toLowerCase() : "";
+    const domain = typeof project?.domain === "string" ? project.domain.toLowerCase() : "";
+    const title =
+      typeof project?.title === "string"
+        ? project.title.toLowerCase()
+        : `${project?.title?.fr || ""} ${project?.title?.en || ""}`.toLowerCase();
+    const description =
+      typeof project?.description === "string"
+        ? project.description.toLowerCase()
+        : `${project?.description?.fr || ""} ${project?.description?.en || ""}`.toLowerCase();
     const content = `${title} ${description}`;
-    return content.includes("data") || content.includes("analysis") ? "data" : "dev";
+
+    const isDataProject =
+      content.includes("data") ||
+      content.includes("analysis") ||
+      content.includes("analytics") ||
+      content.includes("warehouse") ||
+      content.includes("power bi") ||
+      content.includes("python") ||
+      content.includes("sql");
+
+    if (domain === "data") return "data";
+    if (domain === "dev" && !isDataProject) return "dev";
+    return isDataProject ? "data" : "dev";
   };
 
   const domainGroups = {
