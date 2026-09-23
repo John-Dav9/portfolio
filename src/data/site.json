@@ -1,0 +1,18 @@
+{
+  "hero": {
+    "subtitleSuffix": { "fr": "& Data Analyst", "en": "& Data Analyst" },
+    "ctaUrl": "https://www.canva.com/design/DAGRbJFBCcQ/ENKhhjbSAB3NvhZBzzCISA/view",
+    "imageUrl": "/img/copie 3.JPG"
+  },
+  "about": { "imageUrl": "/img/copie 2.JPG" },
+  "cv": {
+    "dev": { "fr": "", "en": "" },
+    "data": { "fr": "", "en": "" }
+  },
+  "socialLinks": {
+    "facebook": "https://www.facebook.com/",
+    "instagram": "https://www.instagram.com/",
+    "twitter": "https://www.twitter.com/",
+    "linkedin": "https://www.linkedin.com/in/jd-tchomgui"
+  }
+}

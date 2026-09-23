@@ -28,7 +28,7 @@
       "id": "5",
       "src": "./img/deployment.jpg",
       "title": "Déploiement & DevOps",
-      "description": "Déploiement d'applications sur Heroku, Firebase, GoDaddy..., gestion de domaines (Namecheap), configuration serveur et mise en production d'applications web fullstack en autonomie."
+      "description": "Déploiement d'applications sur Heroku, GoDaddy..., gestion de domaines (Namecheap), configuration serveur et mise en production d'applications web fullstack en autonomie."
     },
     {
       "id": "6",
@@ -58,7 +58,7 @@
       "description": "Un portfolio conçu en React pour présenter mes projets, mes compétences et mon parcours, avec une interface moderne, responsive et orientée expérience utilisateur.",
       "link": "Voir en ligne",
       "url": "https://github.com/John-Dav9/portfolio.git",
-      "site": "https://john-david-portfolio.web.app/"
+      "site": "/"
     },
     {
       "id": "2",
@@ -75,7 +75,7 @@
       "domain": "dev",
       "src": "./img/cmciea-france.png",
       "title": "CMCIEA-France",
-      "description": "Site institutionnel moderne et responsive pour la Communauté Missionnaire Chrétienne Internationale & Églises Associées en France. Déploiement sur Firebase et gestion du nom de domaine via Squarespace. Technologies utilisées : Angular, Bootstrap.",
+      "description": "Site institutionnel moderne et responsive pour la Communauté Missionnaire Chrétienne Internationale & Églises Associées en France. Hébergement web et gestion du nom de domaine via Squarespace. Technologies utilisées : Angular, Bootstrap.",
       "link": "View online",
       "url": "https://cmciea-france.com/",
       "site": "https://cmciea-france.com/"

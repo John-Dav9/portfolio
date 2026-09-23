@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { db } from "../../firebase";
-import { collection, addDoc } from "firebase/firestore";
 import emailjs from '@emailjs/browser';
 
 const COUNTRY_CODES = [
@@ -193,12 +191,12 @@ export default function ContactMe() {
 
     const form = e.target;
     const formData = new FormData(form);
-    
+
     // Ajouter le numéro de téléphone complet
     const fullPhoneNumber = `${phoneCountryCode}${phoneNumber}`;
     formData.set("phone-number", fullPhoneNumber);
 
-    // Préparer les données pour Firestore
+    // Préparer les données du message
     const contactData = {
       firstName: formData.get("first-name"),
       lastName: formData.get("last-name"),
@@ -225,10 +223,7 @@ export default function ContactMe() {
     };
 
     try {
-      // 1. Sauvegarder dans Firestore
-      await addDoc(collection(db, "contacts"), contactData);
-      
-      // 2. Envoyer l'email via EmailJS
+      // Envoyer l'email via EmailJS
       await emailjs.send(
         'service_3e9z3k3',      // Service ID
         'template_lwhrj6h',     // Template ID
@@ -241,7 +236,7 @@ export default function ContactMe() {
       setPhoneCountryCode("+33");
       setPhoneNumber("");
       setTimeout(() => setSubmitStatus(null), 5000);
-      
+
     } catch (error) {
       console.error("Erreur:", error);
       setSubmitStatus("error");
@@ -354,8 +349,8 @@ export default function ContactMe() {
           <span className="text-sm">{t('contact.form.agreeTerms')} <span className="required-asterisk">*</span></span>
         </label>
         <div>
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="btn btn-primary contact--form--btn"
             disabled={isSubmitting}
           >

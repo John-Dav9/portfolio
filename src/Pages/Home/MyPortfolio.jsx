@@ -1,30 +1,8 @@
 import data from "../../data/index.json";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { db } from "../../firebase";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 export default function MyPortfolio() {
   const { t, i18n } = useTranslation();
-  const [dynamicProjects, setDynamicProjects] = useState([]);
-
-  useEffect(() => {
-    const loadProjects = async () => {
-      try {
-        const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
-        const snapshot = await getDocs(q);
-        const list = snapshot.docs.map((docItem) => ({
-          id: docItem.id,
-          ...docItem.data()
-        }));
-        setDynamicProjects(list);
-      } catch (error) {
-        console.error("Erreur chargement projects:", error);
-      }
-    };
-
-    loadProjects();
-  }, []);
 
   // Create mapping of project titles to translations
   const projectTitleMap = {
@@ -41,7 +19,7 @@ export default function MyPortfolio() {
     "Projet Data Analysis : Conception d'un Data Warehouse structuré pour analyser les ventes BMW. Analyse exploratoire avec Python (pandas, matplotlib) pour identifier les modèles rentables et tendances par région. Dashboards Power BI interactifs avec recommandations stratégiques orientées client.": t('portfolio.projects.3.description'),
   };
 
-  const projects = dynamicProjects.length > 0 ? dynamicProjects : data?.portfolio || [];
+  const projects = data?.portfolio || [];
   const lang = i18n.language || "fr";
 
   const resolveDomain = (project) => {

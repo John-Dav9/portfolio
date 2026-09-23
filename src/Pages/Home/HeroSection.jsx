@@ -1,37 +1,15 @@
+import siteContent from "../../data/site.json";
 import { useTranslation } from 'react-i18next';
-import { useEffect, useRef, useState } from 'react';
-import { db } from '../../firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { useRef, useState } from 'react';
 import { RichText } from '../../utils/richText';
 
 export default function HeroSection() {
   const { t, i18n } = useTranslation();
-  const [heroContent, setHeroContent] = useState(null);
-  const [cvLinks, setCvLinks] = useState(null);
+  const heroContent = siteContent.hero;
+  const cvLinks = siteContent.cv;
   const [selectedCvUrl, setSelectedCvUrl] = useState("");
   const [selectedCvLabel, setSelectedCvLabel] = useState("");
   const cvDropdownRef = useRef(null);
-
-  useEffect(() => {
-    const loadHeroContent = async () => {
-      try {
-        const snapshot = await getDoc(doc(db, 'siteContent', 'home'));
-        if (snapshot.exists()) {
-          const data = snapshot.data();
-          setHeroContent(data.hero || null);
-        }
-        const cvSnap = await getDoc(doc(db, 'siteContent', 'cv'));
-        if (cvSnap.exists()) {
-          const data = cvSnap.data();
-          setCvLinks(data.links || null);
-        }
-      } catch (error) {
-        console.error('Erreur chargement hero:', error);
-      }
-    };
-
-    loadHeroContent();
-  }, []);
 
   const lang = i18n.language || 'fr';
   const heroTitle = heroContent?.title?.[lang] || t('hero.title');
@@ -48,7 +26,6 @@ export default function HeroSection() {
   const heroImageUrl = heroContent?.imageUrl || "./img/copie 3.JPG";
   const hasCvLinks =
     cvLinks?.dev?.fr || cvLinks?.dev?.en || cvLinks?.data?.fr || cvLinks?.data?.en;
-
 
   return (
     <section id="heroSection" className="hero--section">

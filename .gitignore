@@ -22,4 +22,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 node_modules
-firebase-debug.log
+
+# Local environment and downloaded file metadata
+.env
+.env.*
+!.env.example
+*:Zone.Identifier

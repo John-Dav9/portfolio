@@ -1,39 +1,12 @@
 import { Link } from "react-scroll";
 import { Link as RouterLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import React, { useEffect, useState } from "react";
-import { db } from "../../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import React from "react";
+import siteContent from "../../data/site.json";
 
 function Footer() {
   const { t } = useTranslation();
-  const [socialLinks, setSocialLinks] = useState({
-    facebook: "https://www.facebook.com/",
-    instagram: "https://www.instagram.com/",
-    twitter: "https://www.twitter.com/",
-    linkedin: "https://www.linkedin.com/in/jd-tchomgui"
-  });
-
-  useEffect(() => {
-    const loadFooterLinks = async () => {
-      try {
-        const snapshot = await getDoc(doc(db, "siteContent", "footer"));
-        if (snapshot.exists()) {
-          const data = snapshot.data();
-          if (data?.socialLinks) {
-            setSocialLinks((prev) => ({
-              ...prev,
-              ...data.socialLinks
-            }));
-          }
-        }
-      } catch (error) {
-        console.error("Erreur chargement footer:", error);
-      }
-    };
-
-    loadFooterLinks();
-  }, []);
+  const socialLinks = siteContent.socialLinks;
 
   return (
     <footer className="footer--container">

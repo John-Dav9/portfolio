@@ -1,33 +1,12 @@
 import data from "../../data/index.json";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { db } from "../../firebase";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 export default function MySkills() {
   const { t, i18n } = useTranslation();
   const [selectedSkill, setSelectedSkill] = useState(null);
-  const [dynamicSkills, setDynamicSkills] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsPerView, setCardsPerView] = useState(4);
-
-  useEffect(() => {
-    const loadSkills = async () => {
-      try {
-        const q = query(collection(db, "skills"), orderBy("createdAt", "desc"));
-        const snapshot = await getDocs(q);
-        const list = snapshot.docs.map((docItem) => ({
-          id: docItem.id,
-          ...docItem.data()
-        }));
-        setDynamicSkills(list);
-      } catch (error) {
-        console.error("Erreur chargement skills:", error);
-      }
-    };
-
-    loadSkills();
-  }, []);
 
   useEffect(() => {
     const updateCardsPerView = () => {
@@ -45,7 +24,7 @@ export default function MySkills() {
     return () => window.removeEventListener("resize", updateCardsPerView);
   }, []);
 
-  const skills = dynamicSkills.length > 0 ? dynamicSkills : data?.skills || [];
+  const skills = data?.skills || [];
   const maxIndex = Math.max(0, skills.length - cardsPerView);
   const displayedSkills = skills.slice(currentIndex, currentIndex + cardsPerView);
   const lang = i18n.language || "fr";
@@ -113,8 +92,8 @@ export default function MySkills() {
           style={{ gridTemplateColumns: `repeat(${cardsPerView}, minmax(0, 1fr))` }}
         >
           {displayedSkills?.map((item) => (
-            <div 
-              key={item.id} 
+            <div
+              key={item.id}
               className="skills--section--card"
               onClick={() => handleSkillClick(item)}
               role="button"

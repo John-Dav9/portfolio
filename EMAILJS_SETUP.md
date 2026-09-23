@@ -576,7 +576,7 @@ Tu peux personnaliser le template pour inclure :
 
 ## ✅ Étape 6 : Tester
 
-1. Déploie le site : `npm run build && firebase deploy`
+1. Déploie le site : `npm run build`, puis publie le dossier `build/` sur ton hébergement
 2. Va sur ton portfolio : https://john-david-portfolio.web.app
 3. Remplis le formulaire de contact
 4. Vérifie ta boîte email !

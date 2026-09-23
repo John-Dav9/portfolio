@@ -1,85 +1,11 @@
 import data from "../../data/index.json";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { db } from "../../firebase";
-import { collection, addDoc, getDocs, orderBy, query } from "firebase/firestore";
 
 export default function Testimonial() {
   const { t } = useTranslation();
-  const [testimonials, setTestimonials] = useState(data?.testimonials || []);
-  const [showModal, setShowModal] = useState(false);
+  const testimonials = data.testimonials || [];
   const [showAll, setShowAll] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    author_name: "",
-    author_designation: "",
-    description: "",
-    count: "5"
-  });
-
-  // Charger les avis depuis Firestore au démarrage
-  useEffect(() => {
-    loadTestimonials();
-  }, []);
-
-  const loadTestimonials = async () => {
-    try {
-      const q = query(collection(db, "testimonials"), orderBy("createdAt", "desc"));
-      const querySnapshot = await getDocs(q);
-      const firestoreTestimonials = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      
-      // Ne charger que les témoignages approuvés pour le public
-      const approvedTestimonials = firestoreTestimonials.filter(t => t.status === "approved" || !t.status);
-      
-      // Combiner les avis approuvés avec ceux de Firestore et les avis statiques
-      setTestimonials([...approvedTestimonials, ...data?.testimonials || []]);
-    } catch (error) {
-      console.error("Erreur lors du chargement des avis:", error);
-      // En cas d'erreur, garder les avis statiques
-      setTestimonials(data?.testimonials || []);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    
-    try {
-      const newTestimonial = {
-        author_name: formData.author_name,
-        author_designation: formData.author_designation,
-        description: formData.description,
-        count: formData.count,
-        src: "./img/avatar-image.png",
-        status: "pending", // Avis en attente d'approbation
-        createdAt: new Date().toISOString()
-      };
-      
-      // Sauvegarder dans Firestore
-      await addDoc(collection(db, "testimonials"), newTestimonial);
-      
-      // Recharger les avis
-      await loadTestimonials();
-      
-      setShowModal(false);
-      setFormData({
-        author_name: "",
-        author_designation: "",
-        description: "",
-        count: "5"
-      });
-      
-      alert("✅ Merci pour votre avis ! Il sera publié après validation.");
-    } catch (error) {
-      console.error("Erreur lors de l'ajout de l'avis:", error);
-      alert("❌ Erreur: Impossible d'enregistrer l'avis. Vérifiez votre configuration Firebase.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <section className="testimonial--section" id="testimonial">
@@ -124,33 +50,13 @@ export default function Testimonial() {
             </div>
           </div>
         ))}
-        <button 
-          onClick={() => setShowModal(true)} 
-          className="testimonial--add--card"
-          type="button"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="48"
-            height="48"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg>
-          <span>{t('testimonials.leaveReview')}</span>
-        </button>
+
       </div>
 
       {testimonials.length > 3 && (
         <div className="testimonial--see--all-wrapper">
-          <button 
-            onClick={() => setShowAll(!showAll)} 
+          <button
+            onClick={() => setShowAll(!showAll)}
             className="btn-outline-primary"
             type="button"
           >
@@ -159,77 +65,6 @@ export default function Testimonial() {
         </div>
       )}
 
-      {showModal && (
-        <div className="modal--overlay" onClick={() => setShowModal(false)}>
-          <div className="modal--content" onClick={(e) => e.stopPropagation()}>
-            <button 
-              className="modal--close" 
-              onClick={() => setShowModal(false)}
-              type="button"
-            >
-              ×
-            </button>
-            <h3>Laisser un avis</h3>
-            <form onSubmit={handleSubmit} className="testimonial--form">
-              <div className="form--group">
-                <label htmlFor="name">Votre nom *</label>
-                <input
-                  id="name"
-                  type="text"
-                  required
-                  value={formData.author_name}
-                  onChange={(e) => setFormData({...formData, author_name: e.target.value})}
-                  placeholder="John Doe"
-                />
-              </div>
-              <div className="form--group">
-                <label htmlFor="designation">Fonction / Entreprise *</label>
-                <input
-                  id="designation"
-                  type="text"
-                  required
-                  value={formData.author_designation}
-                  onChange={(e) => setFormData({...formData, author_designation: e.target.value})}
-                  placeholder="Développeur chez XYZ"
-                />
-              </div>
-              <div className="form--group">
-                <label htmlFor="rating">Note *</label>
-                <select
-                  id="rating"
-                  value={formData.count}
-                  onChange={(e) => setFormData({...formData, count: e.target.value})}
-                >
-                  <option value="5">5 étoiles</option>
-                  <option value="4">4 étoiles</option>
-                  <option value="3">3 étoiles</option>
-                  <option value="2">2 étoiles</option>
-                  <option value="1">1 étoile</option>
-                </select>
-              </div>
-              <div className="form--group">
-                <label htmlFor="comment">Votre commentaire *</label>
-                <textarea
-                  id="comment"
-                  required
-                  rows="5"
-                  value={formData.description}
-                  onChange={(e) => setFormData({...formData, description: e.target.value})}
-                  placeholder="Partagez votre expérience..."
-                />
-              </div>
-              <div className="form--actions">
-                <button type="button" onClick={() => setShowModal(false)} className="btn-secondary" disabled={loading}>
-                  Annuler
-                </button>
-                <button type="submit" className="btn-primary" disabled={loading}>
-                  {loading ? "Publication..." : "Publier l'avis"}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

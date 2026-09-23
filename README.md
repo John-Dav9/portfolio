@@ -1,61 +1,47 @@
-# 🌟 Portfolio – John Tchomgui
+# Portfolio – John Tchomgui
 
-Bienvenue sur mon portfolio personnel, développé pour présenter mes compétences en développement web, mes projets réalisés et mon parcours en reconversion vers la tech.
+Portfolio React bilingue (français/anglais), avec React Router, i18next et un formulaire de contact EmailJS. Le site est désormais statique : aucun backend de contenu, aucune connexion administrateur et aucun stockage de messages côté site.
 
-Ce site vitrine a pour but de me représenter en tant que développeur web fullstack junior, passionné par la création d’interfaces intuitives et la résolution de problèmes techniques.
+## Installation et développement
 
----
+Node.js >= 20.19.0 et npm sont nécessaires. Utiliser npm et le fichier `package-lock.json` pour les installations reproductibles.
 
-## 🛠️ Stack utilisée
+```sh
+npm ci --legacy-peer-deps
+npm start
+```
 
-- HTML5  
-- CSS3 (custom + Bootstrap)  
-- JavaScript  
-- Git / GitHub  
----
+Le paramètre `--legacy-peer-deps` reste nécessaire avec les contraintes actuelles de Create React App et TypeScript. Les dépendances de construction présentent encore des alertes de sécurité ; le retrait du backend ne les corrige pas.
 
-## ✨ Ce que vous trouverez sur le site
+## Modifier les contenus
 
-- 🎯 **Présentation de mon profil** (bio, parcours, soft skills)
-- 🛠️ **Mes projets** : Luxe Drive, Miam-Miam, C’Empire, etc.
-- 📫 **Moyens de contact** : email, LinkedIn, GitHub
-- 💬 Responsive design pensé pour tous les écrans
+- `src/locales/fr.json` et `src/locales/en.json` : textes traduits, dont le message d’accueil (`hero.description` et `hero.description_continued`). La suite du message accepte les liens HTML nettoyés par `src/utils/richText.jsx`.
+- `src/data/site.json` : images d’accueil, lien du bouton CV, liens de CV par langue et réseaux sociaux.
+- `src/data/index.json` : compétences, projets et témoignages publiés.
+- `public/img/` : images locales.
 
----
+Les anciennes routes `/admin/*` ont été retirées. Les témoignages locaux restent visibles, mais le dépôt de nouveaux avis et l’édition depuis un dashboard nécessitent un nouveau backend. Les contenus présents uniquement dans l’ancienne base distante n’ont pas été importés ; les fichiers locaux constituent le contenu affiché.
 
-## ✅ État technique (février 2026)
+Le formulaire envoie directement le message via EmailJS. Il ne conserve plus de copie dans une base de données. Voir `EMAILJS_SETUP.md` pour la configuration du service et du modèle.
 
-- Runtime recommandé : **Node >= 20.19.0** (aligné avec les dépendances récentes).
-- Build : **OK** avec `npm run build`.
-- Dépendances : mises à jour au maximum compatible avec CRA 5.
-- Vulnérabilités : **12** restantes dans l’arbre `react-scripts` (tooling). Elles ne se corrigent pas sans migration.
+Après une modification de contenu, reconstruire puis redéployer le site.
 
----
+## Compilation et prévisualisation
 
-## 🧭 Plan de migration (optionnel, pour supprimer les vulnérabilités CRA)
+```sh
+npm run build
+npm run serve
+```
 
-1) **Audit & stratégie**
-   - Identifier les dépendances CRA spécifiques (react-scripts, config implicit).
-   - Définir la cible : **Vite** (simple) ou **Next.js** (SEO/SSR).
+Publier le contenu de `build/` sur l’hébergement statique. Le serveur doit rediriger les routes de l’application vers `index.html` ; `nginx.conf` fournit cette configuration.
 
-2) **Initialisation**
-   - Créer le nouveau projet (Vite ou Next).
-   - Recopier les assets, styles, composants et données.
+## Docker et VPS
 
-3) **Routing & i18n**
-   - Reconfigurer le routing.
-   - Vérifier `react-i18next` et les fichiers de traductions.
+```sh
+docker build -t portfolio .
+docker run --rm -p 4001:80 portfolio
+```
 
-4) **Build & déploiement**
-   - Valider `npm run build`.
-   - Mettre à jour la config de déploiement (Firebase/Heroku/serve).
+Le fichier `docker-compose.yml` existant est prévu pour un dossier parent contenant le projet dans `app/` et un réseau externe `mon-reseau`. Le workflow `.github/workflows/deploy-vps.yml` utilise cette organisation sur le VPS. Pour utiliser Compose directement à la racine du dépôt, adapter le contexte de construction à `.` et préparer le réseau.
 
-5) **Nettoyage**
-   - Supprimer CRA et les dépendances obsolètes.
-   - Vérifier `npm audit` (objectif 0 vulnérabilité).
-
----
-
-## 📷 Aperçu visuel
-
->
+Aucun déploiement distant n’est effectué par les commandes locales de compilation.
