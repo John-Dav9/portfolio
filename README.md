@@ -1,6 +1,8 @@
 # Portfolio – John David Tchomgui
 
-Portfolio statique et bilingue (français/anglais) : React 19, Vite, React Router, i18next et formulaire de contact EmailJS. Aucun backend ni base de données.
+Portfolio statique et bilingue (français/anglais) : React 19, Vite, Tailwind CSS v4, Motion (animations), React Router, i18next et formulaire de contact EmailJS. Aucun backend ni base de données.
+
+Design « Fusion » : thème sombre et interrupteur Dev/Data (`src/components/FocusContext.jsx`) qui change la couleur d'accent et met en avant les compétences (`focus` dans `index.json`) et les projets (`domain`) correspondants. Les animations (`src/components/motion.jsx`) sont désactivées si le visiteur a activé « réduire les animations ».
 
 ## Développement
 
@@ -19,11 +21,11 @@ npm run preview    # prévisualisation du build
 
 | Fichier | Contenu |
 |---|---|
-| `src/data/index.json` | Compétences, projets (`domain`: `dev` ou `data`, `repo`, `site`) et témoignages, au format `{ "fr": ..., "en": ... }` |
+| `src/data/index.json` | Compétences (`focus` : `dev`, `data` ou `both`, `tag`, `tools`), projets (`domain`: `dev` ou `data`, `repo`, `site`) et témoignages, au format `{ "fr": ..., "en": ... }` |
 | `src/data/site.json` | URL publique (`siteUrl`), images d'accueil, liens CV, réseaux sociaux (vide = masqué), hébergeur, identifiants EmailJS |
 | `src/locales/fr.json`, `en.json` | Textes de l'interface. `hero.description_continued` et `about.*` acceptent des liens HTML (nettoyés par `src/utils/richText.jsx`) |
 | `src/Pages/Legal/content.js` | Mentions légales, confidentialité, conditions, cookies |
-| `public/img/` | Images au format WebP (≈ 800 px de large pour les vignettes, 1200 px pour les projets) |
+| `public/img/` | Images au format WebP (≈ 800 px de large pour les portraits, 1200 px pour les projets) |
 
 Les tests (`src/__tests__/content.test.js`) vérifient que chaque contenu existe dans les deux langues et que les images référencées existent.
 

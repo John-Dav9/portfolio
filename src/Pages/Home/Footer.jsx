@@ -25,43 +25,44 @@ function Footer() {
   const socialLinks = Object.entries(siteContent.socialLinks).filter(([, url]) => url);
 
   return (
-    <footer className="footer--container">
-      <div className="footer--link--container">
-        <div>
-          <img src="/img/logo.webp" alt={t("navbar.logoAlt")} width="45" height="45" loading="lazy" />
-        </div>
-        <div className="footer--items">
-          <ul>
+    <footer className="mt-10 border-t border-line bg-ink/80">
+      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-12 md:px-8">
+        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+          <RouterLink to="/" className="font-mono text-[15px] font-semibold text-slate-100">
+            <span className="text-accent">~/</span>jd-tchomgui
+          </RouterLink>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400">
             {SECTIONS.map(({ id, labelKey }) => (
               <li key={id}>
-                <SectionLink to={id} className="text-md">
+                <SectionLink to={id} className="hover:text-white">
                   {t(labelKey)}
                 </SectionLink>
               </li>
             ))}
           </ul>
-        </div>
-        <div className="footer--social--icon">
-          <ul aria-label={t("footer.social")}>
+          <ul aria-label={t("footer.social")} className="flex gap-3">
             {socialLinks.map(([name, url]) => (
               <li key={name}>
-                <a href={url} target="_blank" rel="noreferrer" aria-label={SOCIAL_LABELS[name]}>
-                  <SocialIcon name={name} size={name === "github" ? 18 : 32} />
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={SOCIAL_LABELS[name]}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-slate-300 transition-colors hover:border-accent hover:text-accent"
+                >
+                  <SocialIcon name={name} size={name === "github" ? 18 : 26} />
                 </a>
               </li>
             ))}
           </ul>
         </div>
-      </div>
-      <hr className="divider" />
-      <div className="footer--content--container">
-        <p className="footer--content">{t("footer.copyright", { year: new Date().getFullYear() })}</p>
-        <p className="footer--content">{t("footer.dedication")}</p>
-        <div className="footer--social--icon">
-          <ul>
+        <div className="flex flex-col gap-4 border-t border-line pt-6 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
+          <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
+          <p>{t("footer.dedication")}</p>
+          <ul className="flex flex-wrap gap-x-5 gap-y-2">
             {LEGAL_LINKS.map(({ to, labelKey }) => (
               <li key={to}>
-                <RouterLink to={to} className="text-sm">
+                <RouterLink to={to} className="hover:text-white">
                   {t(labelKey)}
                 </RouterLink>
               </li>

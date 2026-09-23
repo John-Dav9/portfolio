@@ -29,15 +29,18 @@ describe("translations", () => {
 });
 
 describe("content data", () => {
-  const entries = [
-    ...data.skills.map((item) => ["skill", item]),
-    ...data.portfolio.map((item) => ["project", item]),
-  ];
+  it.each(data.skills.map((skill) => [skill.id, skill]))("skill %s is bilingual with a focus and tools", (_, skill) => {
+    expect(bilingual(skill.title)).toBeTruthy();
+    expect(bilingual(skill.description)).toBeTruthy();
+    expect(["dev", "data", "both"]).toContain(skill.focus);
+    expect(skill.tag).toBeTruthy();
+    expect(skill.tools).toBeTruthy();
+  });
 
-  it.each(entries)("%s %# has bilingual title/description and an existing image", (_, item) => {
-    expect(bilingual(item.title)).toBeTruthy();
-    expect(bilingual(item.description)).toBeTruthy();
-    expect(existsSync(publicFile(item.src))).toBe(true);
+  it.each(data.portfolio.map((project) => [project.id, project]))("project %s is bilingual with an existing image", (_, project) => {
+    expect(bilingual(project.title)).toBeTruthy();
+    expect(bilingual(project.description)).toBeTruthy();
+    expect(existsSync(publicFile(project.src))).toBe(true);
   });
 
   it("projects declare a known domain and clean https links", () => {

@@ -16,11 +16,9 @@
   },
   "hero": {
     "title": "John David TCHOMGUI",
-    "subtitle": "Full Stack Web Developer",
     "description": "Full Stack Web Developer and Data Analyst passionate about turning data into high-performing web solutions. Specialized in data analysis with Python, SQL and Power BI, and in building robust applications with React, Ruby on Rails and Node.js. I combine technical expertise in frontend/backend development with analytical skills to create intuitive interfaces and data-driven insights.",
     "description_continued": "Trained at <a href=\"https://www.lewagon.com/fr/web-development-course\">Le Wagon</a> and <a href=\"https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis\">Technofutur TIC</a>, I am looking for new challenges combining web development and data analysis.",
     "cta_button": "View my CV",
-    "imageAlt": "Portrait of John David Tchomgui",
     "cv": {
       "dev": "Web Developer",
       "data": "Data Analyst",
@@ -28,22 +26,40 @@
       "download": "Download",
       "close": "Close",
       "frame": "CV preview"
+    },
+    "status": "Open to new challenges",
+    "prompt": "$ whoami",
+    "role": {
+      "dev": "Full Stack Web Developer",
+      "data": "Data Analyst · Python · Power BI"
+    },
+    "pitch": {
+      "dev": "From React components to Rails or Node.js APIs in production: complete, robust, carefully built web applications.",
+      "data": "From data cleaning to Power BI dashboards: clear analyses that help people decide."
+    },
+    "cta": {
+      "dev": "See dev projects →",
+      "data": "See data projects →"
+    },
+    "stats": {
+      "projects": "published projects",
+      "skills": "skill areas"
     }
   },
   "about": {
     "title": "About",
     "imageAlt": "John David Tchomgui",
     "description1": "Full Stack Web Developer and Data Analyst with dual technical expertise. Trained in web development at <a href=\"https://www.lewagon.com/fr/web-development-course\">Le Wagon</a> (Ruby on Rails, React, PostgreSQL) and in data analysis at <a href=\"https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis\">Technofutur TIC</a> (Python, SQL, Power BI), I master the full web application development cycle as well as complex data analysis.",
-    "description2": "Passionate about digital transformation, I combine frontend/backend development and analytical skills to build high-performing web solutions enriched by data. Autonomous and collaborative, I thrive both in teamwork and when leading projects on my own. My unconventional path reflects strong adaptability and continuous learning, essential in today's technology ecosystem."
+    "description2": "Passionate about digital transformation, I combine frontend/backend development and analytical skills to build high-performing web solutions enriched by data. Autonomous and collaborative, I thrive both in teamwork and when leading projects on my own. My unconventional path reflects strong adaptability and continuous learning, essential in today's technology ecosystem.",
+    "education": "Background",
+    "lewagon": "Web development: Ruby on Rails, React, PostgreSQL",
+    "technofutur": "Data analysis: Python, SQL, Power BI"
   },
   "skills": {
     "title": "My Skills",
     "learnMore": "Learn more",
     "close": "Close",
-    "carousel": {
-      "previous": "Previous skills",
-      "next": "Next skills"
-    }
+    "hint": "Click a card for details."
   },
   "portfolio": {
     "title": "My Projects",
@@ -91,7 +107,6 @@
     "showLess": "Show fewer reviews"
   },
   "footer": {
-    "madeBy": "Designed and built by John David Tchomgui",
     "dedication": "Dedicated with love to my wife",
     "copyright": "© {{year}} John David Tchomgui. All rights reserved.",
     "social": "Social networks"
@@ -108,5 +123,10 @@
     "title": "Page not found",
     "description": "The page you are looking for does not exist or has been moved.",
     "back": "Back to home"
+  },
+  "focus": {
+    "label": "Highlighted profile",
+    "dev": "dev",
+    "data": "data"
   }
 }

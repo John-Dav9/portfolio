@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
 const { siteUrl: configuredSiteUrl } = JSON.parse(readFileSync("./src/data/site.json", "utf8"));
 const siteUrl = (process.env.SITE_URL || configuredSiteUrl || "").replace(/\/$/, "");
@@ -34,7 +35,7 @@ function siteUrlPlugin() {
 }
 
 export default defineConfig({
-  plugins: [react(), siteUrlPlugin()],
+  plugins: [react(), tailwindcss(), siteUrlPlugin()],
   build: {
     outDir: "build",
   },

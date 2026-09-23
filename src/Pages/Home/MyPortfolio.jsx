@@ -1,80 +1,102 @@
 import { useTranslation } from "react-i18next";
+import { m } from "motion/react";
 import data from "../../data/index.json";
 import siteContent from "../../data/site.json";
 import { ArrowIcon, GithubIcon } from "../../components/Icons";
 import { localize } from "../../utils/localize";
+import { useFocus } from "../../components/FocusContext";
+import SectionHeading from "../../components/SectionHeading";
+import { revealGroup, revealItem, trackSpotlight } from "../../components/motion";
 
-const DOMAINS = ["dev", "data"];
-
-function ProjectCard({ project, lang }) {
+function ProjectCard({ project, lang, highlighted }) {
   const { t } = useTranslation();
   const title = localize(project.title, lang);
   const mainUrl = project.site || project.repo;
 
   return (
-    <div className="portfolio--section--img">
-      <a href={mainUrl} target="_blank" rel="noreferrer" tabIndex={-1} aria-hidden="true">
-        <img src={project.src} alt="" width="1200" height="900" loading="lazy" />
+    <m.article
+      variants={revealItem}
+      onPointerMove={trackSpotlight}
+      className={`spotlight group flex flex-col overflow-hidden rounded-3xl ${highlighted ? "" : "opacity-45 hover:opacity-100"}`}
+    >
+      <a href={mainUrl} target="_blank" rel="noreferrer" tabIndex={-1} aria-hidden="true" className="block overflow-hidden">
+        <img
+          src={project.src}
+          alt=""
+          width="1200"
+          height="900"
+          loading="lazy"
+          className="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
       </a>
-      <div className="portfolio--section--card--content">
-        <div>
-          <h4 className="portfolio--section--title">{title}</h4>
-          <p className="text-md">{localize(project.description, lang)}</p>
-        </div>
-        <div className="portfolio--links">
+      <div className="flex flex-1 flex-col gap-3 p-6">
+        <span
+          className={`self-start rounded-full px-2.5 py-1 font-mono text-xs font-semibold text-ink ${
+            project.domain === "dev" ? "bg-dev" : "bg-data"
+          }`}
+        >
+          {t(`portfolio.domains.${project.domain}`)}
+        </span>
+        <h3 className="text-xl font-bold text-white">{title}</h3>
+        <p className="text-sm leading-relaxed text-slate-400">{localize(project.description, lang)}</p>
+        <div className="mt-auto flex flex-wrap gap-5 pt-2 text-sm font-semibold">
           {project.repo && (
-            <a href={project.repo} target="_blank" rel="noreferrer" aria-label={t("portfolio.links.githubLabel", { title })}>
-              <span className="text-sm portfolio--link">
-                {t("portfolio.links.github")}
-                <ArrowIcon />
-              </span>
+            <a
+              href={project.repo}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={t("portfolio.links.githubLabel", { title })}
+              className="inline-flex items-center gap-2 text-slate-200 hover:text-accent"
+            >
+              {t("portfolio.links.github")} <ArrowIcon />
             </a>
           )}
           {project.site && (
-            <a href={project.site} target="_blank" rel="noreferrer" aria-label={t("portfolio.links.siteLabel", { title })}>
-              <span className="text-sm portfolio--link">
-                {t("portfolio.links.site")}
-                <ArrowIcon />
-              </span>
+            <a
+              href={project.site}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={t("portfolio.links.siteLabel", { title })}
+              className="inline-flex items-center gap-2 text-slate-200 hover:text-accent"
+            >
+              {t("portfolio.links.site")} <ArrowIcon />
             </a>
           )}
         </div>
       </div>
-    </div>
+    </m.article>
   );
 }
 
 export default function MyPortfolio() {
   const { t, i18n } = useTranslation();
   const lang = i18n.resolvedLanguage;
+  const { focus } = useFocus();
 
   return (
-    <section className="portfolio--section" id="MyPortfolio">
-      <div className="portfolio--container--box">
-        <div className="portfolio--container">
-          <h2 className="sections--heading">{t("portfolio.title")}</h2>
-        </div>
-        <div>
-          <a href={siteContent.githubUrl} target="_blank" rel="noreferrer" className="btn btn-github">
-            <GithubIcon size={28} />
-            {t("portfolio.github")}
-          </a>
-        </div>
-      </div>
-      {DOMAINS.map((domain) => {
-        const projects = data.portfolio.filter((project) => project.domain === domain);
-        if (projects.length === 0) return null;
-        return (
-          <div key={domain} className="portfolio--domain--section">
-            <h3 className="portfolio--domain--title">{t(`portfolio.domains.${domain}`)}</h3>
-            <div className="portfolio--section--container">
-              {projects.map((project) => (
-                <ProjectCard key={project.id} project={project} lang={lang} />
-              ))}
-            </div>
-          </div>
-        );
-      })}
+    <section id="MyPortfolio" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
+      <SectionHeading index="03" title={t("portfolio.title")}>
+        <a
+          href={siteContent.githubUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-accent hover:text-accent"
+        >
+          <GithubIcon size={18} />
+          {t("portfolio.github")}
+        </a>
+      </SectionHeading>
+      <m.div
+        className="grid gap-6 md:grid-cols-2"
+        variants={revealGroup}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+      >
+        {data.portfolio.map((project) => (
+          <ProjectCard key={project.id} project={project} lang={lang} highlighted={project.domain === focus} />
+        ))}
+      </m.div>
     </section>
   );
 }

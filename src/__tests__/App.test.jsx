@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import emailjs from "@emailjs/browser";
@@ -41,11 +41,20 @@ describe("home page", () => {
     expect(screen.getByRole("button", { name: "EN" })).toHaveAttribute("aria-pressed", "true");
   });
 
-  it("classifies projects by their declared domain", () => {
+  it("highlights skills and projects matching the Dev/Data switch", async () => {
+    const user = userEvent.setup();
     renderAt("/");
-    const dataSection = screen.getByRole("heading", { level: 3, name: "Data" }).parentElement;
-    expect(within(dataSection).getByText("Analyse BMW - Data Warehouse")).toBeInTheDocument();
-    expect(within(dataSection).queryByText("LuxeDrive")).not.toBeInTheDocument();
+    const bmw = screen.getByRole("heading", { level: 3, name: "Analyse BMW - Data Warehouse" }).closest("article");
+    const luxedrive = screen.getByRole("heading", { level: 3, name: "LuxeDrive" }).closest("article");
+    expect(within(bmw).getByText("Data")).toBeInTheDocument();
+    expect(bmw).toHaveClass("opacity-45");
+    expect(luxedrive).not.toHaveClass("opacity-45");
+
+    await user.click(screen.getAllByRole("button", { name: /data$/ })[0]);
+    expect(document.documentElement.dataset.focus).toBe("data");
+    expect(bmw).not.toHaveClass("opacity-45");
+    expect(luxedrive).toHaveClass("opacity-45");
+    expect(screen.getByRole("link", { name: "Voir les projets data →" })).toBeInTheDocument();
   });
 
   it("opens the skill dialog with the keyboard and closes it with Escape", async () => {
@@ -57,7 +66,7 @@ describe("home page", () => {
     const dialog = screen.getByRole("dialog", { name: "Développement Front-End" });
     expect(within(dialog).getByRole("button", { name: "Fermer" })).toHaveFocus();
     await user.keyboard("{Escape}");
-    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     expect(card).toHaveFocus();
   });
 

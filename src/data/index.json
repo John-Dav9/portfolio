@@ -2,17 +2,41 @@
   "skills": [
     {
       "id": "frontend",
-      "src": "/img/skill-frontend.webp",
-      "title": { "fr": "Développement Front-End", "en": "Front-End Development" },
+      "focus": "dev",
+      "tag": "<frontend />",
+      "title": {
+        "fr": "Développement Front-End",
+        "en": "Front-End Development"
+      },
+      "tools": "React · Angular · Vue.js · TypeScript",
       "description": {
         "fr": "Création d'interfaces utilisateur réactives et intuitives avec HTML, CSS, JavaScript (ES6+), React, Angular, Vue.js et TypeScript. Maîtrise de Flexbox, Grid et Bootstrap pour des designs responsive.",
         "en": "Building responsive, intuitive user interfaces with HTML, CSS, JavaScript (ES6+), React, Angular, Vue.js and TypeScript. Proficient with Flexbox, Grid and Bootstrap for responsive designs."
       }
     },
     {
+      "id": "data",
+      "focus": "data",
+      "tag": "import pandas",
+      "title": {
+        "fr": "Analyse de Données & BI",
+        "en": "Data Analysis & BI"
+      },
+      "tools": "Python · pandas · Power BI",
+      "description": {
+        "fr": "Analyse de données avec Python (pandas, NumPy, matplotlib, seaborn), SQL et Power BI. Création de dashboards interactifs, data cleaning, modélisation et visualisation décisionnelle pour transformer les données en insights stratégiques.",
+        "en": "Data analysis with Python (pandas, NumPy, matplotlib, seaborn), SQL and Power BI. Interactive dashboards, data cleaning, modeling and business intelligence visualization to turn data into strategic insights."
+      }
+    },
+    {
       "id": "backend",
-      "src": "/img/skill-backend.webp",
-      "title": { "fr": "Développement Back-End", "en": "Back-End Development" },
+      "focus": "dev",
+      "tag": "<backend />",
+      "title": {
+        "fr": "Développement Back-End",
+        "en": "Back-End Development"
+      },
+      "tools": "Ruby on Rails · Node.js · NestJS · ASP.NET",
       "description": {
         "fr": "Développement d'APIs robustes et sécurisées avec Ruby on Rails, Node.js, NestJS, Express et ASP.NET. Gestion de l'authentification (JWT, Devise) et intégration d'APIs REST.",
         "en": "Building robust, secure APIs with Ruby on Rails, Node.js, NestJS, Express and ASP.NET. Authentication (JWT, Devise) and REST API integration."
@@ -20,53 +44,69 @@
     },
     {
       "id": "database",
-      "src": "/img/skill-database.webp",
-      "title": { "fr": "Bases de Données & SQL", "en": "Databases & SQL" },
+      "focus": "both",
+      "tag": "SELECT *",
+      "title": {
+        "fr": "Bases de Données & SQL",
+        "en": "Databases & SQL"
+      },
+      "tools": "PostgreSQL · MongoDB · SQL Server",
       "description": {
         "fr": "Expertise en PostgreSQL, MongoDB et SQL Server pour la conception, la modélisation et l'optimisation de bases de données. Maîtrise de SSMS (SQL Server Management Studio) pour la gestion avancée.",
         "en": "Expertise in PostgreSQL, MongoDB and SQL Server for database design, modeling and optimization. Proficient with SSMS (SQL Server Management Studio) for advanced administration."
       }
     },
     {
-      "id": "data",
-      "src": "/img/skill-data.webp",
-      "title": { "fr": "Analyse de Données & BI", "en": "Data Analysis & BI" },
-      "description": {
-        "fr": "Analyse de données avec Python (pandas, NumPy, matplotlib, seaborn), SQL et Power BI. Création de dashboards interactifs, data cleaning, modélisation et visualisation décisionnelle pour transformer les données en insights stratégiques.",
-        "en": "Data analysis with Python (pandas, NumPy, matplotlib, seaborn), SQL and Power BI. Interactive dashboards, data cleaning, modeling and business intelligence visualization to turn data into strategic insights."
-      }
-    },
-    {
       "id": "devops",
-      "src": "/img/skill-devops.webp",
-      "title": { "fr": "Déploiement & DevOps", "en": "Deployment & DevOps" },
+      "focus": "dev",
+      "tag": "$ deploy",
+      "title": {
+        "fr": "Déploiement & DevOps",
+        "en": "Deployment & DevOps"
+      },
+      "tools": "Docker · nginx · Heroku",
       "description": {
         "fr": "Déploiement d'applications sur Heroku et GoDaddy, gestion de domaines (Namecheap), configuration serveur et mise en production d'applications web fullstack en autonomie.",
         "en": "Deploying applications on Heroku and GoDaddy, domain management (Namecheap), server configuration and independent production releases of full stack web applications."
       }
     },
     {
-      "id": "agile",
-      "src": "/img/skill-agile.webp",
-      "title": { "fr": "Gestion de Projet Agile", "en": "Agile Project Management" },
-      "description": {
-        "fr": "Application de méthodologies agiles (Scrum, Kanban) avec des outils comme Trello pour la gestion de tâches, la collaboration en équipe et le suivi de progression des projets.",
-        "en": "Applying agile methodologies (Scrum, Kanban) with tools like Trello for task management, team collaboration and project progress tracking."
-      }
-    },
-    {
       "id": "design",
-      "src": "/img/skill-design.webp",
-      "title": { "fr": "Design UX/UI", "en": "UX/UI Design" },
+      "focus": "dev",
+      "tag": "/* ux */",
+      "title": {
+        "fr": "Design UX/UI",
+        "en": "UX/UI Design"
+      },
+      "tools": "Figma · Canva",
       "description": {
         "fr": "Conception orientée utilisateur et prototypage avec Figma et Canva. Création de maquettes interactives pour valider l'expérience utilisateur avant le développement.",
         "en": "User-centered design and prototyping with Figma and Canva. Interactive mockups to validate the user experience before development."
       }
     },
     {
+      "id": "agile",
+      "focus": "both",
+      "tag": "sprint++",
+      "title": {
+        "fr": "Gestion de Projet Agile",
+        "en": "Agile Project Management"
+      },
+      "tools": "Scrum · Kanban · Trello",
+      "description": {
+        "fr": "Application de méthodologies agiles (Scrum, Kanban) avec des outils comme Trello pour la gestion de tâches, la collaboration en équipe et le suivi de progression des projets.",
+        "en": "Applying agile methodologies (Scrum, Kanban) with tools like Trello for task management, team collaboration and project progress tracking."
+      }
+    },
+    {
       "id": "git",
-      "src": "/img/skill-git.webp",
-      "title": { "fr": "Git & Outils Dev", "en": "Git & Dev Tools" },
+      "focus": "both",
+      "tag": "git push",
+      "title": {
+        "fr": "Git & Outils Dev",
+        "en": "Git & Dev Tools"
+      },
+      "tools": "GitHub · VS Code · Postman",
       "description": {
         "fr": "Maîtrise de Git/GitHub pour le versioning, Visual Studio Code, Postman pour les tests d'API, et workflow collaboratif en équipe avec gestion des branches et pull requests.",
         "en": "Git/GitHub for versioning, Visual Studio Code, Postman for API testing, and collaborative team workflows with branches and pull requests."
@@ -78,7 +118,10 @@
       "id": "portfolio",
       "domain": "dev",
       "src": "/img/project-portfolio.webp",
-      "title": { "fr": "Mon Portfolio", "en": "My Portfolio" },
+      "title": {
+        "fr": "Mon Portfolio",
+        "en": "My Portfolio"
+      },
       "description": {
         "fr": "Un portfolio bilingue conçu en React pour présenter mes projets, mes compétences et mon parcours, avec une interface moderne, responsive et orientée expérience utilisateur. Déployé avec Docker et nginx.",
         "en": "A bilingual React portfolio showcasing my projects, skills and background, with a modern, responsive, user-focused interface. Deployed with Docker and nginx."
@@ -90,7 +133,10 @@
       "id": "luxedrive",
       "domain": "dev",
       "src": "/img/project-luxedrive.webp",
-      "title": { "fr": "LuxeDrive", "en": "LuxeDrive" },
+      "title": {
+        "fr": "LuxeDrive",
+        "en": "LuxeDrive"
+      },
       "description": {
         "fr": "Plateforme fullstack de location de voitures de luxe inspirée d'Airbnb. Système d'authentification sécurisé, espace d'administration, tableau de bord dynamique avec visualisation des ventes. Développé en autonomie avec Ruby on Rails, Bootstrap et Git.",
         "en": "Full stack luxury car rental platform inspired by Airbnb. Secure authentication, admin area and a dynamic dashboard with sales visualization. Built independently with Ruby on Rails, Bootstrap and Git."
@@ -102,7 +148,10 @@
       "id": "cmciea",
       "domain": "dev",
       "src": "/img/project-cmciea.webp",
-      "title": { "fr": "CMCIEA-France", "en": "CMCIEA-France" },
+      "title": {
+        "fr": "CMCIEA-France",
+        "en": "CMCIEA-France"
+      },
       "description": {
         "fr": "Site institutionnel moderne et responsive pour la Communauté Missionnaire Chrétienne Internationale & Églises Associées en France. Développé avec Angular et Bootstrap ; hébergement et nom de domaine gérés via Squarespace.",
         "en": "Modern, responsive institutional website for the International Christian Missionary Community & Associated Churches in France. Built with Angular and Bootstrap; hosting and domain managed through Squarespace."
@@ -114,7 +163,10 @@
       "id": "bmw",
       "domain": "data",
       "src": "/img/project-bmw.webp",
-      "title": { "fr": "Analyse BMW - Data Warehouse", "en": "BMW Analysis - Data Warehouse" },
+      "title": {
+        "fr": "Analyse BMW - Data Warehouse",
+        "en": "BMW Analysis - Data Warehouse"
+      },
       "description": {
         "fr": "Conception d'un Data Warehouse structuré pour analyser les ventes BMW, analyse exploratoire avec Python et dashboards Power BI interactifs avec recommandations stratégiques orientées client. Résultats présentés sur un site web (Angular en frontend, Next.js en backend) avec authentification JWT.",
         "en": "Designed a structured Data Warehouse to analyze BMW sales, exploratory analysis with Python and interactive Power BI dashboards with customer-focused strategic recommendations. Results are presented on a website (Angular frontend, Next.js backend) with JWT authentication."
@@ -133,7 +185,10 @@
         "en": "Very professional, thank you so much for the website. May the Lord's hand be even more upon your projects. Be abundantly blessed."
       },
       "author_name": "Pascal Kamtchuang",
-      "author_designation": { "fr": "Hands on heart", "en": "Hands on heart" }
+      "author_designation": {
+        "fr": "Hands on heart",
+        "en": "Hands on heart"
+      }
     },
     {
       "id": "2",
@@ -144,7 +199,10 @@
         "en": "Thank you very much for your energy, I wish you every success in your career."
       },
       "author_name": "Christelle Ngadena",
-      "author_designation": { "fr": "C'Empire", "en": "C'Empire" }
+      "author_designation": {
+        "fr": "C'Empire",
+        "en": "C'Empire"
+      }
     },
     {
       "id": "3",
@@ -155,7 +213,10 @@
         "en": "I have seen this gentleman at work myself, very respectful and eloquent. Well done!"
       },
       "author_name": "Yohanna Taptue",
-      "author_designation": { "fr": "Data Analyst", "en": "Data Analyst" }
+      "author_designation": {
+        "fr": "Data Analyst",
+        "en": "Data Analyst"
+      }
     },
     {
       "id": "4",
@@ -166,7 +227,10 @@
         "en": "Thank you for your availability. Much courage to you. You are someone I would recommend, and I hope your work takes you very far."
       },
       "author_name": "Fernand Taptue",
-      "author_designation": { "fr": "Mon père", "en": "My lovely father" }
+      "author_designation": {
+        "fr": "Mon père",
+        "en": "My lovely father"
+      }
     }
   ]
 }

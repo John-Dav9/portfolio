@@ -16,11 +16,9 @@
   },
   "hero": {
     "title": "John David TCHOMGUI",
-    "subtitle": "Développeur Web Fullstack",
     "description": "Développeur Web Fullstack et Data Analyst passionné par la transformation des données en solutions web performantes. Spécialisé en analyse de données avec Python, SQL et Power BI, et en développement d'applications robustes avec React, Ruby on Rails et Node.js. Je combine expertise technique en développement frontend/backend et capacités analytiques pour créer des interfaces intuitives et des insights basés sur les données.",
     "description_continued": "Formé chez <a href=\"https://www.lewagon.com/fr/web-development-course\">Le Wagon</a> et <a href=\"https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis\">Technofutur TIC</a>, je cherche à relever de nouveaux défis alliant développement web et analyse de données.",
     "cta_button": "Voir mon CV",
-    "imageAlt": "Portrait de John David Tchomgui",
     "cv": {
       "dev": "Développeur Web",
       "data": "Data Analyst",
@@ -28,22 +26,40 @@
       "download": "Télécharger",
       "close": "Fermer",
       "frame": "Aperçu du CV"
+    },
+    "status": "Ouvert à de nouveaux défis",
+    "prompt": "$ whoami",
+    "role": {
+      "dev": "Développeur Web Fullstack",
+      "data": "Data Analyst · Python · Power BI"
+    },
+    "pitch": {
+      "dev": "Du composant React à l’API Rails ou Node.js en production : des applications web complètes, robustes et soignées.",
+      "data": "Du nettoyage des données aux dashboards Power BI : des analyses claires qui aident à décider."
+    },
+    "cta": {
+      "dev": "Voir les projets dev →",
+      "data": "Voir les projets data →"
+    },
+    "stats": {
+      "projects": "projets publiés",
+      "skills": "domaines de compétences"
     }
   },
   "about": {
     "title": "À propos",
     "imageAlt": "John David Tchomgui",
     "description1": "Développeur Web Fullstack et Data Analyst avec une double expertise technique. Formé au développement web chez <a href=\"https://www.lewagon.com/fr/web-development-course\">Le Wagon</a> (Ruby on Rails, React, PostgreSQL) et à l'analyse de données chez <a href=\"https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis\">Technofutur TIC</a> (Python, SQL, Power BI), je maîtrise l'ensemble du cycle de développement d'applications web et l'analyse de données complexes.",
-    "description2": "Passionné par la transformation numérique, je combine développement frontend/backend et compétences analytiques pour créer des solutions web performantes enrichies par l'intelligence des données. Autonome et collaboratif, j'excelle aussi bien dans le travail d'équipe que dans la réalisation de projets en autonomie. Mon parcours atypique témoigne d'une grande capacité d'adaptation et d'un apprentissage continu, essentiels pour évoluer dans l'écosystème technologique actuel."
+    "description2": "Passionné par la transformation numérique, je combine développement frontend/backend et compétences analytiques pour créer des solutions web performantes enrichies par l'intelligence des données. Autonome et collaboratif, j'excelle aussi bien dans le travail d'équipe que dans la réalisation de projets en autonomie. Mon parcours atypique témoigne d'une grande capacité d'adaptation et d'un apprentissage continu, essentiels pour évoluer dans l'écosystème technologique actuel.",
+    "education": "Parcours",
+    "lewagon": "Développement web : Ruby on Rails, React, PostgreSQL",
+    "technofutur": "Analyse de données : Python, SQL, Power BI"
   },
   "skills": {
     "title": "Mes Compétences",
     "learnMore": "En savoir plus",
     "close": "Fermer",
-    "carousel": {
-      "previous": "Compétences précédentes",
-      "next": "Compétences suivantes"
-    }
+    "hint": "Cliquez sur une carte pour le détail."
   },
   "portfolio": {
     "title": "Mes projets",
@@ -91,7 +107,6 @@
     "showLess": "Voir moins d'avis"
   },
   "footer": {
-    "madeBy": "Conçu et développé par John David Tchomgui",
     "dedication": "Dédié avec amour à mon épouse",
     "copyright": "© {{year}} John David Tchomgui. Tous droits réservés.",
     "social": "Réseaux sociaux"
@@ -108,5 +123,10 @@
     "title": "Page introuvable",
     "description": "La page que vous cherchez n'existe pas ou a été déplacée.",
     "back": "Retour à l'accueil"
+  },
+  "focus": {
+    "label": "Profil mis en avant",
+    "dev": "dev",
+    "data": "data"
   }
 }

@@ -1,92 +1,167 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { m } from "motion/react";
 import siteContent from "../../data/site.json";
+import data from "../../data/index.json";
 import { RichText } from "../../utils/richText";
-import { localize } from "../../utils/localize";
+import { useFocus } from "../../components/FocusContext";
+import FocusSwitch from "../../components/FocusSwitch";
+import { CountUp, Typewriter, revealGroup, revealItem, trackSpotlight } from "../../components/motion";
 
 const CV_PROFILES = ["dev", "data"];
 const CV_LANGUAGES = ["fr", "en"];
+const projectCount = (domain) => data.portfolio.filter((p) => p.domain === domain).length;
+const DOMAIN_COUNTS = { dev: projectCount("dev"), data: projectCount("data") };
 
-export default function HeroSection() {
-  const { t, i18n } = useTranslation();
-  const lang = i18n.resolvedLanguage;
+function CvButton() {
+  const { t } = useTranslation();
   const { hero, cv } = siteContent;
   const [selectedCv, setSelectedCv] = useState(null);
-  const cvDropdownRef = useRef(null);
-
+  const detailsRef = useRef(null);
   const hasCvLinks = CV_PROFILES.some((profile) => CV_LANGUAGES.some((l) => cv[profile]?.[l]));
 
-  const openCv = (profile, cvLang) => {
-    setSelectedCv({ url: cv[profile][cvLang], label: `${t(`hero.cv.${profile}`)} (${cvLang.toUpperCase()})` });
-    if (cvDropdownRef.current) cvDropdownRef.current.open = false;
-  };
+  if (!hasCvLinks) {
+    return (
+      <a className="btn-ghost" href={hero.ctaUrl} target="_blank" rel="noreferrer">
+        {t("hero.cta_button")}
+      </a>
+    );
+  }
 
   return (
-    <section id="heroSection" className="hero--section">
-      <div className="hero--section--content--box">
-        <div className="hero--section--content">
-          <h1 className="section--title">
-            <span>{t("hero.title")}</span>
-          </h1>
-          <h2 className="hero--section--title">
-            <span className="hero--section--title--color">{t("hero.subtitle")}</span> <br />
-            {localize(hero.subtitleSuffix, lang)}
-          </h2>
-          <p className="hero--section--description">
-            {t("hero.description")}
-            <br />
-            <RichText text={t("hero.description_continued")} />
-          </p>
-        </div>
-        {!hasCvLinks ? (
-          <a className="btn btn-primary" href={hero.ctaUrl} target="_blank" rel="noreferrer">
-            {t("hero.cta_button")}
-          </a>
-        ) : (
-          <details className="cv-dropdown" ref={cvDropdownRef}>
-            <summary className="cv-dropdown-trigger">
-              {t("hero.cta_button")}
-              <span className="cv-caret" aria-hidden="true">▾</span>
-            </summary>
-            <div className="cv-dropdown-menu">
-              {CV_PROFILES.map((profile) => (
-                <div key={profile} className="cv-dropdown-group">
-                  <p>{t(`hero.cv.${profile}`)}</p>
-                  <div className="cv-dropdown-actions">
-                    {CV_LANGUAGES.filter((cvLang) => cv[profile]?.[cvLang]).map((cvLang) => (
-                      <button key={cvLang} type="button" onClick={() => openCv(profile, cvLang)}>
-                        {cvLang.toUpperCase()}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
+    <>
+      <details ref={detailsRef} className="group relative">
+        <summary className="btn-ghost cursor-pointer list-none">
+          {t("hero.cta_button")} <span aria-hidden="true" className="transition-transform group-open:rotate-180">▾</span>
+        </summary>
+        <div className="absolute left-0 z-20 mt-2 flex w-64 flex-col gap-3 rounded-xl border border-line bg-panel p-4 shadow-2xl">
+          {CV_PROFILES.map((profile) => (
+            <div key={profile} className="flex items-center justify-between gap-2">
+              <span className="text-sm text-slate-300">{t(`hero.cv.${profile}`)}</span>
+              <div className="flex gap-2">
+                {CV_LANGUAGES.filter((l) => cv[profile]?.[l]).map((l) => (
+                  <button
+                    key={l}
+                    type="button"
+                    className="cursor-pointer rounded-md border border-line px-2 py-1 font-mono text-xs hover:border-accent"
+                    onClick={() => {
+                      setSelectedCv({ url: cv[profile][l], label: `${t(`hero.cv.${profile}`)} (${l.toUpperCase()})` });
+                      detailsRef.current.open = false;
+                    }}
+                  >
+                    {l.toUpperCase()}
+                  </button>
+                ))}
+              </div>
             </div>
-          </details>
-        )}
-      </div>
-      <div className="hero--section--img">
-        <img src={hero.imageUrl} alt={t("hero.imageAlt")} width="800" height="923" fetchPriority="high" />
-      </div>
+          ))}
+        </div>
+      </details>
       {selectedCv && (
-        <div className="cv-inline-viewer">
-          <div className="cv-viewer-header">
-            <span>{selectedCv.label}</span>
-            <div className="cv-viewer-actions">
-              <a className="btn btn-primary" href={selectedCv.url} target="_blank" rel="noreferrer">
-                {t("hero.cv.view")}
-              </a>
-              <a className="btn btn-primary" href={selectedCv.url} target="_blank" rel="noreferrer" download>
-                {t("hero.cv.download")}
-              </a>
-              <button type="button" className="btn btn-primary" onClick={() => setSelectedCv(null)}>
-                {t("hero.cv.close")}
-              </button>
+        <div className="fixed inset-0 z-70 flex flex-col bg-ink/95 p-4 backdrop-blur" role="dialog" aria-modal="true" aria-label={selectedCv.label}>
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <span className="font-semibold">{selectedCv.label}</span>
+            <div className="flex gap-2">
+              <a className="btn-ghost" href={selectedCv.url} target="_blank" rel="noreferrer">{t("hero.cv.view")}</a>
+              <a className="btn-ghost" href={selectedCv.url} target="_blank" rel="noreferrer" download>{t("hero.cv.download")}</a>
+              <button type="button" className="btn-primary cursor-pointer" onClick={() => setSelectedCv(null)}>{t("hero.cv.close")}</button>
             </div>
           </div>
-          <iframe title={t("hero.cv.frame")} src={selectedCv.url} className="cv-iframe" />
+          <iframe title={t("hero.cv.frame")} src={selectedCv.url} className="w-full flex-1 rounded-xl bg-white" />
         </div>
       )}
+    </>
+  );
+}
+
+export default function HeroSection() {
+  const { t } = useTranslation();
+  const { focus } = useFocus();
+
+  return (
+    <section id="heroSection" className="mx-auto grid max-w-7xl gap-12 px-5 pt-12 pb-20 md:px-8 lg:grid-cols-12 lg:pt-20">
+      <m.div className="flex flex-col gap-6 lg:col-span-7 lg:justify-center" variants={revealGroup} initial="hidden" animate="visible">
+        <m.div variants={revealItem} className="flex items-center gap-2.5 self-start rounded-full border border-line bg-panel/80 px-3.5 py-2 text-sm text-slate-300">
+          <span className="h-2 w-2 animate-pulse-ring rounded-full bg-data" />
+          {t("hero.status")}
+        </m.div>
+        <m.div variants={revealItem} className="self-start md:hidden">
+          <FocusSwitch />
+        </m.div>
+        <m.p variants={revealItem} className="font-mono text-accent transition-colors duration-500">
+          {t("hero.prompt")}
+        </m.p>
+        <m.h1 variants={revealItem} className="text-5xl leading-[1.02] font-extrabold tracking-tight text-white sm:text-6xl xl:text-7xl">
+          John David
+          <br />
+          <span className="bg-linear-to-r from-white via-slate-200 to-accent bg-clip-text text-transparent">Tchomgui</span>
+        </m.h1>
+        <m.p variants={revealItem} className="min-h-8 font-mono text-lg text-accent sm:text-xl">
+          <Typewriter text={t(`hero.role.${focus}`)} />
+        </m.p>
+        <m.p variants={revealItem} className="max-w-xl text-lg leading-relaxed text-slate-400">
+          {t(`hero.pitch.${focus}`)}
+        </m.p>
+        <m.p variants={revealItem} className="rich max-w-xl text-slate-400">
+          <RichText text={t("hero.description_continued")} />
+        </m.p>
+        <m.div variants={revealItem} className="flex flex-wrap gap-3">
+          <a className="btn-primary" href="#MyPortfolio">
+            {t(`hero.cta.${focus}`)}
+          </a>
+          <CvButton />
+        </m.div>
+      </m.div>
+
+      <m.div
+        className="grid auto-rows-[150px] grid-cols-2 gap-4 lg:col-span-5"
+        variants={revealGroup}
+        initial="hidden"
+        animate="visible"
+        transition={{ delayChildren: 0.25 }}
+      >
+        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight row-span-2 overflow-hidden rounded-3xl p-0">
+          <img
+            src={siteContent.hero.imageUrl}
+            alt={t("about.imageAlt")}
+            width="800"
+            height="923"
+            fetchPriority="high"
+            className="h-full w-full object-cover"
+          />
+        </m.div>
+        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight flex flex-col justify-between rounded-3xl p-5">
+          <span className="text-sm text-slate-400">{t("hero.stats.projects")}</span>
+          <CountUp value={data.portfolio.length} className="text-5xl font-extrabold text-accent transition-colors duration-500" />
+        </m.div>
+        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight flex flex-col justify-between rounded-3xl p-5">
+          <span className="text-sm text-slate-400">{t("hero.stats.skills")}</span>
+          <CountUp value={data.skills.length} className="text-5xl font-extrabold text-accent transition-colors duration-500" />
+        </m.div>
+        <m.div
+          variants={revealItem}
+          onPointerMove={trackSpotlight}
+          className="spotlight col-span-2 flex flex-col justify-center gap-2 rounded-3xl px-6 font-mono text-sm text-slate-300"
+        >
+          <p>
+            <span className="text-purple-400">const</span> focus = <span className="text-accent">&quot;{focus}&quot;</span>;
+          </p>
+          {["dev", "data"].map((domain) => (
+            <div key={domain} className="flex items-center gap-3">
+              <span className="w-10">{domain}</span>
+              <div className="h-2 flex-1 overflow-hidden rounded-full bg-line">
+                <m.div
+                  className={`h-full rounded-full ${domain === "dev" ? "bg-dev" : "bg-data"}`}
+                  initial={{ width: 0 }}
+                  animate={{ width: `${(DOMAIN_COUNTS[domain] / data.portfolio.length) * 100}%` }}
+                  transition={{ duration: 1.2, delay: 0.6, ease: [0.2, 0.7, 0.2, 1] }}
+                />
+              </div>
+              <span>{DOMAIN_COUNTS[domain]}</span>
+            </div>
+          ))}
+        </m.div>
+      </m.div>
     </section>
   );
 }

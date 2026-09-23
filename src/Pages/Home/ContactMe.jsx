@@ -3,6 +3,14 @@ import { useTranslation } from "react-i18next";
 import emailjs from "@emailjs/browser";
 import siteContent from "../../data/site.json";
 import { COUNTRY_CODES } from "../../data/countryCodes";
+import SectionHeading from "../../components/SectionHeading";
+import { SocialIcon } from "../../components/Icons";
+import { Reveal, trackSpotlight } from "../../components/motion";
+
+const CONTACT_LINKS = [
+  { name: "linkedin", url: siteContent.socialLinks.linkedin, label: "LinkedIn" },
+  { name: "github", url: siteContent.socialLinks.github, label: "GitHub" },
+].filter((link) => link.url);
 
 // EmailJS IDs are public by design; restrict allowed origins in the EmailJS dashboard.
 // VITE_EMAILJS_* variables override the values from site.json at build time.
@@ -21,7 +29,7 @@ const SUBJECTS = [
 ];
 
 function RequiredMark() {
-  return <span className="required-asterisk" aria-hidden="true"> *</span>;
+  return <span className="text-accent" aria-hidden="true"> *</span>;
 }
 
 export default function ContactMe() {
@@ -83,144 +91,125 @@ export default function ContactMe() {
   };
 
   return (
-    <section id="Contact" className="contact--section">
-      <div>
-        <h2>{t("contact.title")}</h2>
-        <p className="text-lg">{t("contact.description")}</p>
-      </div>
-      <form onSubmit={handleSubmit} className="contact--form--container">
-        <div className="container">
-          <label htmlFor="first-name" className="contact--label required">
-            <span className="text-md">
-              {t("contact.form.firstName")}
-              <RequiredMark />
-            </span>
-            <input
-              type="text"
-              className="contact--input text-md"
-              name="first-name"
-              id="first-name"
-              placeholder={t("contact.form.firstName")}
-              autoComplete="given-name"
-              required
-            />
-          </label>
-          <label htmlFor="last-name" className="contact--label required">
-            <span className="text-md">
-              {t("contact.form.lastName")}
-              <RequiredMark />
-            </span>
-            <input
-              type="text"
-              className="contact--input text-md"
-              name="last-name"
-              id="last-name"
-              placeholder={t("contact.form.lastName")}
-              autoComplete="family-name"
-              required
-            />
-          </label>
-          <label htmlFor="email" className="contact--label required">
-            <span className="text-md">
-              {t("contact.form.email")}
-              <RequiredMark />
-            </span>
-            <input
-              type="email"
-              className="contact--input text-md"
-              name="email"
-              id="email"
-              placeholder={t("contact.form.email")}
-              autoComplete="email"
-              required
-            />
-          </label>
-          <div className="contact--label">
-            <label htmlFor="phone-number">
-              <span className="text-md">{t("contact.form.phone")}</span>
-            </label>
-            <div className="phone--input--container">
-              <select
-                className="contact--input contact--input--country text-md"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                aria-label={t("contact.form.countryCode")}
-              >
-                {COUNTRY_CODES.map((item) => (
-                  <option key={item.countryCode} value={item.countryCode}>
-                    {item.flag} {item.code}
+    <section id="Contact" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
+      <SectionHeading index="05" title={t("contact.title")} />
+      <div className="grid gap-10 lg:grid-cols-12">
+        <Reveal className="flex flex-col gap-6 lg:col-span-4">
+          <p className="text-lg leading-relaxed text-slate-300">{t("contact.description")}</p>
+          <ul className="flex flex-col gap-3">
+            {CONTACT_LINKS.map(({ name, url, label }) => (
+              <li key={name}>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer"
+                  onPointerMove={trackSpotlight}
+                  className="spotlight flex items-center gap-3 rounded-2xl px-5 py-4 font-semibold text-slate-200"
+                >
+                  <SocialIcon name={name} size={name === "github" ? 20 : 26} />
+                  {label}
+                  <span className="ml-auto text-accent" aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+        <Reveal delay={0.1} className="lg:col-span-8">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5 rounded-3xl border border-line bg-panel/80 p-6 sm:p-8">
+            <div className="grid gap-5 sm:grid-cols-2">
+              <label htmlFor="first-name" className="flex flex-col gap-2">
+                <span className="text-sm font-semibold text-slate-300">
+                  {t("contact.form.firstName")}
+                  <RequiredMark />
+                </span>
+                <input className="field" type="text" name="first-name" id="first-name" placeholder={t("contact.form.firstName")} autoComplete="given-name" required />
+              </label>
+              <label htmlFor="last-name" className="flex flex-col gap-2">
+                <span className="text-sm font-semibold text-slate-300">
+                  {t("contact.form.lastName")}
+                  <RequiredMark />
+                </span>
+                <input className="field" type="text" name="last-name" id="last-name" placeholder={t("contact.form.lastName")} autoComplete="family-name" required />
+              </label>
+              <label htmlFor="email" className="flex flex-col gap-2">
+                <span className="text-sm font-semibold text-slate-300">
+                  {t("contact.form.email")}
+                  <RequiredMark />
+                </span>
+                <input className="field" type="email" name="email" id="email" placeholder={t("contact.form.email")} autoComplete="email" required />
+              </label>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="phone-number" className="text-sm font-semibold text-slate-300">
+                  {t("contact.form.phone")}
+                </label>
+                <div className="grid grid-cols-[110px_1fr] gap-2">
+                  <select className="field" value={country} onChange={(e) => setCountry(e.target.value)} aria-label={t("contact.form.countryCode")}>
+                    {COUNTRY_CODES.map((item) => (
+                      <option key={item.countryCode} value={item.countryCode}>
+                        {item.flag} {item.code}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    type="tel"
+                    className="field"
+                    id="phone-number"
+                    placeholder={t("contact.form.phone")}
+                    autoComplete="tel-national"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ""))}
+                  />
+                </div>
+              </div>
+            </div>
+            <label htmlFor="choose-subject" className="flex flex-col gap-2">
+              <span className="text-sm font-semibold text-slate-300">
+                {t("contact.form.subject")}
+                <RequiredMark />
+              </span>
+              <select id="choose-subject" name="choose-subject" className="field" required>
+                <option value="">{t("contact.form.selectTopic")}</option>
+                {SUBJECTS.map(({ value, labelKey }) => (
+                  <option key={value} value={value}>
+                    {t(labelKey)}
                   </option>
                 ))}
               </select>
-              <input
-                type="tel"
-                className="contact--input contact--input--number text-md"
-                id="phone-number"
-                placeholder={t("contact.form.phone")}
-                autoComplete="tel-national"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ""))}
-              />
+            </label>
+            <label htmlFor="message" className="flex flex-col gap-2">
+              <span className="text-sm font-semibold text-slate-300">
+                {t("contact.form.message")}
+                <RequiredMark />
+              </span>
+              <textarea className="field resize-y" id="message" name="message" rows="6" placeholder={t("contact.form.message")} required />
+            </label>
+            <div className="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
+              <label htmlFor="website">{t("contact.form.honeypot")}</label>
+              <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
             </div>
-          </div>
-        </div>
-        <label htmlFor="choose-subject" className="contact--label required">
-          <span className="text-md">
-            {t("contact.form.subject")}
-            <RequiredMark />
-          </span>
-          <select id="choose-subject" name="choose-subject" className="contact--input text-md" required>
-            <option value="">{t("contact.form.selectTopic")}</option>
-            {SUBJECTS.map(({ value, labelKey }) => (
-              <option key={value} value={value}>
-                {t(labelKey)}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label htmlFor="message" className="contact--label required">
-          <span className="text-md">
-            {t("contact.form.message")}
-            <RequiredMark />
-          </span>
-          <textarea
-            className="contact--input text-md"
-            id="message"
-            name="message"
-            rows="8"
-            placeholder={t("contact.form.message")}
-            required
-          />
-        </label>
-        <div className="contact--honeypot" aria-hidden="true">
-          <label htmlFor="website">{t("contact.form.honeypot")}</label>
-          <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
-        </div>
-        <label htmlFor="consent" className="checkbox--label required">
-          <input type="checkbox" required name="consent" id="consent" />
-          <span className="text-sm">
-            {t("contact.form.consentBefore")}
-            <a href="/privacy-policy" target="_blank" rel="noreferrer">
-              {t("contact.form.consentLink")}
-            </a>
-            .
-            <RequiredMark />
-          </span>
-        </label>
-        <div>
-          <button type="submit" className="btn btn-primary contact--form--btn" disabled={isSubmitting}>
-            {isSubmitting ? t("contact.form.submitting") : t("contact.form.submit")}
-          </button>
-          <div aria-live="polite">
-            {submitStatus === "success" && (
-              <p className="form--message form--message--success">✓ {t("contact.form.success")}</p>
-            )}
-            {submitStatus === "error" && (
-              <p className="form--message form--message--error">✗ {t("contact.form.error")}</p>
-            )}
-          </div>
-        </div>
-      </form>
+            <label htmlFor="consent" className="flex items-start gap-3 text-sm text-slate-400">
+              <input type="checkbox" required name="consent" id="consent" className="mt-1 h-4 w-4 accent-[var(--accent)]" />
+              <span className="rich">
+                {t("contact.form.consentBefore")}
+                <a href="/privacy-policy" target="_blank" rel="noreferrer">
+                  {t("contact.form.consentLink")}
+                </a>
+                .
+                <RequiredMark />
+              </span>
+            </label>
+            <div className="flex flex-wrap items-center gap-4">
+              <button type="submit" className="btn-primary cursor-pointer disabled:cursor-wait disabled:opacity-60" disabled={isSubmitting}>
+                {isSubmitting ? t("contact.form.submitting") : t("contact.form.submit")}
+              </button>
+              <div aria-live="polite">
+                {submitStatus === "success" && <p className="font-semibold text-data">✓ {t("contact.form.success")}</p>}
+                {submitStatus === "error" && <p className="font-semibold text-red-400">✗ {t("contact.form.error")}</p>}
+              </div>
+            </div>
+          </form>
+        </Reveal>
+      </div>
     </section>
   );
 }

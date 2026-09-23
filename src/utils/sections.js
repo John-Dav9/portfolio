@@ -7,4 +7,3 @@ export const SECTIONS = [
   { id: "Contact", labelKey: "navbar.contact" },
 ];
 
-export const SCROLL_OPTIONS = { smooth: true, offset: -70, duration: 500 };
