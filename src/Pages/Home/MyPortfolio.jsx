@@ -26,10 +26,10 @@ function ProjectCard({ project, lang, highlighted }) {
           width="1200"
           height="900"
           loading="lazy"
-          className="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
       </a>
-      <div className="flex flex-1 flex-col gap-3 p-6">
+      <div className="flex flex-1 flex-col gap-2.5 p-5">
         <span
           className={`self-start rounded-full px-2.5 py-1 font-mono text-xs font-semibold text-ink ${
             project.domain === "dev" ? "bg-dev" : "bg-data"
@@ -37,9 +37,11 @@ function ProjectCard({ project, lang, highlighted }) {
         >
           {t(`portfolio.domains.${project.domain}`)}
         </span>
-        <h3 className="text-xl font-bold text-white">{title}</h3>
-        <p className="text-sm leading-relaxed text-slate-400">{localize(project.description, lang)}</p>
-        <div className="mt-auto flex flex-wrap gap-5 pt-2 text-sm font-semibold">
+        <h3 className="text-lg font-bold text-white">{title}</h3>
+        <p className="line-clamp-3 text-sm leading-relaxed text-slate-400" title={localize(project.description, lang)}>
+          {localize(project.description, lang)}
+        </p>
+        <div className="mt-auto flex flex-wrap gap-4 pt-2 text-sm font-semibold">
           {project.repo && (
             <a
               href={project.repo}
@@ -87,7 +89,7 @@ export default function MyPortfolio() {
         </a>
       </SectionHeading>
       <m.div
-        className="grid gap-6 md:grid-cols-2"
+        className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4"
         variants={revealGroup}
         initial="hidden"
         whileInView="visible"

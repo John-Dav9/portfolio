@@ -69,8 +69,8 @@
       "data": "Data"
     },
     "links": {
-      "github": "View on GitHub",
-      "site": "View site",
+      "github": "GitHub",
+      "site": "Live site",
       "githubLabel": "{{title}} source code on GitHub",
       "siteLabel": "{{title}} live site"
     }
@@ -97,8 +97,10 @@
       "consentBefore": "I agree that my data will be used to answer my request, in accordance with the ",
       "consentLink": "privacy policy",
       "submitting": "Sending...",
-      "honeypot": "Leave this field empty"
-    }
+      "honeypot": "Leave this field empty",
+      "phonePlaceholder": "6 12 34 56 78"
+    },
+    "topics": "I'm available for"
   },
   "testimonials": {
     "title": "What People Say",

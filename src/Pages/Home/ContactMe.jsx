@@ -94,9 +94,23 @@ export default function ContactMe() {
     <section id="Contact" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
       <SectionHeading index="05" title={t("contact.title")} />
       <div className="grid gap-10 lg:grid-cols-12">
-        <Reveal className="flex flex-col gap-6 lg:col-span-4">
+        <Reveal className="flex flex-col gap-6 rounded-3xl border border-line bg-panel/50 p-6 sm:p-8 lg:col-span-4">
+          <div className="flex items-center gap-2.5 self-start rounded-full border border-line bg-ink/60 px-3.5 py-2 text-sm text-slate-300">
+            <span className="h-2 w-2 animate-pulse-ring rounded-full bg-data" />
+            {t("hero.status")}
+          </div>
           <p className="text-lg leading-relaxed text-slate-300">{t("contact.description")}</p>
-          <ul className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3">
+            <p className="font-mono text-sm text-slate-400">{t("contact.topics")}</p>
+            <ul className="flex flex-wrap gap-2">
+              {SUBJECTS.slice(0, 3).map(({ value, labelKey }) => (
+                <li key={value} className="rounded-full border border-line px-3 py-1.5 text-sm text-slate-300">
+                  {t(labelKey)}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <ul className="mt-auto flex flex-col gap-3">
             {CONTACT_LINKS.map(({ name, url, label }) => (
               <li key={name}>
                 <a
@@ -115,7 +129,7 @@ export default function ContactMe() {
           </ul>
         </Reveal>
         <Reveal delay={0.1} className="lg:col-span-8">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5 rounded-3xl border border-line bg-panel/80 p-6 sm:p-8">
+          <form onSubmit={handleSubmit} className="flex h-full flex-col gap-5 rounded-3xl border border-line bg-panel/80 p-6 sm:p-8">
             <div className="grid gap-5 sm:grid-cols-2">
               <label htmlFor="first-name" className="flex flex-col gap-2">
                 <span className="text-sm font-semibold text-slate-300">
@@ -142,7 +156,7 @@ export default function ContactMe() {
                 <label htmlFor="phone-number" className="text-sm font-semibold text-slate-300">
                   {t("contact.form.phone")}
                 </label>
-                <div className="grid grid-cols-[110px_1fr] gap-2">
+                <div className="grid grid-cols-[124px_1fr] gap-2">
                   <select className="field" value={country} onChange={(e) => setCountry(e.target.value)} aria-label={t("contact.form.countryCode")}>
                     {COUNTRY_CODES.map((item) => (
                       <option key={item.countryCode} value={item.countryCode}>
@@ -154,7 +168,7 @@ export default function ContactMe() {
                     type="tel"
                     className="field"
                     id="phone-number"
-                    placeholder={t("contact.form.phone")}
+                    placeholder={t("contact.form.phonePlaceholder")}
                     autoComplete="tel-national"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ""))}

@@ -69,8 +69,8 @@
       "data": "Data"
     },
     "links": {
-      "github": "Voir sur GitHub",
-      "site": "Voir le site",
+      "github": "GitHub",
+      "site": "Site en ligne",
       "githubLabel": "Code source de {{title}} sur GitHub",
       "siteLabel": "Site en ligne de {{title}}"
     }
@@ -97,8 +97,10 @@
       "consentBefore": "J'accepte que mes données soient utilisées pour répondre à ma demande, conformément à la ",
       "consentLink": "politique de confidentialité",
       "submitting": "Envoi en cours...",
-      "honeypot": "Ne pas remplir ce champ"
-    }
+      "honeypot": "Ne pas remplir ce champ",
+      "phonePlaceholder": "6 12 34 56 78"
+    },
+    "topics": "Je suis disponible pour"
   },
   "testimonials": {
     "title": "Ce que disent les gens",
