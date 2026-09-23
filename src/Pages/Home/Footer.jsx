@@ -29,7 +29,7 @@ function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-12 md:px-8">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
           <RouterLink to="/" className="font-mono text-[15px] font-semibold text-slate-100">
-            <span className="text-accent">~/</span>jd-tchomgui
+            john-d<span className="text-accent">.dev</span>
           </RouterLink>
           <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400">
             {SECTIONS.map(({ id, labelKey }) => (

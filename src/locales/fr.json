@@ -28,7 +28,7 @@
       "frame": "Aperçu du CV"
     },
     "status": "Ouvert à de nouveaux défis",
-    "prompt": "$ whoami",
+    "prompt": "> Bonjour, je suis",
     "role": {
       "dev": "Développeur Web Fullstack",
       "data": "Data Analyst · Python · Power BI"

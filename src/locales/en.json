@@ -28,7 +28,7 @@
       "frame": "CV preview"
     },
     "status": "Open to new challenges",
-    "prompt": "$ whoami",
+    "prompt": "> Hi, I'm",
     "role": {
       "dev": "Full Stack Web Developer",
       "data": "Data Analyst · Python · Power BI"

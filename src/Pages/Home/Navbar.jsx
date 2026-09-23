@@ -81,7 +81,7 @@ function Navbar() {
     >
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-5 md:px-8">
         <RouterLink to="/" onClick={closeMenu} className="font-mono text-[15px] font-semibold text-slate-100">
-          <span className="text-accent transition-colors duration-500">~/</span>jd-tchomgui
+          john-d<span className="text-accent transition-colors duration-500">.dev</span>
         </RouterLink>
 
         <ul className="hidden items-center gap-1 rounded-full border border-line bg-panel/70 p-1.5 text-sm lg:flex">
