@@ -1,6 +1,9 @@
 services:
   portfolio:
-    build: ./app
+    build:
+      context: .
+      args:
+        SITE_URL: ${SITE_URL:-}
     container_name: portfolio-jd
     restart: unless-stopped
     ports:
