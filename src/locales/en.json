@@ -106,7 +106,19 @@
     "title": "What People Say",
     "rating": "Rating: {{count}} out of 5",
     "showAll": "See all reviews ({{count}})",
-    "showLess": "Show fewer reviews"
+    "showLess": "Show fewer reviews",
+    "leaveReview": "Leave a review",
+    "form": {
+      "title": "Leave a review",
+      "intro": "Your review will be published once approved.",
+      "name": "Name",
+      "designation": "Role or company",
+      "rating": "Rating",
+      "message": "Your review",
+      "consent": "I agree that my name, role and review will be published on this website once approved.",
+      "submit": "Send my review",
+      "thanks": "Thank you! Your review was received and will be published once approved."
+    }
   },
   "footer": {
     "dedication": "Dedicated with love to my wife",

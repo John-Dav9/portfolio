@@ -19,7 +19,7 @@ function siteUrlPlugin() {
       return html.replaceAll("%SITE_URL%", siteUrl).replace("<!-- site-url-meta -->", meta);
     },
     generateBundle() {
-      const robots = ["User-agent: *", "Allow: /"];
+      const robots = ["User-agent: *", "Allow: /", "Disallow: /admin"];
       if (siteUrl) {
         robots.push(`Sitemap: ${siteUrl}/sitemap.xml`);
         const urls = PAGES.map((page) => `  <url><loc>${siteUrl}${page}</loc></url>`).join("\n");
@@ -38,6 +38,12 @@ export default defineConfig({
   plugins: [react(), tailwindcss(), siteUrlPlugin()],
   build: {
     outDir: "build",
+  },
+  server: {
+    proxy: { "/api": "http://localhost:3001", "/uploads": "http://localhost:3001" },
+  },
+  preview: {
+    proxy: { "/api": "http://localhost:3001", "/uploads": "http://localhost:3001" },
   },
   test: {
     environment: "jsdom",

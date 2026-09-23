@@ -1,32 +1,33 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, m } from "motion/react";
-import data from "../../data/index.json";
+import { useContent } from "../../components/ContentContext";
+import TestimonialForm from "./TestimonialForm";
 import { StarIcon } from "../../components/Icons";
 import { localize } from "../../utils/localize";
 import SectionHeading from "../../components/SectionHeading";
 import { trackSpotlight } from "../../components/motion";
 
 const INITIAL_COUNT = 3;
-const testimonials = data.testimonials;
 
 export default function Testimonial() {
   const { t, i18n } = useTranslation();
   const lang = i18n.resolvedLanguage;
+  const { testimonials } = useContent();
   const [showAll, setShowAll] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
+  const closeForm = useCallback(() => setFormOpen(false), []);
   const visible = showAll ? testimonials : testimonials.slice(0, INITIAL_COUNT);
 
   return (
     <section id="testimonial" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
       <SectionHeading index="04" title={t("testimonials.title")} />
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <AnimatePresence initial={false}>
           {visible.map((item, index) => (
             <m.figure
               key={item.id}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: (index % INITIAL_COUNT) * 0.08 }}
               onPointerMove={trackSpotlight}
@@ -47,15 +48,18 @@ export default function Testimonial() {
               </figcaption>
             </m.figure>
           ))}
-        </AnimatePresence>
       </div>
-      {testimonials.length > INITIAL_COUNT && (
-        <div className="mt-10 flex justify-center">
+      <div className="mt-10 flex flex-wrap justify-center gap-3">
+        {testimonials.length > INITIAL_COUNT && (
           <button type="button" onClick={() => setShowAll(!showAll)} aria-expanded={showAll} className="btn-ghost cursor-pointer">
             {showAll ? t("testimonials.showLess") : t("testimonials.showAll", { count: testimonials.length })}
           </button>
-        </div>
-      )}
+        )}
+        <button type="button" onClick={() => setFormOpen(true)} aria-haspopup="dialog" className="btn-primary cursor-pointer">
+          {t("testimonials.leaveReview")}
+        </button>
+      </div>
+      <AnimatePresence>{formOpen && <TestimonialForm onClose={closeForm} />}</AnimatePresence>
     </section>
   );
 }

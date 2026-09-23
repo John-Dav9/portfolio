@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, m } from "motion/react";
-import data from "../../data/index.json";
+import { useContent } from "../../components/ContentContext";
 import { localize } from "../../utils/localize";
 import { useFocus } from "../../components/FocusContext";
 import SectionHeading from "../../components/SectionHeading";
@@ -67,6 +67,7 @@ export default function MySkills() {
   const { t, i18n } = useTranslation();
   const lang = i18n.resolvedLanguage;
   const { focus } = useFocus();
+  const { skills } = useContent();
   const [selected, setSelected] = useState(null);
   const close = useCallback(() => setSelected(null), []);
 
@@ -80,7 +81,7 @@ export default function MySkills() {
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
-        {data.skills.map((skill, index) => {
+        {skills.map((skill, index) => {
           const highlighted = skill.focus === "both" || skill.focus === focus;
           return (
             <m.li key={skill.id} variants={revealItem} className={WIDE.has(index) ? "lg:col-span-2" : ""}>

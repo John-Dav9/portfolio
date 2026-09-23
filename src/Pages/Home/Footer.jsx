@@ -1,6 +1,6 @@
 import { Link as RouterLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import siteContent from "../../data/site.json";
+import { useContent } from "../../components/ContentContext";
 import SectionLink from "../../components/SectionLink";
 import { SocialIcon } from "../../components/Icons";
 import { SECTIONS } from "../../utils/sections";
@@ -22,7 +22,8 @@ const LEGAL_LINKS = [
 
 function Footer() {
   const { t } = useTranslation();
-  const socialLinks = Object.entries(siteContent.socialLinks).filter(([, url]) => url);
+  const { site } = useContent();
+  const socialLinks = Object.entries(site.socialLinks).filter(([, url]) => url);
 
   return (
     <footer className="mt-10 border-t border-line bg-ink/80">

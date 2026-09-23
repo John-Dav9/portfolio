@@ -28,6 +28,7 @@ i18n.use(initReactI18next).init({
   lng: initialLanguage(),
   fallbackLng: "fr",
   supportedLngs: SUPPORTED,
+  showSupportNotice: false,
   interpolation: {
     escapeValue: false,
   },

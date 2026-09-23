@@ -1,8 +1,7 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { m } from "motion/react";
-import siteContent from "../../data/site.json";
-import data from "../../data/index.json";
+import { useContent } from "../../components/ContentContext";
 import { RichText } from "../../utils/richText";
 import { useFocus } from "../../components/FocusContext";
 import FocusSwitch from "../../components/FocusSwitch";
@@ -10,12 +9,11 @@ import { CountUp, Typewriter, revealGroup, revealItem, trackSpotlight } from "..
 
 const CV_PROFILES = ["dev", "data"];
 const CV_LANGUAGES = ["fr", "en"];
-const projectCount = (domain) => data.portfolio.filter((p) => p.domain === domain).length;
-const DOMAIN_COUNTS = { dev: projectCount("dev"), data: projectCount("data") };
 
 function CvButton() {
   const { t } = useTranslation();
-  const { hero, cv } = siteContent;
+  const { site, cv } = useContent();
+  const { hero } = site;
   const [selectedCv, setSelectedCv] = useState(null);
   const detailsRef = useRef(null);
   const hasCvLinks = CV_PROFILES.some((profile) => CV_LANGUAGES.some((l) => cv[profile]?.[l]));
@@ -77,6 +75,11 @@ function CvButton() {
 export default function HeroSection() {
   const { t } = useTranslation();
   const { focus } = useFocus();
+  const { site, projects, skills } = useContent();
+  const domainCounts = {
+    dev: projects.filter((p) => p.domain === "dev").length,
+    data: projects.filter((p) => p.domain === "data").length,
+  };
 
   return (
     <section id="heroSection" className="mx-auto grid max-w-7xl gap-12 px-5 pt-12 pb-20 md:px-8 lg:grid-cols-12 lg:pt-20">
@@ -122,7 +125,7 @@ export default function HeroSection() {
       >
         <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight row-span-2 overflow-hidden rounded-3xl p-0">
           <img
-            src={siteContent.hero.imageUrl}
+            src={site.hero.imageUrl}
             alt={t("about.imageAlt")}
             width="800"
             height="923"
@@ -132,11 +135,11 @@ export default function HeroSection() {
         </m.div>
         <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight flex flex-col justify-between rounded-3xl p-5">
           <span className="text-sm text-slate-400">{t("hero.stats.projects")}</span>
-          <CountUp value={data.portfolio.length} className="text-5xl font-extrabold text-accent transition-colors duration-500" />
+          <CountUp value={projects.length} className="text-5xl font-extrabold text-accent transition-colors duration-500" />
         </m.div>
         <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight flex flex-col justify-between rounded-3xl p-5">
           <span className="text-sm text-slate-400">{t("hero.stats.skills")}</span>
-          <CountUp value={data.skills.length} className="text-5xl font-extrabold text-accent transition-colors duration-500" />
+          <CountUp value={skills.length} className="text-5xl font-extrabold text-accent transition-colors duration-500" />
         </m.div>
         <m.div
           variants={revealItem}
@@ -153,11 +156,11 @@ export default function HeroSection() {
                 <m.div
                   className={`h-full rounded-full ${domain === "dev" ? "bg-dev" : "bg-data"}`}
                   initial={{ width: 0 }}
-                  animate={{ width: `${(DOMAIN_COUNTS[domain] / data.portfolio.length) * 100}%` }}
+                  animate={{ width: `${(domainCounts[domain] / Math.max(projects.length, 1)) * 100}%` }}
                   transition={{ duration: 1.2, delay: 0.6, ease: [0.2, 0.7, 0.2, 1] }}
                 />
               </div>
-              <span>{DOMAIN_COUNTS[domain]}</span>
+              <span>{domainCounts[domain]}</span>
             </div>
           ))}
         </m.div>

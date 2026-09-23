@@ -10,3 +10,5 @@ build
 coverage
 *.log
 **/*:Zone.Identifier
+**/node_modules
+server/data

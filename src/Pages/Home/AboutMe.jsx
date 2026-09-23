@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import siteContent from "../../data/site.json";
+import { useContent } from "../../components/ContentContext";
 import { RichText } from "../../utils/richText";
 import SectionHeading from "../../components/SectionHeading";
 import { Reveal, trackSpotlight } from "../../components/motion";
@@ -16,6 +16,7 @@ const SCHOOLS = [
 
 export default function AboutMe() {
   const { t } = useTranslation();
+  const { site } = useContent();
 
   return (
     <section id="AboutMe" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
@@ -28,7 +29,7 @@ export default function AboutMe() {
         <div className="flex flex-col gap-4 lg:col-span-5">
           <Reveal delay={0.1} className="spotlight overflow-hidden rounded-3xl" onPointerMove={trackSpotlight}>
             <img
-              src={siteContent.about.imageUrl}
+              src={site.about.imageUrl}
               alt={t("about.imageAlt")}
               width="800"
               height="1067"

@@ -1,24 +1,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import emailjs from "@emailjs/browser";
-import siteContent from "../../data/site.json";
+import { useContent } from "../../components/ContentContext";
 import { COUNTRY_CODES } from "../../data/countryCodes";
 import SectionHeading from "../../components/SectionHeading";
 import { SocialIcon } from "../../components/Icons";
 import { Reveal, trackSpotlight } from "../../components/motion";
-
-const CONTACT_LINKS = [
-  { name: "linkedin", url: siteContent.socialLinks.linkedin, label: "LinkedIn" },
-  { name: "github", url: siteContent.socialLinks.github, label: "GitHub" },
-].filter((link) => link.url);
-
-// EmailJS IDs are public by design; restrict allowed origins in the EmailJS dashboard.
-// VITE_EMAILJS_* variables override the values from site.json at build time.
-const EMAILJS_CONFIG = {
-  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || siteContent.emailjs.serviceId,
-  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || siteContent.emailjs.templateId,
-  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || siteContent.emailjs.publicKey,
-};
+import { api } from "../../services/api";
 
 const DEFAULT_COUNTRY = "FRA";
 const SUBJECTS = [
@@ -34,14 +21,20 @@ function RequiredMark() {
 
 export default function ContactMe() {
   const { t } = useTranslation();
+  const { site } = useContent();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
   const [country, setCountry] = useState(DEFAULT_COUNTRY);
   const [phoneNumber, setPhoneNumber] = useState("");
 
+  const contactLinks = [
+    { name: "linkedin", url: site.socialLinks.linkedin, label: "LinkedIn" },
+    { name: "github", url: site.socialLinks.github, label: "GitHub" },
+  ].filter((link) => link.url);
+
   const showStatus = (status) => {
     setSubmitStatus(status);
-    setTimeout(() => setSubmitStatus(null), 5000);
+    setTimeout(() => setSubmitStatus(null), 6000);
   };
 
   const handleSubmit = async (e) => {
@@ -58,32 +51,27 @@ export default function ContactMe() {
 
     setIsSubmitting(true);
     setSubmitStatus(null);
-
     const dialCode = COUNTRY_CODES.find((item) => item.countryCode === country)?.code ?? "";
-    const email = formData.get("email");
 
     try {
-      await emailjs.send(
-        EMAILJS_CONFIG.serviceId,
-        EMAILJS_CONFIG.templateId,
-        {
-          from_name: `${formData.get("first-name")} ${formData.get("last-name")}`,
-          from_email: email,
-          phone_number: phoneNumber ? `${dialCode} ${phoneNumber}` : "—",
-          subject: formData.get("choose-subject") || "Nouveau message de contact",
+      await api("/contact", {
+        method: "POST",
+        body: {
+          firstName: formData.get("first-name"),
+          lastName: formData.get("last-name"),
+          email: formData.get("email"),
+          phone: phoneNumber ? `${dialCode} ${phoneNumber}` : "",
+          subject: formData.get("choose-subject"),
           message: formData.get("message"),
-          to_name: "John David",
-          reply_to: email,
-          submission_date: new Date().toLocaleString("fr-FR", { dateStyle: "full", timeStyle: "short" }),
+          consent: formData.get("consent") === "on",
         },
-        { publicKey: EMAILJS_CONFIG.publicKey }
-      );
+      });
       form.reset();
       setCountry(DEFAULT_COUNTRY);
       setPhoneNumber("");
       showStatus("success");
     } catch (error) {
-      console.error("EmailJS error:", error);
+      console.error("Contact form error:", error);
       showStatus("error");
     } finally {
       setIsSubmitting(false);
@@ -111,7 +99,7 @@ export default function ContactMe() {
             </ul>
           </div>
           <ul className="mt-auto flex flex-col gap-3">
-            {CONTACT_LINKS.map(({ name, url, label }) => (
+            {contactLinks.map(({ name, url, label }) => (
               <li key={name}>
                 <a
                   href={url}
@@ -195,7 +183,7 @@ export default function ContactMe() {
                 {t("contact.form.message")}
                 <RequiredMark />
               </span>
-              <textarea className="field resize-y" id="message" name="message" rows="6" placeholder={t("contact.form.message")} required />
+              <textarea className="field h-40 resize-none" id="message" name="message" rows="6" placeholder={t("contact.form.message")} required />
             </label>
             <div className="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
               <label htmlFor="website">{t("contact.form.honeypot")}</label>

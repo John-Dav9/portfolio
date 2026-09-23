@@ -2,9 +2,8 @@ import siteContent from "../../data/site.json";
 
 // Legal page texts. Paragraphs and list items accept the limited HTML allowed by RichText.
 const { owner, hosting } = siteContent;
-const UPDATED = { fr: "septembre 2026", en: "September 2026" };
+const UPDATED = { fr: "24 septembre 2026", en: "September 24, 2026" };
 const HOST = `${hosting.name}, ${hosting.address} — <a href="${hosting.website}">${hosting.website.replace("https://", "")}</a>`;
-const EMAILJS_PRIVACY = '<a href="https://www.emailjs.com/legal/privacy-policy/">EmailJS</a>';
 const CNIL = '<a href="https://www.cnil.fr/fr/plaintes">CNIL</a>';
 
 export const LEGAL_CONTENT = {
@@ -86,38 +85,37 @@ export const LEGAL_CONTENT = {
         },
         {
           heading: "Données collectées",
-          paragraphs: ["Ce site ne collecte des données personnelles que lorsque vous utilisez le formulaire de contact :"],
+          paragraphs: ["Ce site ne collecte des données personnelles que lorsque vous remplissez un formulaire :"],
           items: [
-            "prénom, nom et adresse e-mail (obligatoires) ;",
-            "numéro de téléphone (facultatif) ;",
-            "sujet et contenu de votre message.",
+            "<strong>formulaire de contact</strong> : prénom, nom, adresse e-mail, numéro de téléphone (facultatif), sujet et message ;",
+            "<strong>formulaire d'avis</strong> : nom, fonction (facultative), note et avis.",
           ],
         },
         {
           heading: "Ce que le site ne fait pas",
           items: [
             "aucun outil de mesure d'audience ni de publicité ;",
-            "aucun cookie ;",
-            "aucune base de données : les messages ne sont pas stockés sur le site ;",
+            "aucun cookie pour les visiteurs ;",
             "aucune revente ni cession de vos données.",
           ],
         },
         {
           heading: "Finalité et base légale",
           paragraphs: [
-            "Vos données servent uniquement à répondre à votre demande. Le traitement repose sur votre consentement, exprimé en cochant la case du formulaire (article 6.1.a du RGPD).",
+            "Les messages servent uniquement à répondre à votre demande. Les avis sont publiés sur le site (nom, fonction, note et texte) après validation. Ces traitements reposent sur votre consentement, exprimé en cochant la case du formulaire (article 6.1.a du RGPD).",
           ],
         },
         {
-          heading: "Destinataires",
+          heading: "Stockage et destinataires",
           paragraphs: [
-            `Le message est transmis par le service ${EMAILJS_PRIVACY}, qui l'achemine vers la boîte e-mail de ${owner.name}. Ce prestataire peut traiter les données en dehors de l'Union européenne ; consultez sa politique de confidentialité pour connaître les garanties appliquées.`,
+            `Les données sont enregistrées dans une base de données hébergée sur le serveur de ${owner.name}, chez ${hosting.name} (Union européenne). Seul ${owner.name} y a accès.`,
+            `Une notification contenant votre message est envoyée à la boîte e-mail de ${owner.name}, via son fournisseur de messagerie. Aucun autre service tiers n'est utilisé.`,
           ],
         },
         {
           heading: "Durée de conservation",
           paragraphs: [
-            "Les messages sont conservés dans la messagerie le temps nécessaire au traitement de votre demande, et au plus 3 ans après le dernier échange.",
+            "Les messages sont conservés le temps nécessaire au traitement de votre demande, et au plus 3 ans après le dernier échange. Les avis restent publiés jusqu'à leur retrait, à votre demande ou à l'initiative de l'éditeur.",
             `Les journaux techniques du serveur (adresse IP, date, page demandée) sont conservés pour une durée limitée, à des fins de sécurité, chez l'hébergeur ${hosting.name}.`,
           ],
         },
@@ -155,38 +153,37 @@ export const LEGAL_CONTENT = {
         },
         {
           heading: "Data collected",
-          paragraphs: ["This website only collects personal data when you use the contact form:"],
+          paragraphs: ["This website only collects personal data when you fill in a form:"],
           items: [
-            "first name, last name and email address (required);",
-            "phone number (optional);",
-            "subject and content of your message.",
+            "<strong>contact form</strong>: first name, last name, email address, phone number (optional), subject and message;",
+            "<strong>review form</strong>: name, role (optional), rating and review.",
           ],
         },
         {
           heading: "What this website does not do",
           items: [
             "no analytics or advertising tools;",
-            "no cookies;",
-            "no database: messages are not stored on the website;",
+            "no cookies for visitors;",
             "no sale or transfer of your data.",
           ],
         },
         {
           heading: "Purpose and legal basis",
           paragraphs: [
-            "Your data is used only to answer your request. Processing is based on your consent, given by ticking the form checkbox (Article 6(1)(a) GDPR).",
+            "Messages are used only to answer your request. Reviews are published on the website (name, role, rating and text) once approved. Processing is based on your consent, given by ticking the form checkbox (Article 6(1)(a) GDPR).",
           ],
         },
         {
-          heading: "Recipients",
+          heading: "Storage and recipients",
           paragraphs: [
-            `Your message is sent through the ${EMAILJS_PRIVACY} service, which delivers it to ${owner.name}'s mailbox. This provider may process data outside the European Union; see its privacy policy for the safeguards it applies.`,
+            `Data is stored in a database hosted on ${owner.name}'s own server at ${hosting.name} (European Union). Only ${owner.name} has access to it.`,
+            `A notification containing your message is sent to ${owner.name}'s mailbox through their email provider. No other third-party service is used.`,
           ],
         },
         {
           heading: "Retention",
           paragraphs: [
-            "Messages are kept in the mailbox for as long as needed to handle your request, and at most 3 years after the last exchange.",
+            "Messages are kept for as long as needed to handle your request, and at most 3 years after the last exchange. Reviews remain published until removed, at your request or at the publisher's initiative.",
             `Server technical logs (IP address, date, requested page) are kept for a limited period for security purposes by the host, ${hosting.name}.`,
           ],
         },
@@ -303,9 +300,10 @@ export const LEGAL_CONTENT = {
       updated: UPDATED.fr,
       sections: [
         {
-          heading: "Aucun cookie sur ce site",
+          heading: "Aucun cookie pour les visiteurs",
           paragraphs: [
-            "Ce site n'utilise aucun cookie, ni de mesure d'audience, ni publicitaire. Aucun bandeau de consentement n'est donc nécessaire.",
+            "Ce site n'utilise aucun cookie de mesure d'audience ni publicitaire. Aucun bandeau de consentement n'est donc nécessaire.",
+            "Seul l'espace d'administration, réservé à l'éditeur, dépose un cookie de session strictement nécessaire à la connexion (8 heures au maximum).",
           ],
         },
         {
@@ -333,9 +331,10 @@ export const LEGAL_CONTENT = {
       updated: UPDATED.en,
       sections: [
         {
-          heading: "No cookies on this website",
+          heading: "No cookies for visitors",
           paragraphs: [
-            "This website uses no cookies, whether for analytics or advertising. No consent banner is therefore required.",
+            "This website uses no analytics or advertising cookies. No consent banner is therefore required.",
+            "Only the administration area, reserved for the publisher, sets a session cookie strictly required to log in (8 hours at most).",
           ],
         },
         {

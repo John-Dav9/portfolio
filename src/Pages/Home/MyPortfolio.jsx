@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { m } from "motion/react";
-import data from "../../data/index.json";
-import siteContent from "../../data/site.json";
+import { useContent } from "../../components/ContentContext";
 import { ArrowIcon, GithubIcon } from "../../components/Icons";
 import { localize } from "../../utils/localize";
 import { useFocus } from "../../components/FocusContext";
@@ -74,12 +73,13 @@ export default function MyPortfolio() {
   const { t, i18n } = useTranslation();
   const lang = i18n.resolvedLanguage;
   const { focus } = useFocus();
+  const { site, projects } = useContent();
 
   return (
     <section id="MyPortfolio" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
       <SectionHeading index="03" title={t("portfolio.title")}>
         <a
-          href={siteContent.githubUrl}
+          href={site.githubUrl}
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-accent hover:text-accent"
@@ -95,7 +95,7 @@ export default function MyPortfolio() {
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
-        {data.portfolio.map((project) => (
+        {projects.map((project) => (
           <ProjectCard key={project.id} project={project} lang={lang} highlighted={project.domain === focus} />
         ))}
       </m.div>

@@ -8,9 +8,32 @@ services:
     restart: unless-stopped
     ports:
       - "4001:80"
+    depends_on:
+      - api
     networks:
       - mon-reseau
+      - backend
+
+  api:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    container_name: portfolio-jd-api
+    restart: unless-stopped
+    env_file:
+      - path: ./server/.env
+        required: false
+    environment:
+      SITE_ORIGIN: ${SITE_ORIGIN:-https://john-d.dev}
+    volumes:
+      - portfolio-data:/data
+    networks:
+      - backend
 
 networks:
+  backend:
   mon-reseau:
     external: true
+
+volumes:
+  portfolio-data:

@@ -106,7 +106,19 @@
     "title": "Ce que disent les gens",
     "rating": "Note : {{count}} sur 5",
     "showAll": "Voir tous les avis ({{count}})",
-    "showLess": "Voir moins d'avis"
+    "showLess": "Voir moins d'avis",
+    "leaveReview": "Laisser un avis",
+    "form": {
+      "title": "Laisser un avis",
+      "intro": "Votre avis sera publié après validation.",
+      "name": "Nom",
+      "designation": "Fonction ou entreprise",
+      "rating": "Note",
+      "message": "Votre avis",
+      "consent": "J'accepte que mon nom, ma fonction et mon avis soient publiés sur ce site après validation.",
+      "submit": "Envoyer mon avis",
+      "thanks": "Merci ! Votre avis a bien été reçu et sera publié après validation."
+    }
   },
   "footer": {
     "dedication": "Dédié avec amour à mon épouse",

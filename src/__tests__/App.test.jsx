@@ -2,11 +2,17 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
-import emailjs from "@emailjs/browser";
 import i18n from "../i18n";
 import App from "../App";
 
-vi.mock("@emailjs/browser", () => ({ default: { send: vi.fn(() => Promise.resolve({ status: 200 })) } }));
+// API stub: content requests fail (bundled content is used), form posts succeed.
+const fetchMock = vi.fn(async (url, init = {}) => {
+  if (init.method === "POST") return new Response(JSON.stringify({ id: "1" }), { status: 201 });
+  return new Response("", { status: 503 });
+});
+vi.stubGlobal("fetch", fetchMock);
+const posts = (path) =>
+  fetchMock.mock.calls.filter(([url, init]) => url === path && init?.method === "POST").map(([, init]) => JSON.parse(init.body));
 
 const renderAt = (path = "/") =>
   render(
@@ -17,7 +23,7 @@ const renderAt = (path = "/") =>
 
 beforeEach(async () => {
   await i18n.changeLanguage("fr");
-  vi.mocked(emailjs.send).mockClear();
+  fetchMock.mockClear();
 });
 
 describe("home page", () => {
@@ -89,15 +95,15 @@ describe("contact form", () => {
     await user.click(screen.getByRole("checkbox"));
   };
 
-  it("sends the message through EmailJS without requiring a phone number", async () => {
+  it("posts the message to the API without requiring a phone number", async () => {
     const user = userEvent.setup();
     renderAt("/");
     await fillRequired(user);
     await user.click(screen.getByRole("button", { name: "Envoyer le message" }));
-    expect(emailjs.send).toHaveBeenCalledTimes(1);
-    const params = vi.mocked(emailjs.send).mock.calls[0][2];
-    expect(params).toMatchObject({ from_name: "Ada Lovelace", reply_to: "ada@example.com", phone_number: "—" });
     expect(await screen.findByText(/Message envoyé avec succès/)).toBeInTheDocument();
+    expect(posts("/api/contact")).toEqual([
+      expect.objectContaining({ firstName: "Ada", lastName: "Lovelace", email: "ada@example.com", phone: "", consent: true }),
+    ]);
   });
 
   it("distinguishes countries sharing a dial code", async () => {
@@ -108,7 +114,8 @@ describe("contact form", () => {
     expect(screen.getByLabelText("Indicatif pays")).toHaveValue("USA");
     await user.type(screen.getByLabelText(/^Numéro de téléphone/), "5551234");
     await user.click(screen.getByRole("button", { name: "Envoyer le message" }));
-    expect(vi.mocked(emailjs.send).mock.calls[0][2].phone_number).toBe("+1 5551234");
+    await screen.findByText(/Message envoyé avec succès/);
+    expect(posts("/api/contact")[0].phone).toBe("+1 5551234");
   });
 
   it("silently drops submissions that fill the honeypot", async () => {
@@ -117,7 +124,25 @@ describe("contact form", () => {
     await fillRequired(user);
     container.querySelector("#website").value = "spam";
     await user.click(screen.getByRole("button", { name: "Envoyer le message" }));
-    expect(emailjs.send).not.toHaveBeenCalled();
+    expect(posts("/api/contact")).toHaveLength(0);
+  });
+});
+
+describe("testimonial form", () => {
+  it("submits a review for moderation", async () => {
+    const user = userEvent.setup();
+    renderAt("/");
+    await user.click(screen.getByRole("button", { name: "Laisser un avis" }));
+    const dialog = screen.getByRole("dialog", { name: "Laisser un avis" });
+    await user.type(within(dialog).getByLabelText(/^Nom/), "Grace Hopper");
+    await user.click(within(dialog).getByRole("button", { name: "Note : 4 sur 5" }));
+    await user.type(within(dialog).getByLabelText(/^Votre avis/), "Un travail remarquable et soigné.");
+    await user.click(within(dialog).getByRole("checkbox"));
+    await user.click(within(dialog).getByRole("button", { name: "Envoyer mon avis" }));
+    expect(await within(dialog).findByText(/sera publié après validation/)).toBeInTheDocument();
+    expect(posts("/api/testimonials")).toEqual([
+      expect.objectContaining({ authorName: "Grace Hopper", rating: 4, lang: "fr", consent: true }),
+    ]);
   });
 });
 
