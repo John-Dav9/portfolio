@@ -1,18 +1,35 @@
 {
+  "siteUrl": "",
+  "owner": {
+    "name": "John David Tchomgui",
+    "location": { "fr": "France", "en": "France" }
+  },
+  "hosting": {
+    "name": "Contabo GmbH",
+    "address": "Aschauer Straße 32a, 81549 München, Allemagne",
+    "website": "https://contabo.com"
+  },
   "hero": {
     "subtitleSuffix": { "fr": "& Data Analyst", "en": "& Data Analyst" },
     "ctaUrl": "https://www.canva.com/design/DAGRbJFBCcQ/ENKhhjbSAB3NvhZBzzCISA/view",
-    "imageUrl": "/img/copie 3.JPG"
+    "imageUrl": "/img/hero-portrait.webp"
   },
-  "about": { "imageUrl": "/img/copie 2.JPG" },
+  "about": { "imageUrl": "/img/about-portrait.webp" },
   "cv": {
     "dev": { "fr": "", "en": "" },
     "data": { "fr": "", "en": "" }
   },
+  "githubUrl": "https://github.com/John-Dav9",
   "socialLinks": {
-    "facebook": "https://www.facebook.com/",
-    "instagram": "https://www.instagram.com/",
-    "twitter": "https://www.twitter.com/",
-    "linkedin": "https://www.linkedin.com/in/jd-tchomgui"
+    "linkedin": "https://www.linkedin.com/in/jd-tchomgui",
+    "github": "https://github.com/John-Dav9",
+    "facebook": "",
+    "instagram": "",
+    "twitter": ""
+  },
+  "emailjs": {
+    "serviceId": "service_3e9z3k3",
+    "templateId": "template_lwhrj6h",
+    "publicKey": "WjxPUQCdiNcmPGWZp"
   }
 }

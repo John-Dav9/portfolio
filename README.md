@@ -1,47 +1,43 @@
-# Portfolio – John Tchomgui
+# Portfolio – John David Tchomgui
 
-Portfolio React bilingue (français/anglais), avec React Router, i18next et un formulaire de contact EmailJS. Le site est désormais statique : aucun backend de contenu, aucune connexion administrateur et aucun stockage de messages côté site.
+Portfolio statique et bilingue (français/anglais) : React 19, Vite, React Router, i18next et formulaire de contact EmailJS. Aucun backend ni base de données.
 
-## Installation et développement
+## Développement
 
-Node.js >= 20.19.0 et npm sont nécessaires. Utiliser npm et le fichier `package-lock.json` pour les installations reproductibles.
+Node.js >= 22.12 (24 recommandé).
 
 ```sh
-npm ci --legacy-peer-deps
-npm start
+npm ci
+npm run dev        # serveur de développement
+npm test           # tests Vitest
+npm run lint       # ESLint
+npm run build      # build de production dans build/
+npm run preview    # prévisualisation du build
 ```
-
-Le paramètre `--legacy-peer-deps` reste nécessaire avec les contraintes actuelles de Create React App et TypeScript. Les dépendances de construction présentent encore des alertes de sécurité ; le retrait du backend ne les corrige pas.
 
 ## Modifier les contenus
 
-- `src/locales/fr.json` et `src/locales/en.json` : textes traduits, dont le message d’accueil (`hero.description` et `hero.description_continued`). La suite du message accepte les liens HTML nettoyés par `src/utils/richText.jsx`.
-- `src/data/site.json` : images d’accueil, lien du bouton CV, liens de CV par langue et réseaux sociaux.
-- `src/data/index.json` : compétences, projets et témoignages publiés.
-- `public/img/` : images locales.
+| Fichier | Contenu |
+|---|---|
+| `src/data/index.json` | Compétences, projets (`domain`: `dev` ou `data`, `repo`, `site`) et témoignages, au format `{ "fr": ..., "en": ... }` |
+| `src/data/site.json` | URL publique (`siteUrl`), images d'accueil, liens CV, réseaux sociaux (vide = masqué), hébergeur, identifiants EmailJS |
+| `src/locales/fr.json`, `en.json` | Textes de l'interface. `hero.description_continued` et `about.*` acceptent des liens HTML (nettoyés par `src/utils/richText.jsx`) |
+| `src/Pages/Legal/content.js` | Mentions légales, confidentialité, conditions, cookies |
+| `public/img/` | Images au format WebP (≈ 800 px de large pour les vignettes, 1200 px pour les projets) |
 
-Les anciennes routes `/admin/*` ont été retirées. Les témoignages locaux restent visibles, mais le dépôt de nouveaux avis et l’édition depuis un dashboard nécessitent un nouveau backend. Les contenus présents uniquement dans l’ancienne base distante n’ont pas été importés ; les fichiers locaux constituent le contenu affiché.
+Les tests (`src/__tests__/content.test.js`) vérifient que chaque contenu existe dans les deux langues et que les images référencées existent.
 
-Le formulaire envoie directement le message via EmailJS. Il ne conserve plus de copie dans une base de données. Voir `EMAILJS_SETUP.md` pour la configuration du service et du modèle.
+**URL publique** : renseigner `siteUrl` dans `site.json` (ou la variable `SITE_URL` au build) pour générer le canonical, les URL Open Graph absolues et `sitemap.xml`.
 
-Après une modification de contenu, reconstruire puis redéployer le site.
+**EmailJS** : les identifiants sont publics par nature. Restreindre les domaines autorisés dans le tableau de bord EmailJS. Les variables `VITE_EMAILJS_SERVICE_ID`, `VITE_EMAILJS_TEMPLATE_ID` et `VITE_EMAILJS_PUBLIC_KEY` remplacent les valeurs de `site.json`. Voir `EMAILJS_SETUP.md`.
 
-## Compilation et prévisualisation
-
-```sh
-npm run build
-npm run serve
-```
-
-Publier le contenu de `build/` sur l’hébergement statique. Le serveur doit rediriger les routes de l’application vers `index.html` ; `nginx.conf` fournit cette configuration.
-
-## Docker et VPS
+## Docker et déploiement
 
 ```sh
 docker build -t portfolio .
 docker run --rm -p 4001:80 portfolio
 ```
 
-Le fichier `docker-compose.yml` existant est prévu pour un dossier parent contenant le projet dans `app/` et un réseau externe `mon-reseau`. Le workflow `.github/workflows/deploy-vps.yml` utilise cette organisation sur le VPS. Pour utiliser Compose directement à la racine du dépôt, adapter le contexte de construction à `.` et préparer le réseau.
+L'image sert le build avec nginx (`nginx.conf` : fallback SPA, gzip, cache long sur `/assets/`, en-têtes de sécurité et CSP). Si un nouveau service externe est ajouté (analytics, iframe…), mettre à jour la `Content-Security-Policy`.
 
-Aucun déploiement distant n’est effectué par les commandes locales de compilation.
+Le workflow `.github/workflows/deploy-vps.yml` lance lint, tests et build sur chaque push et pull request, puis, seulement si tout passe sur `master`, se connecte au VPS en SSH et exécute `docker compose --project-name portfolio_jd up -d --build` dans le dossier du dépôt. Le réseau Docker externe `mon-reseau` doit exister sur le serveur.

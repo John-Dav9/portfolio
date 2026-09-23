@@ -1,54 +1,35 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-scroll";
+import { Link as RouterLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import SectionLink from "../../components/SectionLink";
+import { SECTIONS } from "../../utils/sections";
+
+const LANGUAGES = [
+  { code: "fr", label: "FR", title: "Français" },
+  { code: "en", label: "EN", title: "English" },
+];
 
 function Navbar() {
   const [navActive, setNavActive] = useState(false);
   const { t, i18n } = useTranslation();
 
-  const toggleNav = () => {
-    setNavActive((current) => !current);
-  };
-
-  const closeMenu = () => {
-    setNavActive(false);
-  };
-
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-    localStorage.setItem('language', lng);
-  };
+  const closeMenu = () => setNavActive(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 500) {
-        closeMenu();
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (window.innerWidth <= 1200) {
-      closeMenu();
-    }
+    window.addEventListener("resize", closeMenu);
+    return () => window.removeEventListener("resize", closeMenu);
   }, []);
 
   return (
     <nav className={`navbar ${navActive ? "active" : ""}`}>
-      <div className="navbar__logo">
-        <img src="./img/logo.svg" alt="John David Tchomgui" />
-      </div>
+      <RouterLink to="/" className="navbar__logo" onClick={closeMenu}>
+        <img src="/img/logo.webp" alt={t("navbar.logoAlt")} width="60" height="60" />
+      </RouterLink>
       <button
         type="button"
         className={`nav__hamburger ${navActive ? "active" : ""}`}
-        onClick={toggleNav}
-        aria-label="Toggle navigation"
+        onClick={() => setNavActive((current) => !current)}
+        aria-label={t("navbar.toggle")}
         aria-expanded={navActive}
         aria-controls="primary-navigation"
       >
@@ -56,113 +37,32 @@ function Navbar() {
         <span className="nav__hamburger__line"></span>
         <span className="nav__hamburger__line"></span>
       </button>
-      <div
-        id="primary-navigation"
-        className={`navbar--items ${navActive ? "active" : ""}`}
-      >
+      <div id="primary-navigation" className={`navbar--items ${navActive ? "active" : ""}`}>
         <ul>
-          <li>
-            <Link
-              onClick={closeMenu}
-              activeClass="navbar--active--content"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-              to="heroSection"
-              className="navbar--content"
-            >
-              {t('navbar.home')}
-            </Link>
-          </li>
-          <li>
-            <Link
-              onClick={closeMenu}
-              activeClass="navbar--active--content"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-              to="MySkills"
-              className="navbar--content"
-            >
-              {t('navbar.skills')}
-            </Link>
-          </li>
-          <li>
-            <Link
-              onClick={closeMenu}
-              activeClass="navbar--active--content"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-              to="AboutMe"
-              className="navbar--content"
-            >
-              {t('navbar.about')}
-            </Link>
-          </li>
-          <li>
-            <Link
-              onClick={closeMenu}
-              activeClass="navbar--active--content"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-              to="MyPortfolio"
-              className="navbar--content"
-            >
-              {t('navbar.portfolio')}
-            </Link>
-          </li>
-          <li>
-            <Link
-              onClick={closeMenu}
-              activeClass="navbar--active--content"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-              to="testimonial"
-              className="navbar--content"
-            >
-              {t('navbar.testimonials')}
-            </Link>
-          </li>
-          <li>
-            <Link
-              onClick={closeMenu}
-              activeClass="navbar--active--content"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-              to="Contact"
-              className="navbar--content"
-            >
-              {t('navbar.contact')}
-            </Link>
-          </li>
+          {SECTIONS.map(({ id, labelKey }) => (
+            <li key={id}>
+              <SectionLink to={id} className="navbar--content" onClick={closeMenu}>
+                {t(labelKey)}
+              </SectionLink>
+            </li>
+          ))}
         </ul>
       </div>
       <div className="navbar--actions">
-        <div className="language--toggle">
-          <button
-            onClick={() => changeLanguage('fr')}
-            className={`lang--btn ${i18n.language === 'fr' ? 'active' : ''}`}
-            title="Français"
-          >
-            FR
-          </button>
-          <button
-            onClick={() => changeLanguage('en')}
-            className={`lang--btn ${i18n.language === 'en' ? 'active' : ''}`}
-            title="English"
-          >
-            EN
-          </button>
+        <div className="language--toggle" role="group" aria-label={t("navbar.language")}>
+          {LANGUAGES.map(({ code, label, title }) => (
+            <button
+              key={code}
+              type="button"
+              onClick={() => i18n.changeLanguage(code)}
+              className={`lang--btn ${i18n.resolvedLanguage === code ? "active" : ""}`}
+              aria-pressed={i18n.resolvedLanguage === code}
+              title={title}
+              lang={code}
+            >
+              {label}
+            </button>
+          ))}
         </div>
       </div>
     </nav>

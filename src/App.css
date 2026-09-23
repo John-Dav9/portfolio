@@ -2520,3 +2520,55 @@ input[type="checkbox"] {
 }
 
 /* Responsive Screens Ends*/
+
+/* Semantic testimonial markup: reset default figure/blockquote spacing */
+figure.testimonial--section--card,
+.testimonial--section--card blockquote {
+  margin: 0;
+}
+
+/* Anti-spam field, invisible to people and screen readers */
+.contact--honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.checkbox--label a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* Social icons inherit currentColor so the hover state can recolor them */
+.footer--social--icon > ul li a {
+  color: var(--black);
+}
+.footer--social--icon > ul li a:hover {
+  color: var(--white);
+}
+
+.btn-back {
+  text-decoration: none;
+}
+
+.legal-content p a,
+.legal-content li a {
+  color: var(--primary);
+}
+
+/* 404 page */
+.not-found {
+  text-align: center;
+}
+.not-found--code {
+  font-size: 96px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+.not-found .btn {
+  margin-top: 24px;
+}

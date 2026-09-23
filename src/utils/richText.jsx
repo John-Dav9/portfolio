@@ -19,7 +19,7 @@ export function sanitizeRichText(html) {
           }
           child.removeAttribute(attr.name);
         });
-        if (child.tagName === "A") {
+        if (child.tagName === "A" && /^https?:/i.test(child.getAttribute("href") || "")) {
           child.setAttribute("target", "_blank");
           child.setAttribute("rel", "noreferrer");
         }

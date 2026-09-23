@@ -1,88 +1,99 @@
-import data from "../../data/index.json";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import data from "../../data/index.json";
+import { localize } from "../../utils/localize";
+
+const skills = data.skills;
+
+function cardsForWidth(width) {
+  if (width >= 1200) return 4;
+  if (width >= 576) return 2;
+  return 1;
+}
+
+function SkillModal({ skill, lang, onClose }) {
+  const { t } = useTranslation();
+  const closeButtonRef = useRef(null);
+  const title = localize(skill.title, lang);
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    closeButtonRef.current?.focus();
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      previouslyFocused?.focus?.();
+    };
+  }, [onClose]);
+
+  return (
+    <div className="skills--modal--overlay" onClick={onClose}>
+      <div
+        className="skills--modal--content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="skill-modal-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          ref={closeButtonRef}
+          type="button"
+          className="skills--modal--close"
+          onClick={onClose}
+          aria-label={t("skills.close")}
+        >
+          ×
+        </button>
+        <div className="skills--modal--header">
+          <img src={skill.src} alt="" className="skills--modal--img" />
+          <h2 id="skill-modal-title">{title}</h2>
+        </div>
+        <p className="skills--modal--description">{localize(skill.description, lang)}</p>
+      </div>
+    </div>
+  );
+}
 
 export default function MySkills() {
   const { t, i18n } = useTranslation();
+  const lang = i18n.resolvedLanguage;
   const [selectedSkill, setSelectedSkill] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [cardsPerView, setCardsPerView] = useState(4);
+  const [cardsPerView, setCardsPerView] = useState(() => cardsForWidth(window.innerWidth));
 
   useEffect(() => {
-    const updateCardsPerView = () => {
-      if (window.innerWidth >= 1200) {
-        setCardsPerView(4);
-      } else if (window.innerWidth >= 576) {
-        setCardsPerView(2);
-      } else {
-        setCardsPerView(1);
-      }
-    };
-
-    updateCardsPerView();
+    const updateCardsPerView = () => setCardsPerView(cardsForWidth(window.innerWidth));
     window.addEventListener("resize", updateCardsPerView);
     return () => window.removeEventListener("resize", updateCardsPerView);
   }, []);
 
-  const skills = data?.skills || [];
+  const closeModal = useCallback(() => setSelectedSkill(null), []);
+
   const maxIndex = Math.max(0, skills.length - cardsPerView);
-  const displayedSkills = skills.slice(currentIndex, currentIndex + cardsPerView);
-  const lang = i18n.language || "fr";
+  const startIndex = Math.min(currentIndex, maxIndex);
+  const displayedSkills = skills.slice(startIndex, startIndex + cardsPerView);
 
-  useEffect(() => {
-    setCurrentIndex((prev) => Math.min(prev, maxIndex));
-  }, [maxIndex]);
-
-  // Create a mapping of titles to translations
-  const skillTitleMap = {
-    "Front-End Development": t('skills.frontend.title'),
-    "Back-End Development": t('skills.backend.title'),
-    "Bases de Données & SQL": t('skills.database.title'),
-    "Data Analysis & BI": t('skills.dataAnalysis.title'),
-    "Déploiement & DevOps": t('skills.deployment.title'),
-    "Gestion de Projet Agile": t('skills.agile.title'),
-    "Design UX/UI": t('skills.uxui.title'),
-    "Git & Outils Dev": t('skills.git.title'),
-  };
-
-  const skillDescriptionMap = {
-    "Création d'interfaces utilisateur réactives et intuitives avec HTML, CSS, JavaScript (ES6+), React, Angular, Vue.js et TypeScript. Maîtrise de Flexbox, Grid et Bootstrap pour des designs responsive.": t('skills.frontend.description'),
-    "Développement d'APIs robustes et sécurisées avec Ruby on Rails, Node.js, NestJS, Express et ASP.NET. Gestion de l'authentification JWT et intégration d'APIs REST.": t('skills.backend.description'),
-    "Expertise en PostgreSQL et SQL Server pour la conception, modélisation et optimisation de bases de données. Maîtrise de SSMS (SQL Server Management Studio) pour la gestion avancée.": t('skills.database.description'),
-    "Analyse de données avec Python (pandas, NumPy, matplotlib, seaborn), SQL et Power BI. Création de dashboards interactifs, data cleaning, modélisation et visualisation décisionnelle pour transformer les données en insights stratégiques.": t('skills.dataAnalysis.description'),
-    "Déploiement d'applications sur Heroku, gestion de domaines (Namecheap), configuration serveur et mise en production d'applications web fullstack en autonomie.": t('skills.deployment.description'),
-    "Application de méthodologies agiles (Scrum, Kanban) avec des outils comme Trello pour la gestion de tâches, collaboration en équipe et suivi de progression des projets.": t('skills.agile.description'),
-    "Conception orientée utilisateur et prototypage avec Figma et Canva. Création de maquettes interactives pour valider l'expérience utilisateur avant le développement.": t('skills.uxui.description'),
-    "Maîtrise de Git/GitHub pour le versioning, Visual Studio Code, Postman pour les tests d'API, et workflow collaboratif en équipe avec gestion des branches et pull requests.": t('skills.git.description'),
-  };
-
-  const handleSkillClick = (skill) => {
-    setSelectedSkill(skill);
-  };
-
-  const closeModal = () => {
-    setSelectedSkill(null);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(prev - cardsPerView, 0));
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => Math.min(prev + cardsPerView, maxIndex));
+  const onCardKeyDown = (e, skill) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setSelectedSkill(skill);
+    }
   };
 
   return (
     <section className="skills--section" id="MySkills">
       <div className="portfolio--container">
-        <h2 className="skills--section--heading">{t('skills.title')}</h2>
+        <h2 className="skills--section--heading">{t("skills.title")}</h2>
       </div>
       <div className="skills--carousel--layout">
         <button
           type="button"
           className="skills--carousel--btn"
-          onClick={handlePrev}
-          disabled={currentIndex === 0}
+          onClick={() => setCurrentIndex(Math.max(startIndex - cardsPerView, 0))}
+          disabled={startIndex === 0}
           aria-label={t("skills.carousel.previous")}
         >
           ‹
@@ -90,30 +101,24 @@ export default function MySkills() {
         <div
           className="skills--section--container"
           style={{ gridTemplateColumns: `repeat(${cardsPerView}, minmax(0, 1fr))` }}
+          aria-live="polite"
         >
-          {displayedSkills?.map((item) => (
+          {displayedSkills.map((skill) => (
             <div
-              key={item.id}
+              key={skill.id}
               className="skills--section--card"
-              onClick={() => handleSkillClick(item)}
+              onClick={() => setSelectedSkill(skill)}
+              onKeyDown={(e) => onCardKeyDown(e, skill)}
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && handleSkillClick(item)}
+              aria-haspopup="dialog"
             >
               <div className="skills--section--img">
-                <img
-                  src={item.imageUrl || item.src}
-                  alt={skillTitleMap[item.title] || item.title || item.title?.[lang] || ""}
-                  loading="lazy"
-                />
+                <img src={skill.src} alt="" width="800" height="533" loading="lazy" />
               </div>
               <div className="skills--section--card--content">
-                <h3 className="skills--section--title">
-                  {item.title?.[lang] || skillTitleMap[item.title] || item.title}
-                </h3>
-                <span className="skills--card--learn-more">
-                  {t('skills.learnMore') || 'En savoir plus'}
-                </span>
+                <h3 className="skills--section--title">{localize(skill.title, lang)}</h3>
+                <span className="skills--card--learn-more">{t("skills.learnMore")}</span>
               </div>
             </div>
           ))}
@@ -121,36 +126,16 @@ export default function MySkills() {
         <button
           type="button"
           className="skills--carousel--btn"
-          onClick={handleNext}
-          disabled={currentIndex >= maxIndex}
+          onClick={() => setCurrentIndex(Math.min(startIndex + cardsPerView, maxIndex))}
+          disabled={startIndex >= maxIndex}
           aria-label={t("skills.carousel.next")}
         >
           ›
         </button>
       </div>
 
-      {/* Skill Modal */}
       {selectedSkill && (
-        <div className="skills--modal--overlay" onClick={closeModal}>
-          <div className="skills--modal--content" onClick={(e) => e.stopPropagation()}>
-            <button className="skills--modal--close" onClick={closeModal} aria-label="Close modal">
-              ×
-            </button>
-            <div className="skills--modal--header">
-              <img
-                src={selectedSkill.imageUrl || selectedSkill.src}
-                alt={skillTitleMap[selectedSkill.title] || selectedSkill.title || selectedSkill.title?.[lang]}
-                className="skills--modal--img"
-              />
-              <h2>{selectedSkill.title?.[lang] || skillTitleMap[selectedSkill.title] || selectedSkill.title}</h2>
-            </div>
-            <p className="skills--modal--description">
-              {selectedSkill.description?.[lang] ||
-                skillDescriptionMap[selectedSkill.description] ||
-                selectedSkill.description}
-            </p>
-          </div>
-        </div>
+        <SkillModal skill={selectedSkill} lang={lang} onClose={closeModal} />
       )}
     </section>
   );
