@@ -1,7 +1,17 @@
 import { useState } from "react";
 import { BilingualField, Card, Field, ImageField, ListItemActions, moveItem, Panel, SaveBar, SelectField, useContentSaver, withIds } from "./ui";
 
-const EMPTY_PROJECT = { id: "", isNew: true, domain: "dev", src: "", title: { fr: "", en: "" }, description: { fr: "", en: "" }, repo: "", site: "" };
+const EMPTY_PROJECT = { id: "", isNew: true, domain: "dev", src: "", title: { fr: "", en: "" }, description: { fr: "", en: "" }, repo: "", site: "", stack: [] };
+
+// "React, Vite , , Docker" -> ["React", "Vite", "Docker"]
+const parseStack = (text) => text.split(",").map((tech) => tech.trim()).filter(Boolean);
+
+function prepareForSave(projects) {
+  return withIds(projects).map(({ stackText, ...project }) => ({
+    ...project,
+    stack: stackText === undefined ? project.stack ?? [] : parseStack(stackText),
+  }));
+}
 
 export default function ProjectsPanel({ content }) {
   const [projects, setProjects] = useState(content.projects);
@@ -47,6 +57,12 @@ export default function ProjectsPanel({ content }) {
           </div>
           <BilingualField label="Titre" value={project.title} onChange={(title) => update(index, { title })} />
           <BilingualField label="Description" multiline value={project.description} onChange={(description) => update(index, { description })} />
+          <Field
+            label="Technologies utilisées (séparées par des virgules)"
+            placeholder="ex. React, Node.js, PostgreSQL"
+            value={project.stackText ?? (project.stack ?? []).join(", ")}
+            onChange={(stackText) => update(index, { stackText })}
+          />
           <ImageField label="Image (capture d'écran du projet)" value={project.src} onChange={(src) => update(index, { src })} />
           <div className="grid gap-3 sm:grid-cols-2">
             <Field label="Lien vers le code (GitHub), facultatif" placeholder="https://github.com/…" value={project.repo} onChange={(repo) => update(index, { repo })} />
@@ -54,7 +70,7 @@ export default function ProjectsPanel({ content }) {
           </div>
         </Card>
       ))}
-      <SaveBar status={status} onSave={() => { const saved = withIds(projects); setProjects(saved); save(saved); }} />
+      <SaveBar status={status} onSave={() => { const saved = prepareForSave(projects); setProjects(saved); save(saved); }} />
     </Panel>
   );
 }

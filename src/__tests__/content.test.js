@@ -43,8 +43,10 @@ describe("content data", () => {
     expect(existsSync(publicFile(project.src))).toBe(true);
   });
 
-  it("projects declare a known domain and clean https links", () => {
+  it("projects declare a known domain, a technology list and clean https links", () => {
     for (const project of data.portfolio) {
+      expect(Array.isArray(project.stack)).toBe(true);
+      expect(project.stack.length).toBeGreaterThan(0);
       expect(["dev", "data"]).toContain(project.domain);
       for (const url of [project.repo, project.site].filter(Boolean)) {
         expect(url).toMatch(/^https:\/\/\S+$/);

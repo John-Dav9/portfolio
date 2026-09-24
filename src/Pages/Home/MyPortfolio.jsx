@@ -40,6 +40,15 @@ function ProjectCard({ project, lang, highlighted }) {
         <p className="line-clamp-3 text-sm leading-relaxed text-slate-400" title={localize(project.description, lang)}>
           {localize(project.description, lang)}
         </p>
+        {project.stack?.length > 0 && (
+          <ul className="flex flex-wrap gap-1.5 pt-1" aria-label={t("portfolio.stack")}>
+            {project.stack.map((tech) => (
+              <li key={tech} className="rounded-md border border-line bg-ink/60 px-2 py-0.5 font-mono text-[11px] text-slate-300">
+                {tech}
+              </li>
+            ))}
+          </ul>
+        )}
         <div className="mt-auto flex flex-wrap gap-4 pt-2 text-sm font-semibold">
           {project.repo && (
             <a
@@ -89,7 +98,8 @@ export default function MyPortfolio() {
         </a>
       </SectionHeading>
       <m.div
-        className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4"
+        // 4 per row, or 3 when a lone card would be left on the last row (5, 9… projects).
+        className={`grid gap-5 sm:grid-cols-2 ${projects.length % 4 === 1 ? "lg:grid-cols-3" : "xl:grid-cols-4"}`}
         variants={revealGroup}
         initial="hidden"
         whileInView="visible"

@@ -73,7 +73,8 @@
       "site": "Site en ligne",
       "githubLabel": "Code source de {{title}} sur GitHub",
       "siteLabel": "Site en ligne de {{title}}"
-    }
+    },
+    "stack": "Technologies utilisées"
   },
   "contact": {
     "title": "Me Contacter",

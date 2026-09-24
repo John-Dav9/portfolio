@@ -27,6 +27,7 @@ export const project = z.object({
   description: bilingual(1500),
   repo: link,
   site: link,
+  stack: z.array(text(30).min(1)).max(12).optional().default([]),
 });
 
 export const site = z.object({
