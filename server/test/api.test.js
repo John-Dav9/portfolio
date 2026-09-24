@@ -66,7 +66,9 @@ describe("public API", () => {
     const { status, body } = await request("GET", "/api/content");
     assert.equal(status, 200);
     assert.equal(body.skills.length, 8);
-    assert.equal(body.projects.length, 4);
+    const seed = JSON.parse(fs.readFileSync(path.join(process.env.SEED_DIR, "data/index.json"), "utf8"));
+    assert.equal(body.projects.length, seed.portfolio.length);
+    assert.ok(body.projects.every((p) => Array.isArray(p.stack)));
     assert.equal(body.testimonials.length, 4);
     assert.ok(body.texts.fr["hero.pitch.dev"]);
     assert.equal(body.site.emailjs, undefined);
@@ -120,6 +122,16 @@ describe("admin API", () => {
     assert.equal((await request("PUT", "/api/admin/content/site", { auth: true, body: site })).status, 200);
     const { body } = await request("GET", "/api/content");
     assert.equal(body.site.socialLinks.twitter, "https://x.com/example");
+  });
+
+  it("stores project technologies and rejects oversized ones", async () => {
+    const { body: all } = await request("GET", "/api/admin/content", { auth: true });
+    const projects = all.projects.map((p, i) => (i === 0 ? { ...p, stack: ["React", "Node.js"] } : p));
+    assert.equal((await request("PUT", "/api/admin/content/projects", { auth: true, body: projects })).status, 200);
+    const { body } = await request("GET", "/api/content");
+    assert.deepEqual(body.projects[0].stack, ["React", "Node.js"]);
+    const tooMany = projects.map((p, i) => (i === 0 ? { ...p, stack: Array.from({ length: 13 }, (_, n) => `T${n}`) } : p));
+    assert.equal((await request("PUT", "/api/admin/content/projects", { auth: true, body: tooMany })).status, 400);
   });
 
   it("accepts PDF CVs, rejects disguised files and serves uploads", async () => {

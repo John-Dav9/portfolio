@@ -61,13 +61,13 @@
       "focus": "dev",
       "tag": "$ deploy",
       "title": {
-        "fr": "Déploiement & DevOps",
-        "en": "Deployment & DevOps"
+        "fr": "Déploiement, serveurs & DevOps",
+        "en": "Deployment, servers & DevOps"
       },
-      "tools": "Docker · nginx · Heroku",
+      "tools": "VPS · DNS · Docker · nginx · CI/CD",
       "description": {
-        "fr": "Déploiement d'applications sur Heroku et GoDaddy, gestion de domaines (Namecheap), configuration serveur et mise en production d'applications web fullstack en autonomie.",
-        "en": "Deploying applications on Heroku and GoDaddy, domain management (Namecheap), server configuration and independent production releases of full stack web applications."
+        "fr": "Mise en production de projets web de bout en bout, en autonomie : achat et gestion de noms de domaine, configuration DNS, installation et configuration de serveurs VPS Linux (Docker, nginx, reverse proxy, certificats HTTPS Let's Encrypt), puis déploiement automatique avec GitHub Actions. Expérience également sur Heroku et GoDaddy.",
+        "en": "End-to-end production deployment of web projects, independently: buying and managing domain names, DNS configuration, setting up and configuring Linux VPS servers (Docker, nginx, reverse proxy, Let's Encrypt HTTPS certificates), then automated deployment with GitHub Actions. Also experienced with Heroku and GoDaddy."
       }
     },
     {
@@ -115,19 +115,45 @@
   ],
   "portfolio": [
     {
-      "id": "portfolio",
+      "id": "cmciea",
       "domain": "dev",
-      "src": "/img/project-portfolio.webp",
+      "src": "/img/project-cmciea.webp",
       "title": {
-        "fr": "Mon Portfolio",
-        "en": "My Portfolio"
+        "fr": "CMCIEA-France",
+        "en": "CMCIEA-France"
       },
       "description": {
-        "fr": "Un portfolio bilingue conçu en React pour présenter mes projets, mes compétences et mon parcours, avec une interface moderne, responsive et orientée expérience utilisateur. Déployé avec Docker et nginx.",
-        "en": "A bilingual React portfolio showcasing my projects, skills and background, with a modern, responsive, user-focused interface. Deployed with Docker and nginx."
+        "fr": "Site institutionnel moderne et responsive pour la Communauté Missionnaire Chrétienne Internationale & Églises Associées en France. Développé avec Angular et Bootstrap ; hébergement et nom de domaine gérés via Squarespace.",
+        "en": "Modern, responsive institutional website for the International Christian Missionary Community & Associated Churches in France. Built with Angular and Bootstrap; hosting and domain managed through Squarespace."
       },
-      "repo": "https://github.com/John-Dav9/portfolio",
-      "site": "https://john-d.dev"
+      "repo": "https://github.com/John-Dav9/cmcieafrance-cdd",
+      "site": "https://cmciea-france.com/",
+      "stack": [
+        "Angular",
+        "TypeScript",
+        "SCSS",
+        "Docker"
+      ]
+    },
+    {
+      "id": "portfolio-client",
+      "domain": "dev",
+      "src": "/img/project-client-portfolio.webp",
+      "title": {
+        "fr": "Portfolio Client",
+        "en": "Client Portfolio"
+      },
+      "description": {
+        "fr": "Portfolio bilingue réalisé en freelance pour Carnelle Nguepi, journaliste et communicante camerounaise : publications, formats radio et TV, présence scénique et espace d’administration. Développé avec Angular et TypeScript.",
+        "en": "Bilingual portfolio built as a freelancer for Carnelle Nguepi, a Cameroonian journalist and communicator: publications, radio and TV formats, stage presence and an admin area. Built with Angular and TypeScript."
+      },
+      "repo": "https://github.com/John-Dav9/comm-portfolio",
+      "site": "https://portfolio-perso-31ee2.web.app",
+      "stack": [
+        "Angular",
+        "TypeScript",
+        "SCSS"
+      ]
     },
     {
       "id": "luxedrive",
@@ -142,22 +168,15 @@
         "en": "Full stack luxury car rental platform inspired by Airbnb. Secure authentication, admin area and a dynamic dashboard with sales visualization. Built independently with Ruby on Rails, Bootstrap and Git."
       },
       "repo": "https://github.com/John-Dav9/LuxeDrive",
-      "site": "https://luxedrive.john-d.dev"
-    },
-    {
-      "id": "cmciea",
-      "domain": "dev",
-      "src": "/img/project-cmciea.webp",
-      "title": {
-        "fr": "CMCIEA-France",
-        "en": "CMCIEA-France"
-      },
-      "description": {
-        "fr": "Site institutionnel moderne et responsive pour la Communauté Missionnaire Chrétienne Internationale & Églises Associées en France. Développé avec Angular et Bootstrap ; hébergement et nom de domaine gérés via Squarespace.",
-        "en": "Modern, responsive institutional website for the International Christian Missionary Community & Associated Churches in France. Built with Angular and Bootstrap; hosting and domain managed through Squarespace."
-      },
-      "repo": "https://github.com/John-Dav9/cmcieafrance-cdd",
-      "site": "https://cmciea-france.com/"
+      "site": "https://luxedrive.john-d.dev",
+      "stack": [
+        "Ruby on Rails",
+        "PostgreSQL",
+        "Bootstrap",
+        "Devise",
+        "Stimulus",
+        "Docker"
+      ]
     },
     {
       "id": "bmw",
@@ -168,11 +187,42 @@
         "en": "BMW Analysis - Data Warehouse"
       },
       "description": {
-        "fr": "Conception d'un Data Warehouse structuré pour analyser les ventes BMW, analyse exploratoire avec Python et dashboards Power BI interactifs avec recommandations stratégiques orientées client. Résultats présentés sur un site web (Angular en frontend, Next.js en backend) avec authentification JWT.",
-        "en": "Designed a structured Data Warehouse to analyze BMW sales, exploratory analysis with Python and interactive Power BI dashboards with customer-focused strategic recommendations. Results are presented on a website (Angular frontend, Next.js backend) with JWT authentication."
+        "fr": "Conception d'un Data Warehouse structuré pour analyser les ventes BMW, analyse exploratoire avec Python et dashboards Power BI interactifs avec recommandations stratégiques orientées client. Résultats présentés sur un site web (Angular en frontend, NestJS en backend) avec authentification JWT.",
+        "en": "Designed a structured Data Warehouse to analyze BMW sales, exploratory analysis with Python and interactive Power BI dashboards with customer-focused strategic recommendations. Results are presented on a website (Angular frontend, NestJS backend) with JWT authentication."
       },
       "repo": "https://github.com/John-Dav9/bmw-sales-analysis",
-      "site": "https://bmw.john-d.dev"
+      "site": "https://bmw.john-d.dev",
+      "stack": [
+        "Python",
+        "pandas",
+        "Power BI",
+        "PostgreSQL",
+        "NestJS",
+        "Angular"
+      ]
+    },
+    {
+      "id": "portfolio",
+      "domain": "dev",
+      "src": "/img/project-portfolio.webp",
+      "title": {
+        "fr": "Mon Portfolio",
+        "en": "My Portfolio"
+      },
+      "description": {
+        "fr": "Un portfolio bilingue conçu en React pour présenter mes projets, mes compétences et mon parcours, avec une interface moderne, responsive et orientée expérience utilisateur. Déployé avec Docker et nginx.",
+        "en": "A bilingual React portfolio showcasing my projects, skills and background, with a modern, responsive, user-focused interface. Deployed with Docker and nginx."
+      },
+      "repo": "https://github.com/John-Dav9/portfolio",
+      "site": "",
+      "stack": [
+        "React",
+        "Vite",
+        "Tailwind CSS",
+        "Node.js",
+        "SQLite",
+        "Docker"
+      ]
     }
   ],
   "testimonials": [

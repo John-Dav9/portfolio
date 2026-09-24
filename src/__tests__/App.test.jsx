@@ -63,6 +63,14 @@ describe("home page", () => {
     expect(screen.getByRole("link", { name: "Voir les projets data →" })).toBeInTheDocument();
   });
 
+  it("lists each project's technologies on its card", () => {
+    renderAt("/");
+    const card = screen.getByRole("heading", { level: 3, name: "LuxeDrive" }).closest("article");
+    const stack = within(card).getByRole("list", { name: "Technologies utilisées" });
+    expect(within(stack).getByText("Ruby on Rails")).toBeInTheDocument();
+    expect(within(stack).getByText("PostgreSQL")).toBeInTheDocument();
+  });
+
   it("opens the skill dialog with the keyboard and closes it with Escape", async () => {
     const user = userEvent.setup();
     renderAt("/");
