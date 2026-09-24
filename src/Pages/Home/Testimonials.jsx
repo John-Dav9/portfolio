@@ -22,7 +22,7 @@ export default function Testimonial() {
   return (
     <section id="testimonial" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
       <SectionHeading index="04" title={t("testimonials.title")} />
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((item, index) => (
             <m.figure
               key={item.id}
@@ -31,7 +31,7 @@ export default function Testimonial() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: (index % INITIAL_COUNT) * 0.08 }}
               onPointerMove={trackSpotlight}
-              className="spotlight flex flex-col gap-5 rounded-3xl p-7"
+              className="spotlight flex flex-col gap-4 rounded-3xl p-6 sm:gap-5 sm:p-7"
             >
               <div className="flex gap-1 text-accent" role="img" aria-label={t("testimonials.rating", { count: item.rating })}>
                 {Array.from({ length: item.rating }, (_, star) => (

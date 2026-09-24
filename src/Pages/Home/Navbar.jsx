@@ -100,12 +100,13 @@ function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <FocusSwitch />
-          <LanguageToggle />
-        </div>
+        <div className="ml-auto flex items-center gap-3 lg:ml-0">
+          <div className="hidden items-center gap-3 md:flex">
+            <FocusSwitch />
+            <LanguageToggle />
+          </div>
 
-        <button
+          <button
           type="button"
           className="flex h-11 w-11 cursor-pointer flex-col items-center justify-center gap-1.5 rounded-lg border border-line lg:hidden"
           onClick={() => setMenuOpen((open) => !open)}
@@ -116,7 +117,8 @@ function Navbar() {
           <span className={`h-0.5 w-5 bg-slate-100 transition-transform ${menuOpen ? "translate-y-2 rotate-45" : ""}`} />
           <span className={`h-0.5 w-5 bg-slate-100 transition-opacity ${menuOpen ? "opacity-0" : ""}`} />
           <span className={`h-0.5 w-5 bg-slate-100 transition-transform ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
-        </button>
+          </button>
+        </div>
       </nav>
 
       <AnimatePresence>

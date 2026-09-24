@@ -27,17 +27,17 @@ export default function AboutMe() {
           <RichText as="p" text={t("about.description2")} />
         </Reveal>
         <div className="flex flex-col gap-4 lg:col-span-5">
-          <Reveal delay={0.1} className="spotlight overflow-hidden rounded-3xl" onPointerMove={trackSpotlight}>
+          <Reveal delay={0.1} className="spotlight mx-auto w-full max-w-sm overflow-hidden rounded-3xl lg:max-w-none" onPointerMove={trackSpotlight}>
             <img
               src={site.about.imageUrl}
               alt={t("about.imageAlt")}
               width="800"
               height="1067"
               loading="lazy"
-              className="h-72 w-full object-cover object-top"
+              className="aspect-[4/5] w-full object-cover object-[center_20%] lg:aspect-[4/3.4]"
             />
           </Reveal>
-          <Reveal delay={0.2}>
+          <Reveal delay={0.2} className="mx-auto w-full max-w-sm lg:max-w-none">
             <h3 className="mb-3 font-mono text-sm text-slate-400">{t("about.education")}</h3>
             <ol className="relative flex flex-col gap-3 border-l border-line pl-6">
               {SCHOOLS.map((school) => (

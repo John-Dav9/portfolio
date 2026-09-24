@@ -7,6 +7,10 @@ describe("sanitizeRichText", () => {
     expect(html).toBe('Hi <strong>there</strong> <a href="https://example.com" target="_blank" rel="noreferrer">link</a>');
   });
 
+  it("keeps highlighted words and strips their attributes", () => {
+    expect(sanitizeRichText('<mark style="color:red" onclick="x()">clé</mark>')).toBe("<mark>clé</mark>");
+  });
+
   it("does not force a new tab on internal links", () => {
     expect(sanitizeRichText('<a href="/privacy-policy">p</a>')).toBe('<a href="/privacy-policy">p</a>');
   });

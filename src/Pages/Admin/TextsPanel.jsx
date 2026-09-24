@@ -23,7 +23,7 @@ export default function TextsPanel({ content }) {
   return (
     <Panel
       title="Textes"
-      description="Textes principaux du site, en français et en anglais. Pour créer un lien : sélectionnez les mots avec la souris, cliquez sur « Lien », puis collez l'adresse de la page."
+      description="Textes principaux du site, en français et en anglais. Sélectionnez des mots avec la souris pour les mettre en valeur (couleur du site) ou en faire un lien (cliquez sur « Lien », puis collez l'adresse de la page)."
     >
       {Object.entries(LABELS).map(([key, [label, kind]]) => (
         <Card key={key} className="grid gap-4 md:grid-cols-2">

@@ -11,14 +11,16 @@ export function normalizeUrl(input) {
   return null;
 }
 
-function closestLink(node, root) {
+function closestTag(node, root, tagName) {
   let current = node?.nodeType === Node.TEXT_NODE ? node.parentNode : node;
   while (current && current !== root) {
-    if (current.tagName === "A") return current;
+    if (current.tagName === tagName) return current;
     current = current.parentNode;
   }
   return null;
 }
+const closestLink = (node, root) => closestTag(node, root, "A");
+const closestMark = (node, root) => closestTag(node, root, "MARK");
 
 function ToolbarButton({ label, onClick, children, active = false, disabled = false }) {
   return (
@@ -49,6 +51,7 @@ export default function RichTextEditor({ label, value, onChange, hint }) {
   const [linkForm, setLinkForm] = useState(null); // { url, error } while the link box is open
   const [notice, setNotice] = useState("");
   const [inLink, setInLink] = useState(false);
+  const [inMark, setInMark] = useState(false);
 
   // Set the content once; afterwards the DOM is the source of truth (keeps the cursor in place).
   useEffect(() => {
@@ -62,6 +65,7 @@ export default function RichTextEditor({ label, value, onChange, hint }) {
       const root = editorRef.current;
       if (!root || !selection?.anchorNode || !root.contains(selection.anchorNode)) return;
       setInLink(Boolean(closestLink(selection.anchorNode, root)));
+      setInMark(Boolean(closestMark(selection.anchorNode, root)));
     };
     document.addEventListener("selectionchange", onSelectionChange);
     return () => document.removeEventListener("selectionchange", onSelectionChange);
@@ -72,6 +76,39 @@ export default function RichTextEditor({ label, value, onChange, hint }) {
   const format = (command) => {
     editorRef.current.focus();
     document.execCommand(command);
+    emit();
+  };
+
+  // Toggles the accent highlight: removes it inside a highlight, otherwise wraps the selection.
+  const toggleHighlight = () => {
+    const root = editorRef.current;
+    const selection = document.getSelection();
+    if (!selection?.rangeCount || !root.contains(selection.anchorNode)) {
+      setNotice("Cliquez d'abord dans le texte, puis sélectionnez les mots à mettre en valeur.");
+      return;
+    }
+    const mark = closestMark(selection.anchorNode, root);
+    if (mark) {
+      mark.replaceWith(...mark.childNodes);
+      setInMark(false);
+    } else {
+      if (selection.isCollapsed) {
+        setNotice("Sélectionnez d'abord le ou les mots à mettre en valeur (en les surlignant avec la souris).");
+        return;
+      }
+      const range = selection.getRangeAt(0);
+      const wrapper = document.createElement("mark");
+      wrapper.appendChild(range.extractContents());
+      // Avoid nested highlights when the selection already contained some.
+      wrapper.querySelectorAll("mark").forEach((inner) => inner.replaceWith(...inner.childNodes));
+      range.insertNode(wrapper);
+      selection.removeAllRanges();
+      const after = document.createRange();
+      after.selectNodeContents(wrapper);
+      selection.addRange(after);
+      setInMark(true);
+    }
+    setNotice("");
     emit();
   };
 
@@ -151,16 +188,23 @@ export default function RichTextEditor({ label, value, onChange, hint }) {
           <ToolbarButton label="Italique" onClick={() => format("italic")}>
             <em className="font-serif">I</em>
           </ToolbarButton>
+          <ToolbarButton label={inMark ? "Retirer la mise en valeur" : "Mettre en valeur"} onClick={toggleHighlight} active={inMark}>
+            <span className="h-3 w-3 rounded-full bg-accent" aria-hidden="true" />
+            <span className="sm:hidden">{inMark ? "Retirer" : "Valeur"}</span>
+            <span className="hidden sm:inline">{inMark ? "Retirer la mise en valeur" : "Mettre en valeur"}</span>
+          </ToolbarButton>
           <ToolbarButton label={inLink ? "Modifier le lien" : "Ajouter un lien"} onClick={openLinkForm} active={inLink}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
               <path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.5 1.5" />
               <path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.5-1.5" />
             </svg>
-            <span>{inLink ? "Modifier le lien" : "Lien"}</span>
+            <span className="sm:hidden">Lien</span>
+            <span className="hidden sm:inline">{inLink ? "Modifier le lien" : "Lien"}</span>
           </ToolbarButton>
           {inLink && (
             <ToolbarButton label="Retirer le lien" onClick={removeLink}>
-              Retirer le lien
+              <span className="sm:hidden">Retirer</span>
+              <span className="hidden sm:inline">Retirer le lien</span>
             </ToolbarButton>
           )}
         </div>
