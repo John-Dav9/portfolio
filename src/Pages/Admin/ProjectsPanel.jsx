@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { BilingualField, Card, Field, ImageField, ListItemActions, moveItem, Panel, SaveBar, SelectField, useContentSaver } from "./ui";
+import { BilingualField, Card, Field, ImageField, ListItemActions, moveItem, Panel, SaveBar, SelectField, useContentSaver, withIds } from "./ui";
 
-const EMPTY_PROJECT = { id: "", domain: "dev", src: "", title: { fr: "", en: "" }, description: { fr: "", en: "" }, repo: "", site: "" };
+const EMPTY_PROJECT = { id: "", isNew: true, domain: "dev", src: "", title: { fr: "", en: "" }, description: { fr: "", en: "" }, repo: "", site: "" };
 
 export default function ProjectsPanel({ content }) {
   const [projects, setProjects] = useState(content.projects);
@@ -15,7 +15,7 @@ export default function ProjectsPanel({ content }) {
         <button
           type="button"
           className="btn-ghost cursor-pointer"
-          onClick={() => setProjects([...projects, { ...EMPTY_PROJECT, id: `projet-${projects.length + 1}` }])}
+          onClick={() => setProjects([...projects, { ...EMPTY_PROJECT }])}
         >
           + Ajouter
         </button>
@@ -35,7 +35,6 @@ export default function ProjectsPanel({ content }) {
             />
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
-            <Field label="Identifiant" value={project.id} onChange={(id) => update(index, { id })} hint="minuscules, chiffres, tirets" />
             <SelectField
               label="Domaine"
               value={project.domain}
@@ -48,14 +47,14 @@ export default function ProjectsPanel({ content }) {
           </div>
           <BilingualField label="Titre" value={project.title} onChange={(title) => update(index, { title })} />
           <BilingualField label="Description" multiline value={project.description} onChange={(description) => update(index, { description })} />
-          <ImageField label="Image" value={project.src} onChange={(src) => update(index, { src })} />
+          <ImageField label="Image (capture d'écran du projet)" value={project.src} onChange={(src) => update(index, { src })} />
           <div className="grid gap-3 sm:grid-cols-2">
-            <Field label="Code source (GitHub)" placeholder="https://github.com/…" value={project.repo} onChange={(repo) => update(index, { repo })} />
-            <Field label="Site en ligne" placeholder="https://…" value={project.site} onChange={(site) => update(index, { site })} />
+            <Field label="Lien vers le code (GitHub), facultatif" placeholder="https://github.com/…" value={project.repo} onChange={(repo) => update(index, { repo })} />
+            <Field label="Lien vers le site en ligne, facultatif" placeholder="https://…" value={project.site} onChange={(site) => update(index, { site })} />
           </div>
         </Card>
       ))}
-      <SaveBar status={status} onSave={() => save(projects)} />
+      <SaveBar status={status} onSave={() => { const saved = withIds(projects); setProjects(saved); save(saved); }} />
     </Panel>
   );
 }

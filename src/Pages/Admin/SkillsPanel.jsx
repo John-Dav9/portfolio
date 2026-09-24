@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { BilingualField, Card, Field, ListItemActions, moveItem, Panel, SaveBar, SelectField, useContentSaver } from "./ui";
+import { BilingualField, Card, Field, ListItemActions, moveItem, Panel, SaveBar, SelectField, useContentSaver, withIds } from "./ui";
 
-const EMPTY_SKILL = { id: "", focus: "dev", tag: "", title: { fr: "", en: "" }, tools: "", description: { fr: "", en: "" } };
+const EMPTY_SKILL = { id: "", isNew: true, focus: "dev", tag: "", title: { fr: "", en: "" }, tools: "", description: { fr: "", en: "" } };
 
 export default function SkillsPanel({ content }) {
   const [skills, setSkills] = useState(content.skills);
@@ -13,7 +13,7 @@ export default function SkillsPanel({ content }) {
       title="Compétences"
       description="L'ordre compte : sur grand écran, les cartes 1, 2, 7 et 8 sont larges."
       actions={
-        <button type="button" className="btn-ghost cursor-pointer" onClick={() => setSkills([...skills, { ...EMPTY_SKILL, id: `skill-${skills.length + 1}` }])}>
+        <button type="button" className="btn-ghost cursor-pointer" onClick={() => setSkills([...skills, { ...EMPTY_SKILL }])}>
           + Ajouter
         </button>
       }
@@ -26,26 +26,25 @@ export default function SkillsPanel({ content }) {
             </h2>
             <ListItemActions index={index} count={skills.length} onMove={(a, b) => setSkills(moveItem(skills, a, b))} onRemove={(i) => setSkills(skills.filter((_, j) => j !== i))} />
           </div>
-          <div className="grid gap-3 sm:grid-cols-3">
-            <Field label="Identifiant" value={skill.id} onChange={(id) => update(index, { id })} hint="minuscules, chiffres, tirets" />
+          <div className="grid gap-3 sm:grid-cols-2">
             <SelectField
-              label="Profil"
+              label="Mise en avant avec le bouton"
               value={skill.focus}
               onChange={(focus) => update(index, { focus })}
               options={[
                 ["dev", "Dev"],
                 ["data", "Data"],
-                ["both", "Les deux"],
+                ["both", "Dev et Data"],
               ]}
             />
-            <Field label="Étiquette (style code)" value={skill.tag} onChange={(tag) => update(index, { tag })} />
+            <Field label="Petit texte au-dessus du titre (facultatif)" placeholder="ex. <frontend />" value={skill.tag} onChange={(tag) => update(index, { tag })} />
           </div>
           <BilingualField label="Titre" value={skill.title} onChange={(title) => update(index, { title })} />
-          <Field label="Outils (affichés sur la carte)" value={skill.tools} onChange={(tools) => update(index, { tools })} />
-          <BilingualField label="Description (fenêtre de détail)" multiline value={skill.description} onChange={(description) => update(index, { description })} />
+          <Field label="Outils affichés sur la carte" placeholder="ex. React · Angular · TypeScript" value={skill.tools} onChange={(tools) => update(index, { tools })} />
+          <BilingualField label="Description (affichée quand on clique sur la carte)" multiline value={skill.description} onChange={(description) => update(index, { description })} />
         </Card>
       ))}
-      <SaveBar status={status} onSave={() => save(skills)} />
+      <SaveBar status={status} onSave={() => { const saved = withIds(skills); setSkills(saved); save(saved); }} />
     </Panel>
   );
 }

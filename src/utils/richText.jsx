@@ -1,4 +1,4 @@
-const ALLOWED_TAGS = new Set(["A", "STRONG", "B", "EM", "I", "BR"]);
+const ALLOWED_TAGS = new Set(["A", "STRONG", "B", "EM", "I", "BR", "MARK"]);
 const SAFE_HREF = /^(https?:\/\/|mailto:|\/)/i;
 
 export function sanitizeRichText(html) {

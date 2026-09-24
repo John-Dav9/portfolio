@@ -75,7 +75,7 @@ export default function MySkills() {
     <section id="MySkills" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
       <SectionHeading index="01" title={t("skills.title")} />
       <m.ul
-        className="grid gap-4 sm:grid-cols-2 lg:auto-rows-[170px] lg:grid-cols-4"
+        className="grid gap-3 min-[480px]:grid-cols-2 sm:gap-4 lg:auto-rows-[170px] lg:grid-cols-4"
         variants={revealGroup}
         initial="hidden"
         whileInView="visible"
@@ -90,12 +90,12 @@ export default function MySkills() {
                 onClick={() => setSelected(skill)}
                 onPointerMove={trackSpotlight}
                 aria-haspopup="dialog"
-                className={`spotlight group flex h-full w-full cursor-pointer flex-col gap-3 rounded-3xl p-6 text-left ${
+                className={`spotlight group flex h-full w-full cursor-pointer flex-col gap-2 rounded-2xl p-5 text-left sm:gap-3 sm:rounded-3xl sm:p-6 ${
                   highlighted ? "" : "opacity-45 hover:opacity-100"
                 }`}
               >
                 <span className="font-mono text-sm text-accent transition-colors duration-500">{skill.tag}</span>
-                <span className="text-xl font-bold text-white">{localize(skill.title, lang)}</span>
+                <span className="text-lg font-bold text-white sm:text-xl">{localize(skill.title, lang)}</span>
                 <span className="text-sm leading-relaxed text-slate-400">{localize(skill.tools, lang)}</span>
                 <span className="mt-auto text-sm text-slate-500 transition-colors group-hover:text-accent">
                   {t("skills.learnMore")} →

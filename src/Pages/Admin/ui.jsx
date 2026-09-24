@@ -167,3 +167,25 @@ export function moveItem(list, from, to) {
   next.splice(to, 0, item);
   return next;
 }
+
+const slugify = (text) =>
+  text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 36) || "element";
+
+// Items keep their id once saved; new items get one derived from their French title.
+export function withIds(list) {
+  const used = new Set();
+  return list.map((item) => {
+    let id = /^[a-z0-9-]{1,40}$/.test(item.id ?? "") && !used.has(item.id) && !item.isNew ? item.id : slugify(item.title?.fr || "");
+    let candidate = id;
+    for (let n = 2; used.has(candidate); n += 1) candidate = `${id}-${n}`;
+    used.add(candidate);
+    const { isNew: _isNew, ...rest } = item;
+    return { ...rest, id: candidate };
+  });
+}
