@@ -117,29 +117,29 @@ export default function HeroSection() {
       </m.div>
 
       <m.div
-        className="grid auto-rows-[150px] grid-cols-2 gap-4 lg:col-span-5 lg:grid-rows-[minmax(150px,1fr)_minmax(150px,1fr)_auto] lg:auto-rows-auto"
+        className="mx-auto grid w-full max-w-xl grid-cols-2 content-center gap-4 lg:col-span-5 lg:max-w-none"
         variants={revealGroup}
         initial="hidden"
         animate="visible"
         transition={{ delayChildren: 0.25 }}
       >
-        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight row-span-2 overflow-hidden rounded-3xl p-0">
+        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight col-span-2 aspect-[5/4] overflow-hidden rounded-3xl p-0">
           <img
             src={site.hero.imageUrl}
             alt={t("about.imageAlt")}
             width="800"
             height="923"
             fetchPriority="high"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover object-top"
           />
         </m.div>
-        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight flex flex-col justify-between rounded-3xl p-5 lg:justify-center lg:gap-4 lg:p-6">
+        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight flex min-h-36 flex-col justify-between gap-3 rounded-3xl p-5">
           <span className="text-sm text-slate-400">{t("hero.stats.projects")}</span>
-          <CountUp value={projects.length} className="text-5xl font-extrabold text-accent transition-colors duration-500 lg:order-first lg:text-7xl" />
+          <CountUp value={projects.length} className="text-5xl font-extrabold text-accent transition-colors duration-500" />
         </m.div>
-        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight flex flex-col justify-between rounded-3xl p-5 lg:justify-center lg:gap-4 lg:p-6">
+        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight flex min-h-36 flex-col justify-between gap-3 rounded-3xl p-5">
           <span className="text-sm text-slate-400">{t("hero.stats.skills")}</span>
-          <CountUp value={skills.length} className="text-5xl font-extrabold text-accent transition-colors duration-500 lg:order-first lg:text-7xl" />
+          <CountUp value={skills.length} className="text-5xl font-extrabold text-accent transition-colors duration-500" />
         </m.div>
         <m.div
           variants={revealItem}
