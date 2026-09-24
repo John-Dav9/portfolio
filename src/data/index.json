@@ -127,7 +127,7 @@
         "en": "A bilingual React portfolio showcasing my projects, skills and background, with a modern, responsive, user-focused interface. Deployed with Docker and nginx."
       },
       "repo": "https://github.com/John-Dav9/portfolio",
-      "site": ""
+      "site": "https://john-d.dev"
     },
     {
       "id": "luxedrive",
@@ -142,7 +142,7 @@
         "en": "Full stack luxury car rental platform inspired by Airbnb. Secure authentication, admin area and a dynamic dashboard with sales visualization. Built independently with Ruby on Rails, Bootstrap and Git."
       },
       "repo": "https://github.com/John-Dav9/LuxeDrive",
-      "site": "https://luxedrive-rqdo.onrender.com"
+      "site": "https://luxedrive.john-d.dev"
     },
     {
       "id": "cmciea",
@@ -172,7 +172,7 @@
         "en": "Designed a structured Data Warehouse to analyze BMW sales, exploratory analysis with Python and interactive Power BI dashboards with customer-focused strategic recommendations. Results are presented on a website (Angular frontend, Next.js backend) with JWT authentication."
       },
       "repo": "https://github.com/John-Dav9/bmw-sales-analysis",
-      "site": "https://bmw-sales-analysis-b36c6.web.app"
+      "site": "https://bmw.john-d.dev"
     }
   ],
   "testimonials": [
