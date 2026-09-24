@@ -20,7 +20,7 @@ export default function Testimonial() {
   const visible = showAll ? testimonials : testimonials.slice(0, INITIAL_COUNT);
 
   return (
-    <section id="testimonial" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
+    <section id="testimonial" className="mx-auto max-w-7xl px-5 py-12 sm:py-14 md:px-8 lg:py-16">
       <SectionHeading index="04" title={t("testimonials.title")} />
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((item, index) => (
