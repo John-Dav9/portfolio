@@ -5,7 +5,7 @@ import { useContent } from "../../components/ContentContext";
 import { RichText } from "../../utils/richText";
 import { useFocus } from "../../components/FocusContext";
 import FocusSwitch from "../../components/FocusSwitch";
-import { CountUp, Typewriter, revealGroup, revealItem, trackSpotlight } from "../../components/motion";
+import { CountUp, Typewriter, revealGroup, revealItem } from "../../components/motion";
 
 const CV_PROFILES = ["dev", "data"];
 const CV_LANGUAGES = ["fr", "en"];
@@ -76,10 +76,6 @@ export default function HeroSection() {
   const { t } = useTranslation();
   const { focus } = useFocus();
   const { site, projects, skills } = useContent();
-  const domainCounts = {
-    dev: projects.filter((p) => p.domain === "dev").length,
-    data: projects.filter((p) => p.domain === "data").length,
-  };
 
   return (
     <section id="heroSection" className="mx-auto grid max-w-7xl gap-10 px-5 pt-10 pb-10 md:px-8 lg:grid-cols-12 lg:gap-12 lg:pt-16 lg:pb-12">
@@ -116,54 +112,50 @@ export default function HeroSection() {
         </m.div>
       </m.div>
 
+      {/* Round portrait with a slowly turning accent ring and two floating stat badges. */}
       <m.div
-        className="grid auto-rows-[150px] grid-cols-2 gap-4 lg:col-span-5 lg:grid-rows-[minmax(150px,1fr)_minmax(150px,1fr)_auto] lg:auto-rows-auto"
-        variants={revealGroup}
-        initial="hidden"
-        animate="visible"
-        transition={{ delayChildren: 0.25 }}
+        className="relative mx-auto flex w-full max-w-[19rem] items-center justify-center sm:max-w-sm lg:col-span-5 lg:max-w-md lg:self-center"
+        initial={{ opacity: 0, scale: 0.94 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: [0.2, 0.7, 0.2, 1] }}
       >
-        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight row-span-2 overflow-hidden rounded-3xl p-0">
+        <div className="relative aspect-square w-full">
+          <svg
+            className="absolute -inset-3 h-[calc(100%+1.5rem)] w-[calc(100%+1.5rem)] animate-[spin_40s_linear_infinite] text-accent transition-colors duration-500"
+            viewBox="0 0 100 100"
+            aria-hidden="true"
+          >
+            <circle cx="50" cy="50" r="49" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1.5 3" strokeLinecap="round" />
+          </svg>
+          <div className="absolute inset-0 rounded-full bg-accent/20 blur-3xl transition-colors duration-500" aria-hidden="true" />
           <img
             src={site.hero.imageUrl}
             alt={t("about.imageAlt")}
             width="800"
             height="923"
             fetchPriority="high"
-            className="h-full w-full object-cover"
+            className="relative h-full w-full rounded-full border border-line object-cover object-[center_15%] shadow-2xl"
           />
-        </m.div>
-        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight flex flex-col justify-between rounded-3xl p-5 lg:justify-center lg:gap-4 lg:p-6">
-          <span className="text-sm text-slate-400">{t("hero.stats.projects")}</span>
-          <CountUp value={projects.length} className="text-5xl font-extrabold text-accent transition-colors duration-500 lg:order-first lg:text-7xl" />
-        </m.div>
-        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight flex flex-col justify-between rounded-3xl p-5 lg:justify-center lg:gap-4 lg:p-6">
-          <span className="text-sm text-slate-400">{t("hero.stats.skills")}</span>
-          <CountUp value={skills.length} className="text-5xl font-extrabold text-accent transition-colors duration-500 lg:order-first lg:text-7xl" />
-        </m.div>
-        <m.div
-          variants={revealItem}
-          onPointerMove={trackSpotlight}
-          className="spotlight col-span-2 flex flex-col justify-center gap-2 rounded-3xl px-6 py-6 font-mono text-sm text-slate-300"
-        >
-          <p>
-            <span className="text-purple-400">const</span> focus = <span className="text-accent">&quot;{focus}&quot;</span>;
-          </p>
-          {["dev", "data"].map((domain) => (
-            <div key={domain} className="flex items-center gap-3">
-              <span className="w-10">{domain}</span>
-              <div className="h-2 flex-1 overflow-hidden rounded-full bg-line">
-                <m.div
-                  className={`h-full rounded-full ${domain === "dev" ? "bg-dev" : "bg-data"}`}
-                  initial={{ width: 0 }}
-                  animate={{ width: `${(domainCounts[domain] / Math.max(projects.length, 1)) * 100}%` }}
-                  transition={{ duration: 1.2, delay: 0.6, ease: [0.2, 0.7, 0.2, 1] }}
-                />
-              </div>
-              <span>{domainCounts[domain]}</span>
-            </div>
-          ))}
-        </m.div>
+
+          <div className="absolute -right-2 -bottom-3 flex flex-col gap-2 sm:-right-4 sm:gap-3 lg:-right-2 xl:-right-3 2xl:-right-8">
+            <m.div
+              className="flex items-center gap-2 rounded-2xl border border-line bg-panel/90 px-3 py-2 shadow-xl backdrop-blur sm:gap-3 sm:px-4 sm:py-3"
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <CountUp value={projects.length} className="text-2xl font-extrabold text-accent transition-colors duration-500 sm:text-3xl" />
+              <span className="max-w-24 text-xs leading-tight text-slate-300 sm:text-sm">{t("hero.stats.projects")}</span>
+            </m.div>
+            <m.div
+              className="flex items-center gap-2 rounded-2xl border border-line bg-panel/90 px-3 py-2 shadow-xl backdrop-blur sm:gap-3 sm:px-4 sm:py-3"
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+            >
+              <CountUp value={skills.length} className="text-2xl font-extrabold text-accent transition-colors duration-500 sm:text-3xl" />
+              <span className="max-w-24 text-xs leading-tight text-slate-300 sm:text-sm">{t("hero.stats.skills")}</span>
+            </m.div>
+          </div>
+        </div>
       </m.div>
     </section>
   );
