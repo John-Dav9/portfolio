@@ -72,7 +72,7 @@ export default function MySkills() {
   const close = useCallback(() => setSelected(null), []);
 
   return (
-    <section id="MySkills" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
+    <section id="MySkills" className="mx-auto max-w-7xl px-5 py-12 sm:py-14 md:px-8 lg:py-16">
       <SectionHeading index="01" title={t("skills.title")} />
       <m.ul
         className="grid gap-3 min-[480px]:grid-cols-2 sm:gap-4 lg:auto-rows-[170px] lg:grid-cols-4"

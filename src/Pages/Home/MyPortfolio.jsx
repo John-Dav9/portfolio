@@ -76,7 +76,7 @@ export default function MyPortfolio() {
   const { site, projects } = useContent();
 
   return (
-    <section id="MyPortfolio" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
+    <section id="MyPortfolio" className="mx-auto max-w-7xl px-5 py-12 sm:py-14 md:px-8 lg:py-16">
       <SectionHeading index="03" title={t("portfolio.title")}>
         <a
           href={site.githubUrl}

@@ -79,7 +79,7 @@ export default function ContactMe() {
   };
 
   return (
-    <section id="Contact" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
+    <section id="Contact" className="mx-auto max-w-7xl px-5 py-12 sm:py-14 md:px-8 lg:py-16">
       <SectionHeading index="05" title={t("contact.title")} />
       <div className="grid gap-10 lg:grid-cols-12">
         <Reveal className="flex flex-col gap-6 rounded-3xl border border-line bg-panel/50 p-6 sm:p-8 lg:col-span-4">

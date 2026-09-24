@@ -19,7 +19,7 @@ export default function AboutMe() {
   const { site } = useContent();
 
   return (
-    <section id="AboutMe" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
+    <section id="AboutMe" className="mx-auto max-w-7xl px-5 py-12 sm:py-14 md:px-8 lg:py-16">
       <SectionHeading index="02" title={t("about.title")} />
       <div className="grid gap-10 lg:grid-cols-12">
         <Reveal className="rich flex flex-col gap-5 text-lg leading-relaxed text-slate-300 lg:col-span-7">

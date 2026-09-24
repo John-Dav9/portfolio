@@ -82,7 +82,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="heroSection" className="mx-auto grid max-w-7xl gap-12 px-5 pt-12 pb-20 md:px-8 lg:grid-cols-12 lg:pt-20">
+    <section id="heroSection" className="mx-auto grid max-w-7xl gap-10 px-5 pt-10 pb-10 md:px-8 lg:grid-cols-12 lg:gap-12 lg:pt-16 lg:pb-12">
       <m.div className="flex flex-col gap-6 lg:col-span-7 lg:justify-center" variants={revealGroup} initial="hidden" animate="visible">
         <m.div variants={revealItem} className="flex items-center gap-2.5 self-start rounded-full border border-line bg-panel/80 px-3.5 py-2 text-sm text-slate-300">
           <span className="h-2 w-2 animate-pulse-ring rounded-full bg-data" />
@@ -117,7 +117,7 @@ export default function HeroSection() {
       </m.div>
 
       <m.div
-        className="grid auto-rows-[150px] grid-cols-2 gap-4 lg:col-span-5"
+        className="grid auto-rows-[150px] grid-cols-2 gap-4 lg:col-span-5 lg:grid-rows-[minmax(150px,1fr)_minmax(150px,1fr)_auto] lg:auto-rows-auto"
         variants={revealGroup}
         initial="hidden"
         animate="visible"
@@ -133,18 +133,18 @@ export default function HeroSection() {
             className="h-full w-full object-cover"
           />
         </m.div>
-        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight flex flex-col justify-between rounded-3xl p-5">
+        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight flex flex-col justify-between rounded-3xl p-5 lg:justify-center lg:gap-4 lg:p-6">
           <span className="text-sm text-slate-400">{t("hero.stats.projects")}</span>
-          <CountUp value={projects.length} className="text-5xl font-extrabold text-accent transition-colors duration-500" />
+          <CountUp value={projects.length} className="text-5xl font-extrabold text-accent transition-colors duration-500 lg:order-first lg:text-7xl" />
         </m.div>
-        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight flex flex-col justify-between rounded-3xl p-5">
+        <m.div variants={revealItem} onPointerMove={trackSpotlight} className="spotlight flex flex-col justify-between rounded-3xl p-5 lg:justify-center lg:gap-4 lg:p-6">
           <span className="text-sm text-slate-400">{t("hero.stats.skills")}</span>
-          <CountUp value={skills.length} className="text-5xl font-extrabold text-accent transition-colors duration-500" />
+          <CountUp value={skills.length} className="text-5xl font-extrabold text-accent transition-colors duration-500 lg:order-first lg:text-7xl" />
         </m.div>
         <m.div
           variants={revealItem}
           onPointerMove={trackSpotlight}
-          className="spotlight col-span-2 flex flex-col justify-center gap-2 rounded-3xl px-6 font-mono text-sm text-slate-300"
+          className="spotlight col-span-2 flex flex-col justify-center gap-2 rounded-3xl px-6 py-6 font-mono text-sm text-slate-300"
         >
           <p>
             <span className="text-purple-400">const</span> focus = <span className="text-accent">&quot;{focus}&quot;</span>;
