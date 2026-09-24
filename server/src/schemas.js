@@ -30,6 +30,16 @@ export const project = z.object({
   stack: z.array(text(30).min(1)).max(12).optional().default([]),
 });
 
+export const timelineStep = z.object({
+  id,
+  period: text(40).min(1),
+  title: bilingual(100),
+  detail: bilingual(300),
+  url: link,
+  kind: z.enum(["dev", "data", "other"]),
+  current: z.boolean().optional().default(false),
+});
+
 export const site = z.object({
   siteUrl: link,
   owner: z.object({ name: text(100), location: bilingual(100).optional() }).passthrough(),
@@ -53,6 +63,7 @@ export const contentSchemas = {
   site,
   skills: z.array(skill).max(40),
   projects: z.array(project).max(60),
+  timeline: z.array(timelineStep).max(30),
   texts,
   cv,
 };

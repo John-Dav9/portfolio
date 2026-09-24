@@ -98,6 +98,7 @@ export function createApp(db) {
       site: readContent("site"),
       skills: readContent("skills"),
       projects: readContent("projects"),
+      timeline: readContent("timeline"),
       texts: readContent("texts"),
       cv: cvUrls,
       testimonials,

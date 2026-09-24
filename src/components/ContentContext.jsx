@@ -10,6 +10,7 @@ export const BUNDLED_CONTENT = {
   site: bundledSite,
   skills: bundledData.skills,
   projects: bundledData.portfolio,
+  timeline: bundledData.timeline,
   testimonials: bundledData.testimonials,
   texts: null,
   cv: EMPTY_CV,
@@ -44,7 +45,7 @@ export function ContentProvider({ children }) {
       .then((remote) => {
         if (cancelled || !remote?.site) return;
         applyTextOverrides(remote.texts);
-        setContent({ ...BUNDLED_CONTENT, ...remote, cv: remote.cv ?? EMPTY_CV });
+        setContent({ ...BUNDLED_CONTENT, ...remote, cv: remote.cv ?? EMPTY_CV, timeline: remote.timeline ?? BUNDLED_CONTENT.timeline });
       })
       .catch(() => {
         // API down: keep the bundled content.

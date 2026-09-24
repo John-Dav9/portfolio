@@ -8,6 +8,7 @@ import TextsPanel from "./TextsPanel";
 import SitePanel from "./SitePanel";
 import SkillsPanel from "./SkillsPanel";
 import ProjectsPanel from "./ProjectsPanel";
+import TimelinePanel from "./TimelinePanel";
 import FilesPanel from "./FilesPanel";
 import { Field } from "./ui";
 
@@ -19,6 +20,7 @@ const TABS = [
   { id: "site", label: "Liens & images" },
   { id: "skills", label: "Compétences" },
   { id: "projects", label: "Projets" },
+  { id: "timeline", label: "Parcours" },
   { id: "files", label: "Fichiers" },
 ];
 
@@ -114,6 +116,7 @@ function Dashboard({ onLoggedOut, mailEnabled }) {
     site: content && <SitePanel content={content} />,
     skills: content && <SkillsPanel content={content} />,
     projects: content && <ProjectsPanel content={content} />,
+    timeline: content && <TimelinePanel content={content} />,
   };
 
   return (
