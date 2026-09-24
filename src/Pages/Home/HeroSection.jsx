@@ -137,7 +137,7 @@ export default function HeroSection() {
             className="relative h-full w-full rounded-full border border-line object-cover object-[center_15%] shadow-2xl"
           />
 
-          <div className="absolute -right-2 -bottom-3 flex flex-col gap-2 sm:-right-4 sm:gap-3 lg:-right-2 xl:-right-8">
+          <div className="absolute -right-2 -bottom-3 flex flex-col gap-2 sm:-right-4 sm:gap-3 lg:-right-2 xl:-right-3 2xl:-right-8">
             <m.div
               className="flex items-center gap-2 rounded-2xl border border-line bg-panel/90 px-3 py-2 shadow-xl backdrop-blur sm:gap-3 sm:px-4 sm:py-3"
               animate={{ y: [0, -6, 0] }}
