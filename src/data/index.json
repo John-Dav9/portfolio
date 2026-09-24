@@ -1,128 +1,236 @@
 {
   "skills": [
     {
-      "id": "1",
-      "src": "./img/frontend.jpg",
-      "title": "Front-End Development",
-      "description": "Création d'interfaces utilisateur réactives et intuitives avec HTML, CSS, JavaScript (ES6+), React, Angular, Vue.js et TypeScript. Maîtrise de Flexbox, Grid et Bootstrap pour des designs responsive."
+      "id": "frontend",
+      "focus": "dev",
+      "tag": "<frontend />",
+      "title": {
+        "fr": "Développement Front-End",
+        "en": "Front-End Development"
+      },
+      "tools": "React · Angular · Vue.js · TypeScript",
+      "description": {
+        "fr": "Création d'interfaces utilisateur réactives et intuitives avec HTML, CSS, JavaScript (ES6+), React, Angular, Vue.js et TypeScript. Maîtrise de Flexbox, Grid et Bootstrap pour des designs responsive.",
+        "en": "Building responsive, intuitive user interfaces with HTML, CSS, JavaScript (ES6+), React, Angular, Vue.js and TypeScript. Proficient with Flexbox, Grid and Bootstrap for responsive designs."
+      }
     },
     {
-      "id": "2",
-      "src": "./img/backend.jpg",
-      "title": "Back-End Development",
-      "description": "Développement d'APIs robustes et sécurisées avec Ruby on Rails, Node.js, NestJS, Express et ASP.NET. Gestion de l'authentification (JWT, device) et intégration d'APIs REST."
+      "id": "data",
+      "focus": "data",
+      "tag": "import pandas",
+      "title": {
+        "fr": "Analyse de Données & BI",
+        "en": "Data Analysis & BI"
+      },
+      "tools": "Python · pandas · Power BI",
+      "description": {
+        "fr": "Analyse de données avec Python (pandas, NumPy, matplotlib, seaborn), SQL et Power BI. Création de dashboards interactifs, data cleaning, modélisation et visualisation décisionnelle pour transformer les données en insights stratégiques.",
+        "en": "Data analysis with Python (pandas, NumPy, matplotlib, seaborn), SQL and Power BI. Interactive dashboards, data cleaning, modeling and business intelligence visualization to turn data into strategic insights."
+      }
     },
     {
-      "id": "3",
-      "src": "./img/db-sql.jpg",
-      "title": "Bases de Données & SQL",
-      "description": "Expertise en PostgreSQL, mongoDB et SQL Server pour la conception, modélisation et optimisation de bases de données. Maîtrise de SSMS (SQL Server Management Studio) pour la gestion avancée."
+      "id": "backend",
+      "focus": "dev",
+      "tag": "<backend />",
+      "title": {
+        "fr": "Développement Back-End",
+        "en": "Back-End Development"
+      },
+      "tools": "Ruby on Rails · Node.js · NestJS · ASP.NET",
+      "description": {
+        "fr": "Développement d'APIs robustes et sécurisées avec Ruby on Rails, Node.js, NestJS, Express et ASP.NET. Gestion de l'authentification (JWT, Devise) et intégration d'APIs REST.",
+        "en": "Building robust, secure APIs with Ruby on Rails, Node.js, NestJS, Express and ASP.NET. Authentication (JWT, Devise) and REST API integration."
+      }
     },
     {
-      "id": "4",
-      "src": "./img/ai_integration.jpg",
-      "title": "Data Analysis & BI",
-      "description": "Analyse de données avec Python (pandas, NumPy, matplotlib, seaborn), SQL et Power BI. Création de dashboards interactifs, data cleaning, modélisation et visualisation décisionnelle pour transformer les données en insights stratégiques."
+      "id": "database",
+      "focus": "both",
+      "tag": "SELECT *",
+      "title": {
+        "fr": "Bases de Données & SQL",
+        "en": "Databases & SQL"
+      },
+      "tools": "PostgreSQL · MongoDB · SQL Server",
+      "description": {
+        "fr": "Expertise en PostgreSQL, MongoDB et SQL Server pour la conception, la modélisation et l'optimisation de bases de données. Maîtrise de SSMS (SQL Server Management Studio) pour la gestion avancée.",
+        "en": "Expertise in PostgreSQL, MongoDB and SQL Server for database design, modeling and optimization. Proficient with SSMS (SQL Server Management Studio) for advanced administration."
+      }
     },
     {
-      "id": "5",
-      "src": "./img/deployment.jpg",
-      "title": "Déploiement & DevOps",
-      "description": "Déploiement d'applications sur Heroku, Firebase, GoDaddy..., gestion de domaines (Namecheap), configuration serveur et mise en production d'applications web fullstack en autonomie."
+      "id": "devops",
+      "focus": "dev",
+      "tag": "$ deploy",
+      "title": {
+        "fr": "Déploiement & DevOps",
+        "en": "Deployment & DevOps"
+      },
+      "tools": "Docker · nginx · Heroku",
+      "description": {
+        "fr": "Déploiement d'applications sur Heroku et GoDaddy, gestion de domaines (Namecheap), configuration serveur et mise en production d'applications web fullstack en autonomie.",
+        "en": "Deploying applications on Heroku and GoDaddy, domain management (Namecheap), server configuration and independent production releases of full stack web applications."
+      }
     },
     {
-      "id": "6",
-      "src": "./img/agile-icon.jpg",
-      "title": "Gestion de Projet Agile",
-      "description": "Application de méthodologies agiles (Scrum, kanban) avec des outils comme Trello pour la gestion de tâches, collaboration en équipe et suivi de progression des projets."
+      "id": "design",
+      "focus": "dev",
+      "tag": "/* ux */",
+      "title": {
+        "fr": "Design UX/UI",
+        "en": "UX/UI Design"
+      },
+      "tools": "Figma · Canva",
+      "description": {
+        "fr": "Conception orientée utilisateur et prototypage avec Figma et Canva. Création de maquettes interactives pour valider l'expérience utilisateur avant le développement.",
+        "en": "User-centered design and prototyping with Figma and Canva. Interactive mockups to validate the user experience before development."
+      }
     },
     {
-      "id": "7",
-      "src": "./img/design-icon.jpg",
-      "title": "UX/UI Design",
-      "description": "Conception orientée utilisateur et prototypage avec Figma et Canva. Création de maquettes interactives pour valider l'expérience utilisateur avant le développement."
+      "id": "agile",
+      "focus": "both",
+      "tag": "sprint++",
+      "title": {
+        "fr": "Gestion de Projet Agile",
+        "en": "Agile Project Management"
+      },
+      "tools": "Scrum · Kanban · Trello",
+      "description": {
+        "fr": "Application de méthodologies agiles (Scrum, Kanban) avec des outils comme Trello pour la gestion de tâches, la collaboration en équipe et le suivi de progression des projets.",
+        "en": "Applying agile methodologies (Scrum, Kanban) with tools like Trello for task management, team collaboration and project progress tracking."
+      }
     },
     {
-      "id": "8",
-      "src": "./img/git-icon.jpg",
-      "title": "Git & Outils Dev",
-      "description": "Maîtrise de Git/GitHub pour le versioning, Visual Studio Code, Postman pour les tests d'API, et workflow collaboratif en équipe avec gestion des branches et pull requests."
+      "id": "git",
+      "focus": "both",
+      "tag": "git push",
+      "title": {
+        "fr": "Git & Outils Dev",
+        "en": "Git & Dev Tools"
+      },
+      "tools": "GitHub · VS Code · Postman",
+      "description": {
+        "fr": "Maîtrise de Git/GitHub pour le versioning, Visual Studio Code, Postman pour les tests d'API, et workflow collaboratif en équipe avec gestion des branches et pull requests.",
+        "en": "Git/GitHub for versioning, Visual Studio Code, Postman for API testing, and collaborative team workflows with branches and pull requests."
+      }
     }
   ],
   "portfolio": [
     {
-      "id": "1",
+      "id": "portfolio",
       "domain": "dev",
-      "src": "./img/placeholder-image-1.png",
-      "title": "My Portfolio",
-      "description": "Un portfolio conçu en React pour présenter mes projets, mes compétences et mon parcours, avec une interface moderne, responsive et orientée expérience utilisateur.",
-      "link": "Voir en ligne",
-      "url": "https://github.com/John-Dav9/portfolio.git",
-      "site": "https://john-david-portfolio.web.app/"
+      "src": "/img/project-portfolio.webp",
+      "title": {
+        "fr": "Mon Portfolio",
+        "en": "My Portfolio"
+      },
+      "description": {
+        "fr": "Un portfolio bilingue conçu en React pour présenter mes projets, mes compétences et mon parcours, avec une interface moderne, responsive et orientée expérience utilisateur. Déployé avec Docker et nginx.",
+        "en": "A bilingual React portfolio showcasing my projects, skills and background, with a modern, responsive, user-focused interface. Deployed with Docker and nginx."
+      },
+      "repo": "https://github.com/John-Dav9/portfolio",
+      "site": "https://john-d.dev"
     },
     {
-      "id": "2",
+      "id": "luxedrive",
       "domain": "dev",
-      "src": "./img/luxedriveimack.png",
-      "title": "LuxeDrive",
-      "description": "Plateforme fullstack de location de voitures de luxe inspirée d'Airbnb. Système d'authentification sécurisé, espace d'administration, tableau de bord dynamique avec visualisation des ventes. Développé en autonomie avec Ruby on Rails, Bootstrap et versioning Git.",
-      "link": "View on GitHub",
-      "url": "https://luxedrive-rqdo.onrender.com",
-      "site": "https://luxedrive-rqdo.onrender.com"
+      "src": "/img/project-luxedrive.webp",
+      "title": {
+        "fr": "LuxeDrive",
+        "en": "LuxeDrive"
+      },
+      "description": {
+        "fr": "Plateforme fullstack de location de voitures de luxe inspirée d'Airbnb. Système d'authentification sécurisé, espace d'administration, tableau de bord dynamique avec visualisation des ventes. Développé en autonomie avec Ruby on Rails, Bootstrap et Git.",
+        "en": "Full stack luxury car rental platform inspired by Airbnb. Secure authentication, admin area and a dynamic dashboard with sales visualization. Built independently with Ruby on Rails, Bootstrap and Git."
+      },
+      "repo": "https://github.com/John-Dav9/LuxeDrive",
+      "site": "https://luxedrive.john-d.dev"
     },
     {
-      "id": "3",
+      "id": "cmciea",
       "domain": "dev",
-      "src": "./img/cmciea-france.png",
-      "title": "CMCIEA-France",
-      "description": "Site institutionnel moderne et responsive pour la Communauté Missionnaire Chrétienne Internationale & Églises Associées en France. Déploiement sur Firebase et gestion du nom de domaine via Squarespace. Technologies utilisées : Angular, Bootstrap.",
-      "link": "View online",
-      "url": "https://cmciea-france.com/",
+      "src": "/img/project-cmciea.webp",
+      "title": {
+        "fr": "CMCIEA-France",
+        "en": "CMCIEA-France"
+      },
+      "description": {
+        "fr": "Site institutionnel moderne et responsive pour la Communauté Missionnaire Chrétienne Internationale & Églises Associées en France. Développé avec Angular et Bootstrap ; hébergement et nom de domaine gérés via Squarespace.",
+        "en": "Modern, responsive institutional website for the International Christian Missionary Community & Associated Churches in France. Built with Angular and Bootstrap; hosting and domain managed through Squarespace."
+      },
+      "repo": "https://github.com/John-Dav9/cmcieafrance-cdd",
       "site": "https://cmciea-france.com/"
     },
     {
-      "id": "4",
+      "id": "bmw",
       "domain": "data",
-      "src": "./img/bmwsales.png",
-      "title": "Analyse BMW - Data Warehouse",
-      "description": "Projet Data Analysis : Conception d'un Data Warehouse structuré pour analyser les ventes BMW. Analyse exploratoire avec Python. Dashboards Power BI interactifs avec recommandations stratégiques orientées client. Projet présenté sous forme de site web développé en Next.js(backend) et Angular(frontend) avec systeme de login et sécurité avec JWTAuth.",
-      "link": "Projet Data",
-      "url": "https://github.com/John-Dav9/bmw-sales-analysis",
-      "site": "  https://bmw-sales-analysis-b36c6.web.app"
+      "src": "/img/project-bmw.webp",
+      "title": {
+        "fr": "Analyse BMW - Data Warehouse",
+        "en": "BMW Analysis - Data Warehouse"
+      },
+      "description": {
+        "fr": "Conception d'un Data Warehouse structuré pour analyser les ventes BMW, analyse exploratoire avec Python et dashboards Power BI interactifs avec recommandations stratégiques orientées client. Résultats présentés sur un site web (Angular en frontend, Next.js en backend) avec authentification JWT.",
+        "en": "Designed a structured Data Warehouse to analyze BMW sales, exploratory analysis with Python and interactive Power BI dashboards with customer-focused strategic recommendations. Results are presented on a website (Angular frontend, Next.js backend) with JWT authentication."
+      },
+      "repo": "https://github.com/John-Dav9/bmw-sales-analysis",
+      "site": "https://bmw.john-d.dev"
     }
   ],
   "testimonials": [
     {
       "id": "1",
-      "count": "5",
-      "src": "./img/avatar-image.png",
-      "description": "Très professionnel, merci beaucoup pour le site. Que la main du Seigneur soit davantage sur tes projets. Soyez abondamment bénis.",
+      "rating": 5,
+      "src": "/img/avatar-1.webp",
+      "description": {
+        "fr": "Très professionnel, merci beaucoup pour le site. Que la main du Seigneur soit davantage sur tes projets. Soyez abondamment bénis.",
+        "en": "Very professional, thank you so much for the website. May the Lord's hand be even more upon your projects. Be abundantly blessed."
+      },
       "author_name": "Pascal Kamtchuang",
-      "author_designation": "Hands on heart"
+      "author_designation": {
+        "fr": "Hands on heart",
+        "en": "Hands on heart"
+      }
     },
     {
       "id": "2",
-      "count": "5",
-      "src": "./img/avatar-image-1.png",
-      "description": "Merci beaucoup pour votre dynamisme, je vous souhaite d'aller plus loin dans votre carrière.",
+      "rating": 5,
+      "src": "/img/avatar-2.webp",
+      "description": {
+        "fr": "Merci beaucoup pour votre dynamisme, je vous souhaite d'aller plus loin dans votre carrière.",
+        "en": "Thank you very much for your energy, I wish you every success in your career."
+      },
       "author_name": "Christelle Ngadena",
-      "author_designation": "C'Empire"
+      "author_designation": {
+        "fr": "C'Empire",
+        "en": "C'Empire"
+      }
     },
     {
       "id": "3",
-      "count": "5",
-      "src": "./img/avatar-image-2.png",
-      "description": "J'ai moi-même vu ce monsieur à l'oeuvre, très respectueux et éloquent. Bravo !",
+      "rating": 5,
+      "src": "/img/avatar-3.webp",
+      "description": {
+        "fr": "J'ai moi-même vu ce monsieur à l'oeuvre, très respectueux et éloquent. Bravo !",
+        "en": "I have seen this gentleman at work myself, very respectful and eloquent. Well done!"
+      },
       "author_name": "Yohanna Taptue",
-      "author_designation": "Data Analyst"
+      "author_designation": {
+        "fr": "Data Analyst",
+        "en": "Data Analyst"
+      }
     },
     {
       "id": "4",
-      "count": "5",
-      "src": "./img/avatar-image-2.png",
-      "description": "Merci pour votre disponibilité. Beaucoup de courage à vous. Vous êtes quelqu'un de recommandable, vivement que votre travail vous conduise très loin.",
+      "rating": 5,
+      "src": "/img/avatar-3.webp",
+      "description": {
+        "fr": "Merci pour votre disponibilité. Beaucoup de courage à vous. Vous êtes quelqu'un de recommandable, vivement que votre travail vous conduise très loin.",
+        "en": "Thank you for your availability. Much courage to you. You are someone I would recommend, and I hope your work takes you very far."
+      },
       "author_name": "Fernand Taptue",
-      "author_designation": "My lovely father"
+      "author_designation": {
+        "fr": "Mon père",
+        "en": "My lovely father"
+      }
     }
   ]
 }

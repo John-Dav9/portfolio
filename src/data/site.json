@@ -1,0 +1,34 @@
+{
+  "siteUrl": "https://john-d.dev",
+  "owner": {
+    "name": "John David Tchomgui",
+    "location": {
+      "fr": "France",
+      "en": "France"
+    }
+  },
+  "hosting": {
+    "name": "Contabo GmbH",
+    "address": "Aschauer Straße 32a, 81549 München, Allemagne",
+    "website": "https://contabo.com"
+  },
+  "hero": {
+    "subtitleSuffix": {
+      "fr": "& Data Analyst",
+      "en": "& Data Analyst"
+    },
+    "ctaUrl": "https://www.canva.com/design/DAGRbJFBCcQ/ENKhhjbSAB3NvhZBzzCISA/view",
+    "imageUrl": "/img/hero-portrait.webp"
+  },
+  "about": {
+    "imageUrl": "/img/about-portrait.webp"
+  },
+  "githubUrl": "https://github.com/John-Dav9",
+  "socialLinks": {
+    "linkedin": "https://www.linkedin.com/in/jd-tchomgui",
+    "github": "https://github.com/John-Dav9",
+    "facebook": "",
+    "instagram": "",
+    "twitter": ""
+  }
+}

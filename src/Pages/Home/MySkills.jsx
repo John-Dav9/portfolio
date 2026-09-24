@@ -1,178 +1,114 @@
-import data from "../../data/index.json";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { db } from "../../firebase";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { AnimatePresence, m } from "motion/react";
+import { useContent } from "../../components/ContentContext";
+import { localize } from "../../utils/localize";
+import { useFocus } from "../../components/FocusContext";
+import SectionHeading from "../../components/SectionHeading";
+import { revealGroup, revealItem, trackSpotlight } from "../../components/motion";
+
+// Bento layout: the first two and last two tiles are wide on large screens.
+const WIDE = new Set([0, 1, 6, 7]);
+
+function SkillDialog({ skill, lang, onClose }) {
+  const { t } = useTranslation();
+  const closeRef = useRef(null);
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    closeRef.current?.focus();
+    const onKeyDown = (e) => e.key === "Escape" && onClose();
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      previouslyFocused?.focus?.();
+    };
+  }, [onClose]);
+
+  return (
+    <m.div
+      className="fixed inset-0 z-70 flex items-center justify-center bg-ink/70 p-5 backdrop-blur-sm"
+      onClick={onClose}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <m.div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="skill-dialog-title"
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-lg rounded-3xl border border-line bg-panel p-8 shadow-2xl"
+        initial={{ opacity: 0, scale: 0.94, y: 16 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.96, y: 8 }}
+        transition={{ duration: 0.25 }}
+      >
+        <button
+          ref={closeRef}
+          type="button"
+          onClick={onClose}
+          aria-label={t("skills.close")}
+          className="absolute top-4 right-4 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-line text-xl text-slate-300 hover:border-accent"
+        >
+          ×
+        </button>
+        <p className="mb-2 font-mono text-sm text-accent">{skill.tag}</p>
+        <h2 id="skill-dialog-title" className="mb-4 text-2xl font-bold text-white">
+          {localize(skill.title, lang)}
+        </h2>
+        <p className="leading-relaxed text-slate-300">{localize(skill.description, lang)}</p>
+      </m.div>
+    </m.div>
+  );
+}
 
 export default function MySkills() {
   const { t, i18n } = useTranslation();
-  const [selectedSkill, setSelectedSkill] = useState(null);
-  const [dynamicSkills, setDynamicSkills] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [cardsPerView, setCardsPerView] = useState(4);
-
-  useEffect(() => {
-    const loadSkills = async () => {
-      try {
-        const q = query(collection(db, "skills"), orderBy("createdAt", "desc"));
-        const snapshot = await getDocs(q);
-        const list = snapshot.docs.map((docItem) => ({
-          id: docItem.id,
-          ...docItem.data()
-        }));
-        setDynamicSkills(list);
-      } catch (error) {
-        console.error("Erreur chargement skills:", error);
-      }
-    };
-
-    loadSkills();
-  }, []);
-
-  useEffect(() => {
-    const updateCardsPerView = () => {
-      if (window.innerWidth >= 1200) {
-        setCardsPerView(4);
-      } else if (window.innerWidth >= 576) {
-        setCardsPerView(2);
-      } else {
-        setCardsPerView(1);
-      }
-    };
-
-    updateCardsPerView();
-    window.addEventListener("resize", updateCardsPerView);
-    return () => window.removeEventListener("resize", updateCardsPerView);
-  }, []);
-
-  const skills = dynamicSkills.length > 0 ? dynamicSkills : data?.skills || [];
-  const maxIndex = Math.max(0, skills.length - cardsPerView);
-  const displayedSkills = skills.slice(currentIndex, currentIndex + cardsPerView);
-  const lang = i18n.language || "fr";
-
-  useEffect(() => {
-    setCurrentIndex((prev) => Math.min(prev, maxIndex));
-  }, [maxIndex]);
-
-  // Create a mapping of titles to translations
-  const skillTitleMap = {
-    "Front-End Development": t('skills.frontend.title'),
-    "Back-End Development": t('skills.backend.title'),
-    "Bases de Données & SQL": t('skills.database.title'),
-    "Data Analysis & BI": t('skills.dataAnalysis.title'),
-    "Déploiement & DevOps": t('skills.deployment.title'),
-    "Gestion de Projet Agile": t('skills.agile.title'),
-    "Design UX/UI": t('skills.uxui.title'),
-    "Git & Outils Dev": t('skills.git.title'),
-  };
-
-  const skillDescriptionMap = {
-    "Création d'interfaces utilisateur réactives et intuitives avec HTML, CSS, JavaScript (ES6+), React, Angular, Vue.js et TypeScript. Maîtrise de Flexbox, Grid et Bootstrap pour des designs responsive.": t('skills.frontend.description'),
-    "Développement d'APIs robustes et sécurisées avec Ruby on Rails, Node.js, NestJS, Express et ASP.NET. Gestion de l'authentification JWT et intégration d'APIs REST.": t('skills.backend.description'),
-    "Expertise en PostgreSQL et SQL Server pour la conception, modélisation et optimisation de bases de données. Maîtrise de SSMS (SQL Server Management Studio) pour la gestion avancée.": t('skills.database.description'),
-    "Analyse de données avec Python (pandas, NumPy, matplotlib, seaborn), SQL et Power BI. Création de dashboards interactifs, data cleaning, modélisation et visualisation décisionnelle pour transformer les données en insights stratégiques.": t('skills.dataAnalysis.description'),
-    "Déploiement d'applications sur Heroku, gestion de domaines (Namecheap), configuration serveur et mise en production d'applications web fullstack en autonomie.": t('skills.deployment.description'),
-    "Application de méthodologies agiles (Scrum, Kanban) avec des outils comme Trello pour la gestion de tâches, collaboration en équipe et suivi de progression des projets.": t('skills.agile.description'),
-    "Conception orientée utilisateur et prototypage avec Figma et Canva. Création de maquettes interactives pour valider l'expérience utilisateur avant le développement.": t('skills.uxui.description'),
-    "Maîtrise de Git/GitHub pour le versioning, Visual Studio Code, Postman pour les tests d'API, et workflow collaboratif en équipe avec gestion des branches et pull requests.": t('skills.git.description'),
-  };
-
-  const handleSkillClick = (skill) => {
-    setSelectedSkill(skill);
-  };
-
-  const closeModal = () => {
-    setSelectedSkill(null);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(prev - cardsPerView, 0));
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => Math.min(prev + cardsPerView, maxIndex));
-  };
+  const lang = i18n.resolvedLanguage;
+  const { focus } = useFocus();
+  const { skills } = useContent();
+  const [selected, setSelected] = useState(null);
+  const close = useCallback(() => setSelected(null), []);
 
   return (
-    <section className="skills--section" id="MySkills">
-      <div className="portfolio--container">
-        <h2 className="skills--section--heading">{t('skills.title')}</h2>
-      </div>
-      <div className="skills--carousel--layout">
-        <button
-          type="button"
-          className="skills--carousel--btn"
-          onClick={handlePrev}
-          disabled={currentIndex === 0}
-          aria-label={t("skills.carousel.previous")}
-        >
-          ‹
-        </button>
-        <div
-          className="skills--section--container"
-          style={{ gridTemplateColumns: `repeat(${cardsPerView}, minmax(0, 1fr))` }}
-        >
-          {displayedSkills?.map((item) => (
-            <div 
-              key={item.id} 
-              className="skills--section--card"
-              onClick={() => handleSkillClick(item)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && handleSkillClick(item)}
-            >
-              <div className="skills--section--img">
-                <img
-                  src={item.imageUrl || item.src}
-                  alt={skillTitleMap[item.title] || item.title || item.title?.[lang] || ""}
-                  loading="lazy"
-                />
-              </div>
-              <div className="skills--section--card--content">
-                <h3 className="skills--section--title">
-                  {item.title?.[lang] || skillTitleMap[item.title] || item.title}
-                </h3>
-                <span className="skills--card--learn-more">
-                  {t('skills.learnMore') || 'En savoir plus'}
+    <section id="MySkills" className="mx-auto max-w-7xl px-5 py-20 md:px-8">
+      <SectionHeading index="01" title={t("skills.title")} />
+      <m.ul
+        className="grid gap-4 sm:grid-cols-2 lg:auto-rows-[170px] lg:grid-cols-4"
+        variants={revealGroup}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+      >
+        {skills.map((skill, index) => {
+          const highlighted = skill.focus === "both" || skill.focus === focus;
+          return (
+            <m.li key={skill.id} variants={revealItem} className={WIDE.has(index) ? "lg:col-span-2" : ""}>
+              <button
+                type="button"
+                onClick={() => setSelected(skill)}
+                onPointerMove={trackSpotlight}
+                aria-haspopup="dialog"
+                className={`spotlight group flex h-full w-full cursor-pointer flex-col gap-3 rounded-3xl p-6 text-left ${
+                  highlighted ? "" : "opacity-45 hover:opacity-100"
+                }`}
+              >
+                <span className="font-mono text-sm text-accent transition-colors duration-500">{skill.tag}</span>
+                <span className="text-xl font-bold text-white">{localize(skill.title, lang)}</span>
+                <span className="text-sm leading-relaxed text-slate-400">{localize(skill.tools, lang)}</span>
+                <span className="mt-auto text-sm text-slate-500 transition-colors group-hover:text-accent">
+                  {t("skills.learnMore")} →
                 </span>
-              </div>
-            </div>
-          ))}
-        </div>
-        <button
-          type="button"
-          className="skills--carousel--btn"
-          onClick={handleNext}
-          disabled={currentIndex >= maxIndex}
-          aria-label={t("skills.carousel.next")}
-        >
-          ›
-        </button>
-      </div>
+              </button>
+            </m.li>
+          );
+        })}
+      </m.ul>
 
-      {/* Skill Modal */}
-      {selectedSkill && (
-        <div className="skills--modal--overlay" onClick={closeModal}>
-          <div className="skills--modal--content" onClick={(e) => e.stopPropagation()}>
-            <button className="skills--modal--close" onClick={closeModal} aria-label="Close modal">
-              ×
-            </button>
-            <div className="skills--modal--header">
-              <img
-                src={selectedSkill.imageUrl || selectedSkill.src}
-                alt={skillTitleMap[selectedSkill.title] || selectedSkill.title || selectedSkill.title?.[lang]}
-                className="skills--modal--img"
-              />
-              <h2>{selectedSkill.title?.[lang] || skillTitleMap[selectedSkill.title] || selectedSkill.title}</h2>
-            </div>
-            <p className="skills--modal--description">
-              {selectedSkill.description?.[lang] ||
-                skillDescriptionMap[selectedSkill.description] ||
-                selectedSkill.description}
-            </p>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {selected && <SkillDialog key={selected.id} skill={selected} lang={lang} onClose={close} />}
+      </AnimatePresence>
     </section>
   );
 }

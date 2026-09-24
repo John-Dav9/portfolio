@@ -1,0 +1,14 @@
+node_modules
+build
+.git
+.github
+.agents
+.codex
+.env
+.env.*
+!.env.example
+coverage
+*.log
+**/*:Zone.Identifier
+**/node_modules
+server/data

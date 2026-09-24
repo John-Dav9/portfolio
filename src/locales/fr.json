@@ -1,97 +1,79 @@
 {
+  "meta": {
+    "title": "John David Tchomgui | Développeur Web Fullstack & Data Analyst",
+    "description": "Portfolio de John David Tchomgui, développeur web fullstack (React, Ruby on Rails, Node.js) et data analyst (Python, SQL, Power BI)."
+  },
   "navbar": {
     "home": "Accueil",
     "about": "À propos",
-    "skills": "Mes Compétences",
-    "portfolio": "Mes Projets",
+    "skills": "Compétences",
+    "portfolio": "Projets",
     "contact": "Contact",
-    "testimonials": "Avis"
+    "testimonials": "Avis",
+    "toggle": "Ouvrir ou fermer le menu",
+    "logoAlt": "Logo de John David Tchomgui",
+    "language": "Langue"
   },
   "hero": {
     "title": "John David TCHOMGUI",
-    "subtitle": "Développeur Web Fullstack",
-    "subtitleAccent": "Développeur Web Fullstack",
-    "description": "Développeur Web Fullstack et Data Analyst passionné par la transformation des données en solutions web performantes. Spécialisé en analyse de données avec Python, SQL et Power BI, et développement d'applications robustes avec React, Ruby on Rails, et Node.js. Je combine expertise technique en développement frontend/backend et capacités analytiques pour créer des interfaces utilisateur intuitives et des insights basés sur les données.",
+    "description": "Développeur Web Fullstack et Data Analyst passionné par la transformation des données en solutions web performantes. Spécialisé en analyse de données avec Python, SQL et Power BI, et en développement d'applications robustes avec React, Ruby on Rails et Node.js. Je combine expertise technique en développement frontend/backend et capacités analytiques pour créer des interfaces intuitives et des insights basés sur les données.",
     "description_continued": "Formé chez <a href=\"https://www.lewagon.com/fr/web-development-course\">Le Wagon</a> et <a href=\"https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis\">Technofutur TIC</a>, je cherche à relever de nouveaux défis alliant développement web et analyse de données.",
-    "cta_button": "Voir mon CV"
+    "cta_button": "Voir mon CV",
+    "cv": {
+      "dev": "Développeur Web",
+      "data": "Data Analyst",
+      "view": "Voir le CV",
+      "download": "Télécharger",
+      "close": "Fermer",
+      "frame": "Aperçu du CV"
+    },
+    "status": "Ouvert à de nouveaux défis",
+    "prompt": "> Bonjour, je suis",
+    "role": {
+      "dev": "Développeur Web Fullstack",
+      "data": "Data Analyst · Python · Power BI"
+    },
+    "pitch": {
+      "dev": "Du composant React à l’API Rails ou Node.js en production : des applications web complètes, robustes et soignées.",
+      "data": "Du nettoyage des données aux dashboards Power BI : des analyses claires qui aident à décider."
+    },
+    "cta": {
+      "dev": "Voir les projets dev →",
+      "data": "Voir les projets data →"
+    },
+    "stats": {
+      "projects": "projets publiés",
+      "skills": "domaines de compétences"
+    }
   },
   "about": {
     "title": "À propos",
+    "imageAlt": "John David Tchomgui",
     "description1": "Développeur Web Fullstack et Data Analyst avec une double expertise technique. Formé au développement web chez <a href=\"https://www.lewagon.com/fr/web-development-course\">Le Wagon</a> (Ruby on Rails, React, PostgreSQL) et à l'analyse de données chez <a href=\"https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis\">Technofutur TIC</a> (Python, SQL, Power BI), je maîtrise l'ensemble du cycle de développement d'applications web et l'analyse de données complexes.",
-    "description2": "Passionné par la transformation numérique, je combine développement frontend/backend et compétences analytiques pour créer des solutions web performantes enrichies par l'intelligence des données. Autonome et collaboratif, j'excelle aussi bien dans le travail d'équipe que dans la réalisation de projets en autonomie. Mon parcours atypique témoigne d'une grande capacité d'adaptation et d'un apprentissage continu, essentiels pour évoluer dans l'écosystème technologique actuel."
+    "description2": "Passionné par la transformation numérique, je combine développement frontend/backend et compétences analytiques pour créer des solutions web performantes enrichies par l'intelligence des données. Autonome et collaboratif, j'excelle aussi bien dans le travail d'équipe que dans la réalisation de projets en autonomie. Mon parcours atypique témoigne d'une grande capacité d'adaptation et d'un apprentissage continu, essentiels pour évoluer dans l'écosystème technologique actuel.",
+    "education": "Parcours",
+    "lewagon": "Développement web : Ruby on Rails, React, PostgreSQL",
+    "technofutur": "Analyse de données : Python, SQL, Power BI"
   },
   "skills": {
     "title": "Mes Compétences",
     "learnMore": "En savoir plus",
-    "carousel": {
-      "previous": "Compétences précédentes",
-      "next": "Compétences suivantes"
-    },
-    "frontend": {
-      "title": "Développement Front-End",
-      "description": "Création d'interfaces utilisateur réactives et intuitives avec HTML, CSS, JavaScript (ES6+), React, Angular, Vue.js et TypeScript. Maîtrise de Flexbox, Grid et Bootstrap pour des designs responsive."
-    },
-    "backend": {
-      "title": "Développement Back-End",
-      "description": "Développement d'APIs robustes et sécurisées avec Ruby on Rails, Node.js, NestJS, Express et ASP.NET. Gestion de l'authentification JWT et intégration d'APIs REST."
-    },
-    "database": {
-      "title": "Bases de Données & SQL",
-      "description": "Expertise en PostgreSQL et SQL Server pour la conception, modélisation et optimisation de bases de données. Maîtrise de SSMS (SQL Server Management Studio) pour la gestion avancée."
-    },
-    "dataAnalysis": {
-      "title": "Analyse de Données & BI",
-      "description": "Analyse de données avec Python (pandas, NumPy, matplotlib, seaborn), SQL et Power BI. Création de dashboards interactifs, data cleaning, modélisation et visualisation décisionnelle pour transformer les données en insights stratégiques."
-    },
-    "deployment": {
-      "title": "Déploiement & DevOps",
-      "description": "Déploiement d'applications sur Heroku, gestion de domaines (Namecheap), configuration serveur et mise en production d'applications web fullstack en autonomie."
-    },
-    "agile": {
-      "title": "Gestion de Projet Agile",
-      "description": "Application de méthodologies agiles (Scrum, Kanban) avec des outils comme Trello pour la gestion de tâches, collaboration en équipe et suivi de progression des projets."
-    },
-    "uxui": {
-      "title": "Design UX/UI",
-      "description": "Conception orientée utilisateur et prototypage avec Figma et Canva. Création de maquettes interactives pour valider l'expérience utilisateur avant le développement."
-    },
-    "git": {
-      "title": "Git & Outils Dev",
-      "description": "Maîtrise de Git/GitHub pour le versioning, Visual Studio Code, Postman pour les tests d'API, et workflow collaboratif en équipe avec gestion des branches et pull requests."
-    }
+    "close": "Fermer",
+    "hint": "Cliquez sur une carte pour le détail."
   },
   "portfolio": {
     "title": "Mes projets",
+    "github": "Mon GitHub",
     "domains": {
       "dev": "Développement web",
       "data": "Data"
     },
     "links": {
-      "github": "Voir sur GitHub",
-      "site": "Voir le site"
-    },
-    "projects": [
-      {
-        "title": "Mon Portfolio",
-        "description": "Un portfolio conçu en React pour présenter mes projets, mes compétences et mon parcours, avec une interface moderne, responsive et orientée expérience utilisateur.",
-        "link": "Voir sur GitHub"
-      },
-      {
-        "title": "LuxeDrive",
-        "description": "Plateforme fullstack de location de voitures de luxe inspirée d'Airbnb. Système d'authentification sécurisé, espace d'administration, tableau de bord dynamique avec visualisation des ventes. Développé en autonomie avec Ruby on Rails, Bootstrap et versioning Git.",
-        "link": "Voir en ligne"
-      },
-      {
-        "title": "CMCIEA-France",
-        "description": "Site institutionnel moderne et responsive pour la Communauté Missionnaire Chrétienne Internationale & Églises Associées France. Déploiement sur Heroku et gestion du nom de domaine via Namecheap.",
-        "link": "Voir en ligne"
-      },
-      {
-        "title": "Analyse BMW - Data Warehouse",
-        "description": "Projet Data Analysis : Conception d'un Data Warehouse structuré pour analyser les ventes BMW. Analyse exploratoire avec Python (pandas, matplotlib) pour identifier les modèles rentables et tendances par région. Dashboards Power BI interactifs avec recommandations stratégiques orientées client.",
-        "link": "Projet Data"
-      }
-    ]
+      "github": "GitHub",
+      "site": "Site en ligne",
+      "githubLabel": "Code source de {{title}} sur GitHub",
+      "siteLabel": "Site en ligne de {{title}}"
+    }
   },
   "contact": {
     "title": "Me Contacter",
@@ -99,57 +81,66 @@
     "form": {
       "firstName": "Prénom",
       "lastName": "Nom",
-      "email": "Adresse Email",
-      "phone": "Numéro de Téléphone",
+      "email": "Adresse e-mail",
+      "phone": "Numéro de téléphone (facultatif)",
+      "countryCode": "Indicatif pays",
       "subject": "Sujet",
       "message": "Message",
-      "submit": "Envoyer le Message",
-      "required": "Requis",
+      "submit": "Envoyer le message",
       "success": "Message envoyé avec succès !",
       "error": "Erreur lors de l'envoi du message. Veuillez réessayer.",
       "selectTopic": "Sélectionner un sujet",
       "freelance": "Freelance",
       "collaboration": "Collaboration",
-      "other": "Autres",
-      "agreeTerms": "J'accepte les termes",
-      "submitting": "En cours..."
-    }
+      "job": "Opportunité d'emploi",
+      "other": "Autre",
+      "consentBefore": "J'accepte que mes données soient utilisées pour répondre à ma demande, conformément à la ",
+      "consentLink": "politique de confidentialité",
+      "submitting": "Envoi en cours...",
+      "honeypot": "Ne pas remplir ce champ",
+      "phonePlaceholder": "6 12 34 56 78"
+    },
+    "topics": "Je suis disponible pour"
   },
   "testimonials": {
-    "title": "Ce que Disent les Gens",
+    "title": "Ce que disent les gens",
+    "rating": "Note : {{count}} sur 5",
+    "showAll": "Voir tous les avis ({{count}})",
+    "showLess": "Voir moins d'avis",
     "leaveReview": "Laisser un avis",
-    "reviews": [
-      {
-        "description": "Très professionnel, merci beaucoup pour le site. Que la main du Seigneur soit davantage sur tes projets. Soyez abondamment bénis.",
-        "author_name": "Pascal Kamtchuang",
-        "author_designation": "Hands on heart"
-      },
-      {
-        "description": "Merci beaucoup pour votre dynamisme, je vous souhaite d'aller plus loin dans votre carrière.",
-        "author_name": "Christelle Ngadena",
-        "author_designation": "C'Empire"
-      },
-      {
-        "description": "J'ai moi-même vu ce monsieur à l'oeuvre, très respectueux et éloquent. Bravo !",
-        "author_name": "Yohanna Taptue",
-        "author_designation": "Data Analyst"
-      },
-      {
-        "description": "Merci pour votre disponibilité. Beaucoup de courage à vous. Vous êtes quelqu'un de recommandable, vivement que votre travail vous conduise très loin.",
-        "author_name": "Fernand Taptue",
-        "author_designation": "My lovely father"
-      }
-    ]
-  },
-  "legal": {
-    "privacyPolicy": "Politique de Confidentialité",
-    "termsOfService": "Conditions d'Utilisation",
-    "cookieSettings": "Gestion des Cookies",
-    "privacyDescription": "Cette section explique comment les données sont collectées et utilisées. Le contenu complet sera ajouté prochainement.",
-    "termsDescription": "Cette section détaille les conditions d'utilisation. Le contenu complet sera ajouté prochainement.",
-    "cookiesDescription": "Cette section décrit la gestion des cookies. Le contenu complet sera ajouté prochainement."
+    "form": {
+      "title": "Laisser un avis",
+      "intro": "Votre avis sera publié après validation.",
+      "name": "Nom",
+      "designation": "Fonction ou entreprise",
+      "rating": "Note",
+      "message": "Votre avis",
+      "consent": "J'accepte que mon nom, ma fonction et mon avis soient publiés sur ce site après validation.",
+      "submit": "Envoyer mon avis",
+      "thanks": "Merci ! Votre avis a bien été reçu et sera publié après validation."
+    }
   },
   "footer": {
-    "copyright": "© 2026 John David Tchomgui. Tous droits réservés."
+    "dedication": "Dédié avec amour à mon épouse",
+    "copyright": "© {{year}} John David Tchomgui. Tous droits réservés.",
+    "social": "Réseaux sociaux"
+  },
+  "legal": {
+    "back": "← Retour à l'accueil",
+    "lastUpdate": "Dernière mise à jour : {{date}}",
+    "legalNotice": "Mentions légales",
+    "privacyPolicy": "Politique de confidentialité",
+    "termsOfService": "Conditions d'utilisation",
+    "cookieSettings": "Cookies"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "description": "La page que vous cherchez n'existe pas ou a été déplacée.",
+    "back": "Retour à l'accueil"
+  },
+  "focus": {
+    "label": "Profil mis en avant",
+    "dev": "dev",
+    "data": "data"
   }
 }
