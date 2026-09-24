@@ -52,8 +52,7 @@
     "description1": "Full Stack Web Developer and Data Analyst with dual technical expertise. Trained in web development at <a href=\"https://www.lewagon.com/fr/web-development-course\">Le Wagon</a> (Ruby on Rails, React, PostgreSQL) and in data analysis at <a href=\"https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis\">Technofutur TIC</a> (Python, SQL, Power BI), I master the full web application development cycle as well as complex data analysis.",
     "description2": "Passionate about digital transformation, I combine frontend/backend development and analytical skills to build high-performing web solutions enriched by data. Autonomous and collaborative, I thrive both in teamwork and when leading projects on my own. My unconventional path reflects strong adaptability and continuous learning, essential in today's technology ecosystem.",
     "education": "Background",
-    "lewagon": "Web development: Ruby on Rails, React, PostgreSQL",
-    "technofutur": "Data analysis: Python, SQL, Power BI"
+    "current": "ongoing"
   },
   "skills": {
     "title": "My Skills",

@@ -69,6 +69,7 @@ describe("public API", () => {
     const seed = JSON.parse(fs.readFileSync(path.join(process.env.SEED_DIR, "data/index.json"), "utf8"));
     assert.equal(body.projects.length, seed.portfolio.length);
     assert.ok(body.projects.every((p) => Array.isArray(p.stack)));
+    assert.equal(body.timeline.length, seed.timeline.length);
     assert.equal(body.testimonials.length, 4);
     assert.ok(body.texts.fr["hero.pitch.dev"]);
     assert.equal(body.site.emailjs, undefined);
@@ -90,6 +91,21 @@ describe("public API", () => {
     assert.equal(res.status, 201);
     const { body } = await request("GET", "/api/content");
     assert.equal(body.testimonials.length, 4);
+  });
+});
+
+describe("database upgrades", () => {
+  it("adds sections created after the first start without touching existing content", () => {
+    const file = path.join(dataDir, "upgrade.db");
+    const first = openDatabase(file);
+    first.prepare("UPDATE content SET value = ? WHERE key = 'skills'").run(JSON.stringify([{ edited: true }]));
+    first.prepare("DELETE FROM content WHERE key = 'timeline'").run();
+    first.close();
+    const reopened = openDatabase(file);
+    const read = (key) => JSON.parse(reopened.prepare("SELECT value FROM content WHERE key = ?").get(key).value);
+    assert.ok(read("timeline").length > 0);
+    assert.deepEqual(read("skills"), [{ edited: true }]);
+    reopened.close();
   });
 });
 

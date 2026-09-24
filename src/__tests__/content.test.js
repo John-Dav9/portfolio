@@ -54,6 +54,15 @@ describe("content data", () => {
     }
   });
 
+  it("timeline steps have a period, a bilingual title and a known color", () => {
+    expect(data.timeline.length).toBeGreaterThan(0);
+    for (const step of data.timeline) {
+      expect(step.period).toBeTruthy();
+      expect(bilingual(step.title)).toBeTruthy();
+      expect(["dev", "data", "other"]).toContain(step.kind);
+    }
+  });
+
   it("testimonials are bilingual with a valid rating and avatar", () => {
     for (const item of data.testimonials) {
       expect(bilingual(item.description)).toBeTruthy();

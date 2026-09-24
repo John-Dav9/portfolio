@@ -71,6 +71,14 @@ describe("home page", () => {
     expect(within(stack).getByText("PostgreSQL")).toBeInTheDocument();
   });
 
+  it("shows the background timeline with the ongoing step", () => {
+    renderAt("/");
+    const about = screen.getByRole("heading", { level: 2, name: "À propos" }).closest("section");
+    expect(within(about).getByRole("link", { name: "EPFC" })).toHaveAttribute("href", "https://www.epfc.eu");
+    expect(within(about).getByText("Enseignant & journaliste")).toBeInTheDocument();
+    expect(within(about).getByText("en cours")).toBeInTheDocument();
+  });
+
   it("opens the skill dialog with the keyboard and closes it with Escape", async () => {
     const user = userEvent.setup();
     renderAt("/");

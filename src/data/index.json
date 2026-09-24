@@ -282,5 +282,82 @@
         "en": "My lovely father"
       }
     }
+  ],
+  "timeline": [
+    {
+      "id": "enseignant-journaliste",
+      "period": "2021 – 2023",
+      "kind": "other",
+      "current": false,
+      "url": "",
+      "title": {
+        "fr": "Enseignant & journaliste",
+        "en": "Teacher & journalist"
+      },
+      "detail": {
+        "fr": "",
+        "en": ""
+      }
+    },
+    {
+      "id": "le-wagon",
+      "period": "2024",
+      "kind": "dev",
+      "current": false,
+      "url": "https://www.lewagon.com/fr/web-development-course",
+      "title": {
+        "fr": "Le Wagon",
+        "en": "Le Wagon"
+      },
+      "detail": {
+        "fr": "Développement web : Ruby on Rails, React, PostgreSQL",
+        "en": "Web development: Ruby on Rails, React, PostgreSQL"
+      }
+    },
+    {
+      "id": "technofutur-tic",
+      "period": "2025",
+      "kind": "data",
+      "current": false,
+      "url": "https://technofuturtic.be/catalogue/formation/developpeur-web-oriente-data-analysis",
+      "title": {
+        "fr": "Technofutur TIC",
+        "en": "Technofutur TIC"
+      },
+      "detail": {
+        "fr": "Développeur web orienté analyse de données : Python, SQL, Power BI",
+        "en": "Web developer with a data analysis focus: Python, SQL, Power BI"
+      }
+    },
+    {
+      "id": "cf2m",
+      "period": "2026",
+      "kind": "dev",
+      "current": false,
+      "url": "https://www.cf2m.be",
+      "title": {
+        "fr": "CF2m",
+        "en": "CF2m"
+      },
+      "detail": {
+        "fr": "Formation développeur web full-stack",
+        "en": "Full stack web developer training"
+      }
+    },
+    {
+      "id": "epfc",
+      "period": "2026",
+      "kind": "dev",
+      "current": true,
+      "url": "https://www.epfc.eu",
+      "title": {
+        "fr": "EPFC",
+        "en": "EPFC"
+      },
+      "detail": {
+        "fr": "Bachelier en informatique, orientation développement d'applications (cours du soir)",
+        "en": "Bachelor's degree in computer science, application development (evening classes)"
+      }
+    }
   ]
 }

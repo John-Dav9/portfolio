@@ -64,7 +64,7 @@ export const EDITABLE_TEXTS = [
 const readJson = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
 const pick = (obj, dotted) => dotted.split(".").reduce((acc, key) => acc?.[key], obj);
 
-function seed(db) {
+function seedContent() {
   const { seedDir } = config;
   const site = readJson(path.join(seedDir, "data/site.json"));
   const data = readJson(path.join(seedDir, "data/index.json"));
@@ -74,13 +74,21 @@ function seed(db) {
   const texts = Object.fromEntries(
     Object.entries(locales).map(([lang, strings]) => [lang, Object.fromEntries(EDITABLE_TEXTS.map((key) => [key, pick(strings, key) ?? ""]))])
   );
-  const content = {
-    site: publicSite,
-    skills: data.skills,
-    projects: data.portfolio,
-    texts,
-    cv: { dev: { fr: null, en: null }, data: { fr: null, en: null } },
+  return {
+    data,
+    content: {
+      site: publicSite,
+      skills: data.skills,
+      projects: data.portfolio,
+      timeline: data.timeline ?? [],
+      texts,
+      cv: { dev: { fr: null, en: null }, data: { fr: null, en: null } },
+    },
   };
+}
+
+function seed(db) {
+  const { data, content } = seedContent();
 
   const insertContent = db.prepare("INSERT INTO content (key, value) VALUES (?, ?)");
   const insertTestimonial = db.prepare(
@@ -113,6 +121,12 @@ export function openDatabase(file = config.dbFile) {
   db.exec("PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON; PRAGMA busy_timeout = 5000;");
   db.exec(SCHEMA);
   const { count } = db.prepare("SELECT COUNT(*) AS count FROM content").get();
-  if (count === 0) seed(db);
+  if (count === 0) {
+    seed(db);
+  } else {
+    // Sections added after the first start are filled from the repository; existing ones are untouched.
+    const insert = db.prepare("INSERT OR IGNORE INTO content (key, value) VALUES (?, ?)");
+    for (const [key, value] of Object.entries(seedContent().content)) insert.run(key, JSON.stringify(value));
+  }
   return db;
 }
